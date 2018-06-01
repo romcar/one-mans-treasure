@@ -21,6 +21,7 @@ let usersSchema = mongoose.Schema({
   password: {type: String, required: true},
   created_at: Date,
   my_listings: [listingsSchema], //{type: Schema.Types.ObjectId, ref: 'Listing'}
+  // my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}],
   // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
   claimed: Array,
   karma: Number,
