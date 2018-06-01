@@ -40,6 +40,7 @@ let saveUser = (userData) => {
   var newUser = {};
   var parsedUser = userData.body;
   var plainTextPw = parsedUser.pw;
+
   var hash = bcrypt.hashSync(plainTextPw, 10);
 
   newUser.username = parsedUser.user;
@@ -57,10 +58,16 @@ let saveUser = (userData) => {
   });
 };
 
-let loginUser = (username, callback) => {
-  User.findOne({username: username}, function(err, user) {
-    callback(null, user.password);
-  });
+let loginUser = (userData, callback) => {
+  var user = userData.body.user;
+  var password = userData.body.pw;
+  User.findOne({username: user}, function(err, user) {
+    if(err) {
+      console.error(err);
+    }
+  }).then(user => {
+    callback(bcrypt.compareSync(password, user.password));
+  }).catch(err => callback(false));
 }
 
 let saveListing = (listing, callback) => {
@@ -124,5 +131,5 @@ let updateListing = () => {
 
 };
 
-
+module.exports.loginUser = loginUser;
 module.exports.saveUser = saveUser;

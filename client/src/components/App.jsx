@@ -24,7 +24,7 @@ class App extends React.Component {
   userLogin(user){
     console.log(login)
     login(user, (response)=>{
-      console.log(`this is from server ${response} | login`);
+      console.log(response);
       this.setState({
         loginAs: response.username
       })
