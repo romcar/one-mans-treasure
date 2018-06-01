@@ -133,19 +133,7 @@ let updateListing = () => {
 
 };
 
-<<<<<<< HEAD
-// This will be default get
-let getLatestListing = (cb) => {
-  Listing.find((err, listings) => {
-    if (err) return console.log(err);
-    cb(listings);
-  }).sort({created_at: -1}) //.limit(?)
-}
 
-
-=======
-module.exports.loginUser = loginUser;
->>>>>>> 05f70ef502e716a18105e8d0a7eae75c9d26f68b
 module.exports.saveUser = saveUser;
 module.exports.saveListing = saveListing;
 

@@ -6,7 +6,7 @@ const dotenv = require('dotenv').config();
 
 let app = express();
 exports.app = app;
-app.set('port', 1128)
+app.set('port', process.env.PORT || 1128)
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended: false}));
