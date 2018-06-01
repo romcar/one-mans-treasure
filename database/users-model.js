@@ -1,5 +1,7 @@
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/greenfield');
+
 
 let listingsSchema = mongoose.Schema({
   name: String,
@@ -21,6 +23,7 @@ let usersSchema = mongoose.Schema({
   password: {type: String, required: true},
   created_at: Date,
   my_listings: [listingsSchema], //{type: Schema.Types.ObjectId, ref: 'Listing'}
+  // my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}],
   // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
   claimed: Array,
   karma: Number,
@@ -34,14 +37,14 @@ let User = mongoose.model('User', usersSchema);
 module.exports.User = User;
 
 let saveUser = (userData) => {
-  //var parsedUser = JSON.parse(userData.body);
 
-  //bcryptdPW = bcrypt( userData.body.pw )
-
-  var parsedUser = userData.body;
   var newUser = {};
+  var parsedUser = userData.body;
+  var plainTextPw = parsedUser.pw;
+  var hash = bcrypt.hashSync(plainTextPw, 10);
+
   newUser.username = parsedUser.user;
-  newUser.password = parsedUser.pw; //bcryptdPW
+  newUser.password = hash;
   newUser.created_at = parsedUser.created_at;
   newUser.my_listings = [];
   newUser.claimed = [];
