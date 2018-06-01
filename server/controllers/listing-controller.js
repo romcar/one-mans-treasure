@@ -1,4 +1,4 @@
-const db = require('../../database/listings-model');
+const db = require('../../database/users-model');
 
 module.exports = {
   listings: {
@@ -12,12 +12,14 @@ module.exports = {
     },
     // create and add listing to db
     post: function(req, res) {
-      new db.Listing.save(req.body).then(function(err, newListing) {
-        if (err) { console.error(err); }
-        console.log('Post request from server')
-        res.writeHead(201);
-        res.end(newListing);
-      });
+      // new db.Listing.save(req.body).then(function(err, newListing) {
+      //   if (err) { console.error(err); }
+      //   console.log('Post request from server')
+      //   res.writeHead(201);
+      //   res.end(newListing);
+      // });
+      db.saveListing(req); //maybe attach promise here?
+      res.end();
     }
   }
 }

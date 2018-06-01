@@ -37,6 +37,7 @@ let User = mongoose.model('User', usersSchema);
 module.exports.User = User;
 
 let saveUser = (userData) => {
+
   var newUser = {};
   var parsedUser = userData.body;
   var plainTextPw = parsedUser.pw;
@@ -70,8 +71,8 @@ let loginUser = (userData, callback) => {
   }).catch(err => callback(false));
 }
 
-let saveListing = (listing, callback) => {
-  var parsedListing = JSON.parse(listing.body);
+let saveListing = (listing) => {
+  var parsedListing = listing.body;
   var newlisting = {};
   newlisting.name = parsedListing.name;
   newlisting.isFreecycle = parsedListing.isFreecycle;
@@ -80,10 +81,11 @@ let saveListing = (listing, callback) => {
   newlisting.updated_at = parsedListing.created_at;
   newlisting.interested_users = [];
   newlisting.description = parsedListing.description;
-  newlisting.photo = parsedListing.photo;
+  //newlisting.photo = parsedListing.photo;
   var listing = new Listing(newlisting);
-  listing.save().then(savedListing => {
-    callback(savedListing);
+  listing.save((err) => {
+    if (err) return console.log(err);
+    console.log('saved user', user)
   })
 };
 
@@ -131,5 +133,19 @@ let updateListing = () => {
 
 };
 
+<<<<<<< HEAD
+// This will be default get
+let getLatestListing = (cb) => {
+  Listing.find((err, listings) => {
+    if (err) return console.log(err);
+    cb(listings);
+  }).sort({created_at: -1}) //.limit(?)
+}
+
+
+=======
 module.exports.loginUser = loginUser;
+>>>>>>> 05f70ef502e716a18105e8d0a7eae75c9d26f68b
 module.exports.saveUser = saveUser;
+module.exports.saveListing = saveListing;
+
