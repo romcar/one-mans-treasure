@@ -34,11 +34,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar 
+        <NavBar
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}
         />
-        
+
       </div>
     )
   }

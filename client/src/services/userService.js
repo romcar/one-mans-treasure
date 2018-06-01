@@ -13,7 +13,6 @@ export function signup({username, password}, callback){
 }
 
 export function login({username, password}, callback){
-  //console.log(user);
   $.post('/login', {
     user: username, pw: password
   })
