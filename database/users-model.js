@@ -40,6 +40,7 @@ let saveUser = (userData) => {
   var newUser = {};
   var parsedUser = userData.body;
   var plainTextPw = parsedUser.pw;
+
   var hash = bcrypt.hashSync(plainTextPw, 10);
 
   newUser.username = parsedUser.user;
