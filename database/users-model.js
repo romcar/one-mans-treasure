@@ -20,7 +20,7 @@ let usersSchema = mongoose.Schema({
   username: {type: String, required: true, index: {unique: true} },
   password: {type: String, required: true},
   created_at: Date,
-  my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}],
+  my_listings: [listingsSchema], //{type: Schema.Types.ObjectId, ref: 'Listing'}
   // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
   claimed: Array,
   karma: Number,
@@ -33,11 +33,12 @@ let User = mongoose.model('User', usersSchema);
 
 module.exports.User = User;
 
-let saveUser = (userData, callback) => {
-  var parsedUser = JSON.parse(userData.body);
+let saveUser = (userData) => {
+  //var parsedUser = JSON.parse(userData.body);
+  var parsedUser = userData.body;
   var newUser = {};
-  newUser.username = parsedUser.username;
-  newUser.password = parsedUser.password;
+  newUser.username = parsedUser.user;
+  newUser.password = parsedUser.pw;
   newUser.created_at = parsedUser.created_at;
   newUser.my_listings = [];
   newUser.claimed = [];
@@ -45,14 +46,15 @@ let saveUser = (userData, callback) => {
   newUser.tokenCount = 0;
   newUser.isAdmin = false;
   var user = new User(newUser);
-  user.save().then(savedUser => {
-    callback(savedUser);
+  user.save((err) => {
+    if (err) console.log(err)
+    console.log('saved user', user)
   });
 };
 
-let loginUser = (username, password, callback) => {
-  User.findOne({username: username}, function(err, password) {
-    callback(password);
+let loginUser = (username, callback) => {
+  User.findOne({username: username}, function(err, user) {
+    callback(null, user.password);
   });
 }
 
