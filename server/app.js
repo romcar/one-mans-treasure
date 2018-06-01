@@ -9,6 +9,7 @@ exports.app = app;
 app.set('port', 1128)
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({extended: false}));
 app.use(morgan("dev"));
 app.use('/', routes);
 

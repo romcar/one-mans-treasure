@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
-export function signup(user, callback){
+export function signup({username, password}, callback){
   $.post('/signup', {
-    userData: user
+    user: username, pw: password, created_at: Date.now()
   })
   .done(response=>{
     callback(response);
@@ -12,10 +12,10 @@ export function signup(user, callback){
   })
 }
 
-export function login(user, callback){
-  console.log(user);
+export function login({username, password}, callback){
+  //console.log(user);
   $.post('/login', {
-    userData: user
+    user: username, pw: password
   })
   .done(response=>{
     callback(reponse);
