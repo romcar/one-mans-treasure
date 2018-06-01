@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
-import {Button} from 'semantic-ui-react';
+import NavDropdown from './NavDropdown.jsx';
+import {Button, Dropdown} from 'semantic-ui-react';
 
 // import Login from './Login.jsx';
 
@@ -10,7 +11,6 @@ class NavBar extends React.Component{
   constructor(props){
     super(props);
   }
-
 
   render(){
     return(
@@ -30,9 +30,7 @@ class NavBar extends React.Component{
               <Signup create={this.props.create.bind(this)}/> 
             </Button.Group>
           </div>
-          <div className="item">
-            <i className="bars icon"></i>
-          </div>        
+            <NavDropdown></NavDropdown>   
         </div>
       </div>
     )

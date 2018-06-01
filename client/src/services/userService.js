@@ -17,7 +17,7 @@ export function login({username, password}, callback){
     user: username, pw: password
   })
   .done(response=>{
-    callback(reponse);
+    callback(response);
   })
   .fail(error=>{
     callback(error);
