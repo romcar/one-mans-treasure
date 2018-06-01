@@ -1,5 +1,7 @@
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/greenfield');
+
 
 let listingsSchema = mongoose.Schema({
   name: String,
@@ -35,11 +37,13 @@ let User = mongoose.model('User', usersSchema);
 module.exports.User = User;
 
 let saveUser = (userData) => {
-  //var parsedUser = JSON.parse(userData.body);
-  var parsedUser = userData.body;
   var newUser = {};
+  var parsedUser = userData.body;
+  var plainTextPw = parsedUser.pw;
+  var hash = bcrypt.hashSync(plainTextPw, 10);
+
   newUser.username = parsedUser.user;
-  newUser.password = parsedUser.pw;
+  newUser.password = hash;
   newUser.created_at = parsedUser.created_at;
   newUser.my_listings = [];
   newUser.claimed = [];
