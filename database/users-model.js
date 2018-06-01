@@ -35,10 +35,13 @@ module.exports.User = User;
 
 let saveUser = (userData) => {
   //var parsedUser = JSON.parse(userData.body);
+
+  //bcryptdPW = bcrypt( userData.body.pw )
+
   var parsedUser = userData.body;
   var newUser = {};
   newUser.username = parsedUser.user;
-  newUser.password = parsedUser.pw;
+  newUser.password = parsedUser.pw; //bcryptdPW
   newUser.created_at = parsedUser.created_at;
   newUser.my_listings = [];
   newUser.claimed = [];
@@ -118,6 +121,10 @@ let updateUser = () => {
 let updateListing = () => {
 
 };
+
+let getLatestListing = () => {
+
+}
 
 
 module.exports.saveUser = saveUser;
