@@ -7,7 +7,9 @@ module.exports = {
     res.status(200).send();
   },
   comparePassword: function(req, res) {
+
     db.loginUser(req, function(isMatch, newUser) {
+
       if(isMatch) {
         let newSession = util.createSession(req, res, newUser);
         newSession.user = newUser;
@@ -17,5 +19,6 @@ module.exports = {
         res.status(200).send(false);
       }
     });
+
   }
 }
