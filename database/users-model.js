@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/greenfield');
+let uriString = process.env.MONGODB_URI || 'mongodb://localhost/greenfield'
+mongoose.connect(uriString);
 
 
 let listingsSchema = mongoose.Schema({
