@@ -6,7 +6,7 @@ router.post('/signup', userCtrl.signUp);
 router.post('/login', userCtrl.comparePassword);
 
 router.post('/listing', listingCtrl.listings.post);
-router.get('/listing/latest', listingCtrl.listings.get);
+router.get('/listing', listingCtrl.listings.get);
 router.get('/listing/nearest', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 
 router.post('/claim', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);

@@ -2,19 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import NavBar from './NavBar.jsx';
-import {signup, login} from '../services/userService.js';
+import Listings from './Listings.jsx';
+import {Container} from 'semantic-ui-react'
+import {signupService, loginService} from '../services/userService.js';
+import {loadListingService} from '../services/listingService.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginAs: null
+      loginAs: null,
+      listings: [],
     }
   }
 
+  componentDidMount(){
+    this.loadListing();
+  }
+
+  loadListing(){
+    loadListingService(listings=>{
+      console.log(listings);
+      this.setState({
+        listings: listings,
+      })
+    })
+  }
+
   createAccount(user){
-    signup(user, (response)=>{
-      console.log(`this is from server ${response}`);
+    signupService(user, (response)=>{
       this.setState({
         loginAs: response.username
       })
@@ -22,8 +38,7 @@ class App extends React.Component {
   }
 
   userLogin(user){
-    console.log(login)
-    login(user, (response)=>{
+    loginService(user, (response)=>{
       console.log(response);
       this.setState({
         loginAs: response.username
@@ -38,7 +53,9 @@ class App extends React.Component {
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}
         />
-
+        <Container>
+          <Listings listings={this.state.listings}/>
+        </Container>
       </div>
     )
   }

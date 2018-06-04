@@ -7,7 +7,6 @@ module.exports = {
     res.send();
   },
   comparePassword: function(req, res) {
-
     db.loginUser(req, function(isMatch) {
       if(isMatch) {
         res.status(200).send(isMatch);
