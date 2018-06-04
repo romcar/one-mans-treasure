@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 let uriString = process.env.MONGODB_URI || 'mongodb://localhost/greenfield'
 mongoose.connect(uriString);
 
-
 let listingsSchema = mongoose.Schema({
   title: String,
   location: String,
@@ -98,6 +97,18 @@ let saveListing = (listing) => {
   })
 };
 
+exports.fetchListings = ()=>{
+  return new Promise((resolve, reject)=>{
+    Listing.find()
+    .then(listings=>{
+      resolve(listings);
+    })
+    .catch(error=>{
+      reject(error);
+    })
+  })
+}
+
 // let claim = () => {
 //   // will be a big method with following functionality:
 //   // - Marks giver's User.my_listings[listing].isAvailable as False
@@ -139,7 +150,6 @@ let updateUser = () => {
 };
 
 let updateListing = () => {
-
 };
 
 

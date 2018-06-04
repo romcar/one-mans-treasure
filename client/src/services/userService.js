@@ -1,25 +1,25 @@
 import $ from 'jquery';
 
-export function signup({username, password}, callback){
+export function signupService({username, password}, callback){
   $.post('/signup', {
     user: username, pw: password, created_at: Date.now()
   })
-  .done(response=>{
+  .then(response=>{
     callback(response);
   })
-  .fail(error=>{
+  .catch(error=>{
     callback(error);
   })
 }
 
-export function login({username, password}, callback){
+export function loginService({username, password}, callback){
   $.post('/login', {
     user: username, pw: password
   })
-  .done(response=>{
+  .then(response=>{
     callback(response);
   })
-  .fail(error=>{
+  .catch(error=>{
     callback(error);
   })
 }

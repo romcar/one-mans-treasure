@@ -38,3 +38,13 @@ export function createListingService(data, callback){
     callback(error);
   })
 }
+
+export function loadListingService(callback){
+  $.get('/listing')
+    .then(response=>{
+      callback(response);
+    })
+    .catch(error=>{
+      callback(response);
+    })
+}
