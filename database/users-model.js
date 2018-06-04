@@ -41,7 +41,7 @@ let User = mongoose.model('User', usersSchema);
 
 module.exports.User = User;
 
-let saveUser = (userData) => {
+exports.saveUser = (userData) => {
 
   var newUser = {};
   var parsedUser = userData.body;
@@ -64,7 +64,7 @@ let saveUser = (userData) => {
   });
 };
 
-let loginUser = (userData, callback) => {
+exports.loginUser = (userData, callback) => {
   var user = userData.body.user;
   var password = userData.body.pw;
   User.findOne({username: user}, function(err, user) {
@@ -72,11 +72,11 @@ let loginUser = (userData, callback) => {
       console.error(err);
     }
   }).then(user => {
-    callback(bcrypt.compareSync(password, user.password));
+    callback(bcrypt.compareSync(password, user.password), user);
   }).catch(err => callback(false));
 }
 
-let saveListing = (listing) => {
+exports.saveListing = (listing) => {
   var newlisting = {};
   newlisting.title = listing.title;
   newlisting.location = listing.loc;
@@ -116,7 +116,7 @@ exports.fetchListings = ()=>{
 
 // };
 
-let give = (giver, claimant, listing) => {
+exports.give = (giver, claimant, listing) => {
   // different from claim, will be for the listings with interest/trade requirement
   // will be a big method with following functionality:
   // - Marks giver's User.my_listings[listing].isAvailable as False
@@ -139,20 +139,16 @@ let give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
-let addInterest = (listing, user) => {
+exports.addInterest = (listing, user) => {
   Listing.findOne({}, (err, listing) => {
     listing.interested_users.push(user);
   })
 };
 
-let updateUser = () => {
+exports.updateUser = () => {
 
 };
 
-let updateListing = () => {
+exports.updateListing = () => {
 };
-
-
-module.exports.saveUser = saveUser;
-module.exports.saveListing = saveListing;
 

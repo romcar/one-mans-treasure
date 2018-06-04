@@ -4,6 +4,9 @@ const router = require('express').Router();
 
 router.post('/signup', userCtrl.signUp);
 router.post('/login', userCtrl.comparePassword);
+router.get('/login', (req, res) => {
+  res.status(200).send(req.session);
+});
 
 router.post('/listing', listingCtrl.listings.post);
 router.get('/listing', listingCtrl.listings.get);

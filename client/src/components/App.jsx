@@ -41,9 +41,13 @@ class App extends React.Component {
     loginService(user, (response)=>{
       console.log(response);
       this.setState({
-        loginAs: response.username
+        loginAs: response
       })
     })
+  }
+
+  isLoggedIn() {
+
   }
 
   render() {
@@ -52,6 +56,7 @@ class App extends React.Component {
         <NavBar
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}
+        isLoggedIn={this.isLoggedIn.bind(this)}
         />
         <Container>
           <Listings listings={this.state.listings}/>

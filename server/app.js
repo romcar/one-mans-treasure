@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const bodyParse = require("body-parser");
 const routes = require("./routes.js");
 const dotenv = require('dotenv').config();
+const session = require('express-session');
 
 let app = express();
 exports.app = app;
@@ -11,6 +12,14 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended: true}));
 app.use(morgan("dev"));
+
+app.use(session({
+  secret: '499xcq3de300op',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true, maxAge: 60000 }
+}));
+
 app.use('/', routes);
 
 
