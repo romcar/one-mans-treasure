@@ -8,6 +8,7 @@ class ListingCreator extends React.Component{
     super(props);
     this.state = {
       listing : {
+        title: '',
         image: '',
         desc: '',
         loc: '',
@@ -62,12 +63,13 @@ class ListingCreator extends React.Component{
     <Modal trigger={<div>Create Listing</div>} closeOnDimmerClick={false}>
       <Modal.Header>New Listing</Modal.Header>
       <div>
+        <Container textAlign="center">
+        <Input onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title}
+        placeholder="Title"/>
         <Divider/>
         <Divider hidden/>
         <Divider hidden/>
         <Divider hidden/>
-        
-        <Container textAlign="center">
         <div style={this.labelStyle}>
           <label htmlFor="embedpollfileinput" className="ui huge green button">
             <i className="ui upload icon"></i> 
@@ -77,12 +79,12 @@ class ListingCreator extends React.Component{
           type="file"
           className="inputfile" id="embedpollfileinput" style={this.inputStyle}/>
         </div>
-        </Container>
         <Divider hidden/>
         <Divider hidden/>
         <Divider hidden/>
         <Divider/>
-        <Divider/>        
+        <Divider/>    
+        </Container>
       </div>
       
       <Container textAlign="center">

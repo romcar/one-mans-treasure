@@ -12,7 +12,13 @@ module.exports = {
     },
     // create and add listing to db
     post: function(req, res) {
-      console.log(req.body)
+      db.saveListing(req.body)
+        .then(savedListing=>{
+          res.status(201).send(savedListing);
+        })
+        .catch(error=>{
+          res.status(401).send(error);
+        })
       // new db.Listing.save(req.body).then(function(err, newListing) {
       //   if (err) { console.error(err); }
       //   console.log('Post request from server')
@@ -20,7 +26,6 @@ module.exports = {
       //   res.end(newListing);
       // });
       // db.saveListing(req); //maybe attach promise here?
-      res.end();
     }
   }
 }

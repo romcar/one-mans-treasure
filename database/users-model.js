@@ -5,7 +5,7 @@ mongoose.connect(uriString);
 
 
 let listingsSchema = mongoose.Schema({
-  name: String,
+  title: String,
   location: String,
   isFreecycle: Boolean,
   isAvailable: Boolean,
@@ -78,20 +78,23 @@ let loginUser = (userData, callback) => {
 }
 
 let saveListing = (listing) => {
-  var parsedListing = listing.body;
   var newlisting = {};
-  newlisting.loc = parsedListing.loc;
-  // newlisting.isFreecycle = parsedListing.isFreecycle;
+  newlisting.title = listing.title;
+  newlisting.location = listing.loc;
+  // newlisting.isFreecycle = listing.isFreecycle;
   newlisting.isAvailable = true;
-  // newlisting.created_at = parsedListing.created_at;
-  // newlisting.updated_at = parsedListing.created_at;
   newlisting.interested_users = [];
-  newlisting.description = parsedListing.description;
-  //newlisting.photo = parsedListing.photo;
+  newlisting.description = listing.desc;
+  newlisting.photo = listing.image;
   var listing = new Listing(newlisting);
-  listing.save((err) => {
-    if (err) return console.log(err);
-    console.log('saved user', user)
+  return new Promise((resolve,reject)=>{
+    listing.save()
+    .then(savedListing=>{
+      resolve(savedListing);
+    })
+    .catch(error=>{
+      reject(error)
+    })
   })
 };
 

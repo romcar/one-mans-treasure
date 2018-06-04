@@ -19,7 +19,7 @@ class NavDropdown extends Component {
 
   handleListingCreate(post){
     createListingService(post, (dataFromServer)=>{
-      console.log('success');
+      console.log(dataFromServer);
     })
   }
 

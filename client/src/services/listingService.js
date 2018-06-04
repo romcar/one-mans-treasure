@@ -19,9 +19,22 @@ export function createListingService(data, callback){
     mimeType: 'multipart/form-data',
   })
   .then(response=>{
-    console.log(JSON.parse(response));
+    response = JSON.parse(response)
+    console.log(response)
+    $.post('/listing', {
+      title: data.title,
+      desc: data.desc,
+      loc: data.loc,
+      image: response.data.link
+    })
+    .then(serverRes=>{
+      callback(serverRes);
+    })
+    .catch(error=>{
+      callback(error);
+    })
   })
   .catch(error=>{
-    console.log(error);
+    callback(error);
   })
 }
