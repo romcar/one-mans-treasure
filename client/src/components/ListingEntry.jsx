@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Segment, Image, Divider, 
+import {Grid, Segment, Image, Divider,
   Container, Header, Label, Icon, Button} from 'semantic-ui-react';
 
 const ListingEntry = (props) =>{
@@ -12,7 +12,7 @@ const ListingEntry = (props) =>{
         </Header>
         <Container textAlign="center">
           <Label color='gray' horizontal>{props.listing.location}</Label>
-        </Container>  
+        </Container>
         <Divider/>
         <Container textAlign="center">
         <Button as='div' labelPosition='right'>
@@ -24,11 +24,13 @@ const ListingEntry = (props) =>{
             2
           </Label>
         </Button>
-        </Container> 
+        </Container>
       </Segment>
 
-    </Grid.Column>    
+    </Grid.Column>
   )
 }
 
 export default ListingEntry;
+
+// ajax call to server sending data: {listing: , user_id: }

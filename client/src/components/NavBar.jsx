@@ -27,10 +27,10 @@ class NavBar extends React.Component{
             <Button.Group>
               <Login login={this.props.login.bind(this)}/>
               <Button.Or/>
-              <Signup create={this.props.create.bind(this)}/> 
+              <Signup create={this.props.create.bind(this)}/>
             </Button.Group>
           </div>
-            <NavDropdown></NavDropdown>   
+            <NavDropdown></NavDropdown>
         </div>
       </div>
     )
