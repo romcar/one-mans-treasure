@@ -6,6 +6,7 @@ mongoose.connect(uriString);
 
 let listingsSchema = mongoose.Schema({
   name: String,
+  location: String,
   isFreecycle: Boolean,
   isAvailable: Boolean,
   created_at: Date,
@@ -13,7 +14,11 @@ let listingsSchema = mongoose.Schema({
   interested_users: Array,
   description: String,
   photo: String
-});
+},
+  {
+    timestamps: true
+  }
+);
 
 let Listing = mongoose.model('Listing', listingsSchema);
 
@@ -75,11 +80,11 @@ let loginUser = (userData, callback) => {
 let saveListing = (listing) => {
   var parsedListing = listing.body;
   var newlisting = {};
-  newlisting.name = parsedListing.name;
-  newlisting.isFreecycle = parsedListing.isFreecycle;
+  newlisting.loc = parsedListing.loc;
+  // newlisting.isFreecycle = parsedListing.isFreecycle;
   newlisting.isAvailable = true;
-  newlisting.created_at = parsedListing.created_at;
-  newlisting.updated_at = parsedListing.created_at;
+  // newlisting.created_at = parsedListing.created_at;
+  // newlisting.updated_at = parsedListing.created_at;
   newlisting.interested_users = [];
   newlisting.description = parsedListing.description;
   //newlisting.photo = parsedListing.photo;
