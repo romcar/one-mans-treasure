@@ -21,7 +21,7 @@ const ListingEntry = (props) =>{
             Claim
           </Button>
           <Label as='a' basic color='red' pointing='left'>
-            2
+            {props.listing.interested_users.length}
           </Label>
         </Button>
         </Container>
