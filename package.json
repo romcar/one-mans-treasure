@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "nodemon server/app.js",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "postinstall": "npm run react-dev"
   },
   "author": "AnotherMansTreasure",
   "license": "ISC",
