@@ -7,7 +7,7 @@
     "node" : "8.11.1"
   },
   "scripts": {
-    "start": "node server/app.js",
+    "start": "nodemon server/app.js",
     "react-dev": "webpack -d --watch"
   },
   "author": "AnotherMansTreasure",
