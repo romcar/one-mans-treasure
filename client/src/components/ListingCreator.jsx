@@ -60,12 +60,10 @@ class ListingCreator extends React.Component{
 
   render(){
     return(
-    <Modal trigger={<div>Create Listing</div>} closeOnDimmerClick={false}>
+    <Modal open={this.state.isOpen} trigger={<Button onClick={this.open.bind(this)}>New Listing</Button>} closeOnDimmerClick={false}>
       <Modal.Header>New Listing</Modal.Header>
       <div>
         <Container textAlign="center">
-        <Input onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title}
-        placeholder="Title"/>
         <Divider/>
         <Divider hidden/>
         <Divider hidden/>
@@ -88,11 +86,13 @@ class ListingCreator extends React.Component{
       </div>
       
       <Container textAlign="center">
-        <TextArea onChange={this.handleChange.bind(this, 'desc')} value={this.state.listing.desc}
-        autoHeight cols="60" placeholder='Short Description' />
-        <Divider/>         
+      <Input onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title}
+        placeholder="Title"/>   
         <Input onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc}
         placeholder="Location"/>
+        <Divider/>         
+        <TextArea onChange={this.handleChange.bind(this, 'desc')} value={this.state.listing.desc}
+        autoHeight cols="60" placeholder='Short Description' />
       </Container>
       <Divider/> 
       <Modal.Actions>

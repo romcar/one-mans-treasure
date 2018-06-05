@@ -5,11 +5,23 @@ import Login from './Login.jsx';
 import NavDropdown from './NavDropdown.jsx';
 import {Button, Dropdown} from 'semantic-ui-react';
 
-// import Login from './Login.jsx';
-
 class NavBar extends React.Component{
   constructor(props){
     super(props);
+  }
+
+  renderCredential(){
+    if(this.props.session === null){
+      return (
+      <Button.Group>
+        <Login login={this.props.login.bind(this)}/>
+      <Button.Or/>
+        <Signup create={this.props.create.bind(this)}/>
+      </Button.Group>
+      )
+    } else {
+      return <div>Welcome back {this.props.session.user.username}!</div>
+    }
   }
 
   render(){
@@ -24,13 +36,9 @@ class NavBar extends React.Component{
         </div>
         <div className="right menu">
           <div className="item ui">
-            <Button.Group>
-              <Login login={this.props.login.bind(this)}/>
-              <Button.Or/>
-              <Signup create={this.props.create.bind(this)}/>
-            </Button.Group>
+            {this.renderCredential()}
           </div>
-            <NavDropdown></NavDropdown>
+            <NavDropdown session={this.props.session}></NavDropdown>
         </div>
       </div>
     )
