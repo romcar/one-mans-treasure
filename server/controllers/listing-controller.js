@@ -14,6 +14,7 @@ module.exports = {
     },
     // create and add listing to db
     post: function(req, res) {
+      //if FC then db.saveFC
       db.saveListing(req.body)
         .then(savedListing=>{
           res.status(201).send(savedListing);
@@ -21,6 +22,17 @@ module.exports = {
         .catch(error=>{
           res.status(401).send(error);
         })
+    },
+
+    interested: function(req, res) {
+      console.log(req.body);
+      db.addInterest(req.body)
+      .then(markedInterest => {
+        res.status(201).send(markedInterest);
+      })
+      .catch(error => {
+        res.status(401).send(error);
+      })
     }
 
   }

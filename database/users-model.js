@@ -170,9 +170,11 @@ exports.give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
-exports.addInterest = (listing, user) => {
-  Listing.findOne({}, (err, listing) => {
-    listing.interested_users.push(user);
+exports.addInterest = (data) => {
+  console.log(data.itemId)
+  let id = data.itemId
+  Listing.findById(id, function (err, listing) {
+    listing.interested_users.push(data.interestedId);
   })
 };
 

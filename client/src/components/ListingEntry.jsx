@@ -15,8 +15,8 @@ const ListingEntry = (props) =>{
         </Container>
         <Divider/>
         <Container textAlign="center">
-        <Button as='div' labelPosition='right'>
-          <Button color='red'>
+        <Button as='div' labelPosition='right' >
+          <Button color='red' onClick={props.handleClaim}>
             <Icon name='heart' />
             Claim
           </Button>
