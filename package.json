@@ -7,9 +7,8 @@
     "node" : "8.11.1"
   },
   "scripts": {
-    "start": "nodemon server/app.js",
-    "react-dev": "webpack -d --watch",
-    "postinstall": "npm run react-dev"
+    "start": "node server/app.js",
+    "react-dev": "webpack -d --watch"
   },
   "author": "AnotherMansTreasure",
   "license": "ISC",
