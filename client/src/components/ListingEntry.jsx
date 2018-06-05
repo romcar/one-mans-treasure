@@ -6,9 +6,9 @@ const ListingEntry = (props) =>{
   return(
     <Grid.Column>
       <Segment>
-      <Image src={props.listing.photo} rounded/>
+      <Image src={props.listing.photo} onClick={()=>{props.selectHandler(props.listing)}} rounded/>
         <Header as="h2" textAlign="center">
-          <Header.Content>{props.listing.title}</Header.Content>
+          <Header.Content onClick={()=>{props.selectHandler(props.listing)}}>{props.listing.title}</Header.Content>
         </Header>
         <Container textAlign="center">
           <Label color='grey' horizontal>{props.listing.location}</Label>

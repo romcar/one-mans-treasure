@@ -23,15 +23,25 @@ class NavDropdown extends Component {
     })
   }
 
+  renderDropdown(){
+    if(this.props.session){
+      return (<div>
+        <Dropdown.Item>
+          <ListingCreator handleCreate={this.handleListingCreate.bind(this)}/>
+        </Dropdown.Item>
+        </div>
+        )
+    }
+  }
+
   render() {
     const { activeItem } = this.state
 
     return (
+    
     <Dropdown item icon='bars'>
       <Dropdown.Menu>
-        <Dropdown.Item><ListingCreator handleCreate={this.handleListingCreate.bind(this)}/></Dropdown.Item>
-        <Dropdown.Item></Dropdown.Item>
-        <Dropdown.Item></Dropdown.Item>
+        {this.renderDropdown()}
       </Dropdown.Menu>
     </Dropdown>
     )

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import NavBar from './NavBar.jsx';
 import Listings from './Listings.jsx';
+import ListingDetails from './ListingDetails.jsx';
+
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
 import {loadListingService} from '../services/listingService.js';
@@ -13,6 +15,8 @@ class App extends React.Component {
     this.state = {
       loginAs: null,
       listings: [],
+      view: 'listings',
+      selectedListing: '',
     }
   }
 
@@ -46,20 +50,33 @@ class App extends React.Component {
     })
   }
 
-  isLoggedIn() {
+  listingSelectHandler(selected){
+    this.setState({
+      view: 'single',
+      selectedListing: selected
+    })
+  }
 
+  renderBody(){
+    if(this.state.view === 'listings'){
+      return (<Listings selectHandler={this.listingSelectHandler.bind(this)} 
+      user={this.state.loginAs} 
+      listings={this.state.listings}/>)
+    } else if(this.state.view === 'single') {
+      return <ListingDetails user={this.state.loginAs} listing={this.state.selectedListing}/>
+    }
   }
 
   render() {
     return (
       <div>
         <NavBar
+        session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}
-        isLoggedIn={this.isLoggedIn.bind(this)}
         />
         <Container>
-          <Listings listings={this.state.listings}/>
+          {this.renderBody()}
         </Container>
       </div>
     )

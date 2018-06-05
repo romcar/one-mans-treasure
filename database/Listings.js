@@ -4,6 +4,7 @@ const db = require('./index.js');
 let listingsSchema = mongoose.Schema({
   title: String,
   location: String,
+  createdBy: String,
   isAvailable: Boolean,
   interested_users: Array,
   description: String,
