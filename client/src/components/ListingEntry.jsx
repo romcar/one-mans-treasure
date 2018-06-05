@@ -11,7 +11,7 @@ const ListingEntry = (props) =>{
           <Header.Content>{props.listing.title}</Header.Content>
         </Header>
         <Container textAlign="center">
-          <Label color='gray' horizontal>{props.listing.location}</Label>
+          <Label color='grey' horizontal>{props.listing.location}</Label>
         </Container>
         <Divider/>
         <Container textAlign="center">
