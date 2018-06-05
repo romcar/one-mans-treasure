@@ -1,4 +1,4 @@
-const db = require('../../database/users-model');
+const db = require('../../database/Users');
 const util = require('../services/utility.js');
 
 module.exports = {
