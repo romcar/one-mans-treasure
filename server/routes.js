@@ -13,6 +13,7 @@ router.get('/listing', listingCtrl.listings.get);
 router.get('/listing/nearest', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 
 router.post('/claim', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
+router.post('/interested', listingCtrl.listings.interested);
 router.post('/resolve', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 
 // router.post('/upvote', )

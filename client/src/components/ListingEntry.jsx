@@ -15,13 +15,13 @@ const ListingEntry = (props) =>{
         </Container>
         <Divider/>
         <Container textAlign="center">
-        <Button as='div' labelPosition='right'>
-          <Button color='red'>
+        <Button as='div' labelPosition='right' >
+          <Button color='red' onClick={props.handleClaim}>
             <Icon name='heart' />
             Claim
           </Button>
           <Label as='a' basic color='red' pointing='left'>
-            2
+            {props.listing.interested_users.length}
           </Label>
         </Button>
         </Container>

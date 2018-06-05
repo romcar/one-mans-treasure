@@ -48,3 +48,16 @@ export function loadListingService(callback){
       callback(response);
     })
 }
+
+export function interestCount(data, callback){
+  $.post('/interested', {
+    interestedId: data.loggedInAs,
+    itemId: data.currentListing
+  })
+  .then(serverRes => {
+    callback(serverRes);
+  })
+  .catch(error => {
+    callback(error);
+  })
+}

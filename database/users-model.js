@@ -6,10 +6,7 @@ mongoose.connect(uriString);
 let listingsSchema = mongoose.Schema({
   title: String,
   location: String,
-  isFreecycle: Boolean,
   isAvailable: Boolean,
-  created_at: Date,
-  updated_at: Date,
   interested_users: Array,
   description: String,
   photo: String
@@ -22,6 +19,22 @@ let listingsSchema = mongoose.Schema({
 let Listing = mongoose.model('Listing', listingsSchema);
 
 module.exports.Listing = Listing;
+
+let freecycleSchema = mongoose.Schema({
+  title: String,
+  location: String,
+  description: String,
+  photo: String,
+  isAvailable: Boolean
+},
+  {
+    timestamps: true
+  }
+);
+
+let Freecycle = mongoose.model('Freecycle', freecycleSchema);
+
+module.exports.Freecycle = Freecycle;
 
 let usersSchema = mongoose.Schema({
   username: {type: String, required: true, index: {unique: true} },
@@ -80,7 +93,6 @@ exports.saveListing = (listing) => {
   var newlisting = {};
   newlisting.title = listing.title;
   newlisting.location = listing.loc;
-  // newlisting.isFreecycle = listing.isFreecycle;
   newlisting.isAvailable = true;
   newlisting.interested_users = [];
   newlisting.description = listing.desc;
@@ -93,6 +105,25 @@ exports.saveListing = (listing) => {
     })
     .catch(error=>{
       reject(error)
+    })
+  })
+};
+
+exports.saveFreecycle = (freecycle) => {
+  var newlisting = {};
+  newlisting.title = freecycle.title;
+  newlisting.location = freecycle.loc;
+  newlisting.description = freecycle.desc;
+  newlisting.photo = freecycle.image;
+  newlisting.isAvailable = true;
+  var listing = new Freecycle(freecycle);
+  return new Promise((resolve, reject) => {
+    listing.save()
+    .then(savedListing => {
+      resolve(savedListing);
+    })
+    .catch(error => {
+      reject(error);
     })
   })
 };
@@ -139,9 +170,11 @@ exports.give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
-exports.addInterest = (listing, user) => {
-  Listing.findOne({}, (err, listing) => {
-    listing.interested_users.push(user);
+exports.addInterest = (data) => {
+  console.log(data.itemId)
+  let id = data.itemId
+  Listing.findById(id, function (err, listing) {
+    listing.interested_users.push(data.interestedId);
   })
 };
 
