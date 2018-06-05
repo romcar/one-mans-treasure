@@ -82,6 +82,7 @@ exports.give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
+
 exports.deleteListing = (id)=>{
   return new Promise((resolve, reject)=>{
     Listing.findByIdAndRemove(id)
@@ -150,7 +151,10 @@ exports.updateListing = (id, {title, description, photo, location}) => {
     }).catch(err=>{
       reject(err);
     })
+
   })
+  .then(response => {callback(response);})
+  .catch(error => {callback(error);})
 };
 
 
