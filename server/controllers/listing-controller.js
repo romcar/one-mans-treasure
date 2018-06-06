@@ -34,10 +34,22 @@ module.exports = {
         })
     },
 
-    delete: function(req, res){
+    delete: function(req, res) {
       db.deleteListing(req.params.listingId)
       .then(deleted=>{
         res.status(201).send(deleted);
+      })
+      .catch(error=>{
+        res.status(401).send(error);
+      })
+    },
+
+    update: function(req, res) {
+      console.log('Request body: \n', req.body);
+      console.log('Request params: \n',req.params);
+      db.updateListing(req.params.listingId, req.body.changes)
+      .then(updated=>{
+        res.status(201).send(updated);
       })
       .catch(error=>{
         res.status(401).send(error);
