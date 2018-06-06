@@ -3,6 +3,10 @@ import {Grid, Segment, Image, Divider,
   Container, Header, Label, Icon, Button} from 'semantic-ui-react';
 
 const ListingEntry = (props) =>{
+  const claimHandler = () => {
+    props.handleClaim(props.listing._id, props.listing.interested_users)
+  }
+
   return(
     <Grid.Column>
       <Segment>
@@ -16,7 +20,7 @@ const ListingEntry = (props) =>{
         <Divider/>
         <Container textAlign="center">
         <Button as='div' labelPosition='right' >
-          <Button color='orange' onClick={props.handleClaim}>
+          <Button color='orange' onClick={() => claimHandler()}>
             <Icon name='heart' />
             Claim
           </Button>

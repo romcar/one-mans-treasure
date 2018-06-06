@@ -14,6 +14,7 @@ router.get('/listing/nearest', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLE
 
 router.post('/claim', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 router.post('/interested', listingCtrl.listings.interested);
+router.post('/notinterested', listingCtrl.listings.notInterested);
 router.post('/resolve', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 
 // router.post('/upvote', )

@@ -2,21 +2,41 @@ import React from 'react'
 import ReactDom from 'react-dom';
 import { Grid, Segment } from 'semantic-ui-react';
 import ListingEntry from '../components/ListingEntry.jsx';
-import {interestCount} from '../services/listingService.js';
+import {addInterest, removeInterest} from '../services/listingService.js';
 
 class Listings extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      loggedInAs: 'ooga booga',
-      currentListing: '5b157f09926cc09b02e54d09'
+      selectedListing : []
     }
   }
 
-  markInterest () {
-    interestCount(this.state , (serverRes) => {
-      console.log(serverRes);
-    })
+  markInterest (listingId, interestArray) {
+    if (this.props.user === null) {
+      console.log('Please login to claim items!')
+      return;
+    }
+    console.log(interestArray)
+    let user = this.props.user.user._id;
+    console.log(user)
+    let index = interestArray.indexOf(user);
+    let interestInfo = {
+      loggedInAs: user,
+      currentListing: listingId
+    }
+
+    if (index >= 0) {
+      //decrement
+      removeInterest(interestInfo, (serverRes) => {
+        console.log('decremented');
+      })
+    } else if (index < 0) {
+      //increment
+      addInterest(interestInfo, (serverRes) => {
+        console.log('incremented');
+      })
+    }
   }
 
   setCurrentListing (listing) {
