@@ -59,12 +59,13 @@ module.exports = {
     },
 
     give: function(req, res) {
-      util.giveListing(req.body)
+      util.giveListing(req.body.data)
       .then(given=>{
         res.status(201).send(given);
+      })
       .catch(error=>{
         res.status(401).send(error);
-
       })
+    }
   }
 }
