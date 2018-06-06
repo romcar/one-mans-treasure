@@ -142,5 +142,15 @@ exports.updateInterest = ({id, userId, claimed})=>{
 //   .catch(err => callback(false));
 // };
 
-exports.updateListing = () => {
+exports.updateListing = (id, {title, description, photo, location}) => {
+  return new Promise((resolve, reject) => {
+    Listing.findByIdAndUpdate(id, { $set: { 'title': title, 'description': description, 'photo': photo, 'location': location } }, { new: true })
+    .then(updated=>{
+      resolve(updated);
+    }).catch(err=>{
+      reject(err);
+    })
+  })
 };
+
+
