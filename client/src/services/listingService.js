@@ -51,28 +51,33 @@ export function loadListingService(callback){
     })
 }
 
-export function addInterest(data, callback){
-  $.post('/interested', {
-    interestedId: data.loggedInAs,
-    itemId: data.currentListing
+export function listingInterestService(id, user, claimed ,callback){
+  $.ajax({
+    type:'PUT',
+    url: '/listing/interest',
+    data: {
+      id: id,
+      claimed: claimed,
+      userId: user,
+    },
   })
-  .then(serverRes => {
-    callback(serverRes);
+  .then(response=>{
+    callback(response);
   })
-  .catch(error => {
+  .catch(error=>{
     callback(error);
   })
 }
 
-export function removeInterest(data, callback){
-  $.post('/notinterested', {
-    interestedId: data.loggedInAs,
-    itemId: data.currentListing
+export function deleteListingService(id, callback){
+  $.ajax({
+    type:'DELETE',
+    url: `/listing/${id}`,
   })
-  .then(serverRes => {
-    callback(serverRes);
+  .then(response=>{
+    callback(response);
   })
-  .catch(error => {
+  .catch(error=>{
     callback(error);
   })
 }

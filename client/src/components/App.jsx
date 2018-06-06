@@ -7,7 +7,7 @@ import ListingDetails from './ListingDetails.jsx';
 
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {loadListingService} from '../services/listingService.js';
+import {loadListingService, listingInterestService, deleteListingService} from '../services/listingService.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +22,30 @@ class App extends React.Component {
 
   componentDidMount(){
     this.loadListing();
+  }
+
+  deleteListing(listing){
+    deleteListingService(listing._id, (deleted)=>{
+      this.loadListing();
+    });
+  }
+
+  markInterest ({interested_users, _id}) {
+    if (this.state.loginAs === null) {
+      console.log('Please login to claim items!')
+      return;
+    }
+    let user = this.state.loginAs.user._id;
+    let index = interested_users.indexOf(user);
+    if (index >= 0) {
+      listingInterestService(_id, user, true, (serverRes) => {
+        this.loadListing();
+      })
+    } else if (index < 0) {
+      listingInterestService(_id, user, false ,(serverRes) => {
+        this.loadListing();        
+      })
+    }
   }
 
   loadListing(){
@@ -65,7 +89,7 @@ class App extends React.Component {
 
   renderBody(){
     if(this.state.view === 'listings'){
-      return (<Listings selectHandler={this.listingSelectHandler.bind(this)} 
+      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)} 
       user={this.state.loginAs} 
       listings={this.state.listings}/>)
     } else if(this.state.view === 'single') {
@@ -82,6 +106,7 @@ class App extends React.Component {
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}
+        delete={this.deleteListing.bind(this)}
         />
         <Container>
           {this.renderBody()}

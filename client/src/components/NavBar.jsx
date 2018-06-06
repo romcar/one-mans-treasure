@@ -43,7 +43,12 @@ class NavBar extends React.Component{
         </div>
         <Menu.Menu position="right">
             {this.renderCredential()}
-          <NavDropdown listings={this.props.listings} logout={this.props.logout.bind(this)} session={this.props.session}></NavDropdown>
+          <NavDropdown 
+          listings={this.props.listings} 
+          logout={this.props.logout.bind(this)} 
+          session={this.props.session}
+          delete={this.props.delete.bind(this)}>
+          </NavDropdown>
             
         </Menu.Menu>
       </div>

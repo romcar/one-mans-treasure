@@ -8,7 +8,7 @@ const MyListingEntry = (props)=>{
     <List.Content floated='right'>
       <Button inverted color='blue'><Icon name='gift'/> Givaway</Button>
       <Button inverted><Icon name='edit'/> Edit</Button>
-      <Button inverted color='red'><Icon name='trash alternate outline'/> Delete</Button>
+      <Button inverted color='red' onClick={()=>{props.delete(props.listing)}}><Icon name='trash alternate outline'/> Delete</Button>
     </List.Content>
     <Image avatar src={props.listing.photo} />
     <List.Content>
