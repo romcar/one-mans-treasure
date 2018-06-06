@@ -24,27 +24,15 @@ module.exports = {
         })
     },
 
-    interested: function(req, res) {
-      //console.log(req.body);
-      db.addInterest(req.body, function(boores) {
-        if(boores) {
-          res.status(201).send("hello")
-        } else {
-          res.status(401).send("goodbye")
-        }
-      })
+    setInterest: function(req, res) {
+      db.updateInterest(req.body)
+        .then(updated=>{
+          res.status(201).send(updated);
+        })
+        .catch(error=>{
+          res.status(401).send(error);
+        })
     },
-
-    notInterested: function(req, res) {
-      //console.log(req.body);
-      db.removeInterest(req.body, function(boores) {
-        if(boores) {
-          res.status(201).send("hello")
-        } else {
-          res.status(401).send("goodbye")
-        }
-      })
-    }
 
   }
 }

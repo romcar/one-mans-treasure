@@ -4,7 +4,7 @@ import {Grid, Segment, Image, Divider,
 
 const ListingEntry = (props) =>{
   const claimHandler = () => {
-    props.handleClaim(props.listing._id, props.listing.interested_users)
+    props.interestHandler(props.listing)
   }
 
   return(

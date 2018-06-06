@@ -7,7 +7,7 @@ import ListingDetails from './ListingDetails.jsx';
 
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {loadListingService} from '../services/listingService.js';
+import {loadListingService, listingInterestService} from '../services/listingService.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +22,27 @@ class App extends React.Component {
 
   componentDidMount(){
     this.loadListing();
+  }
+
+  markInterest (listing) {
+    if (this.state.loginAs === null) {
+      console.log('Please login to claim items!')
+      return;
+    }
+    let user = this.state.loginAs.user._id;
+    let index = listing.interested_users.indexOf(user);
+
+    if (index >= 0) {
+      console.log('decremented');
+      listingInterestService(listing._id, user, true, (serverRes) => {
+        this.loadListing();
+      })
+    } else if (index < 0) {
+      console.log('incremented');      
+      listingInterestService(listing._id, user, false ,(serverRes) => {
+        this.loadListing();        
+      })
+    }
   }
 
   loadListing(){
@@ -65,7 +86,7 @@ class App extends React.Component {
 
   renderBody(){
     if(this.state.view === 'listings'){
-      return (<Listings selectHandler={this.listingSelectHandler.bind(this)} 
+      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)} 
       user={this.state.loginAs} 
       listings={this.state.listings}/>)
     } else if(this.state.view === 'single') {

@@ -11,10 +11,9 @@ router.get('/login', (req, res) => {
 router.post('/listing', listingCtrl.listings.post);
 router.get('/listing', listingCtrl.listings.get);
 router.get('/listing/nearest', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
+router.put('/listing/interest', listingCtrl.listings.setInterest);
 
 router.post('/claim', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
-router.post('/interested', listingCtrl.listings.interested);
-router.post('/notinterested', listingCtrl.listings.notInterested);
 router.post('/resolve', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 
 // router.post('/upvote', )

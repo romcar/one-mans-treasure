@@ -34,8 +34,8 @@ class MyListings extends React.Component {
         <Modal.Content>
           {
             this.props.listings.map(entry =>
-              <List divided verticalAlign='middle'>
-                <MyListingEntry listing={entry} key={entry._id}/>
+              <List divided verticalAlign='middle' key={entry._id}>
+                <MyListingEntry listing={entry} />
               </List>
             )
           }

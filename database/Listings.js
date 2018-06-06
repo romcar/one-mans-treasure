@@ -82,31 +82,53 @@ exports.give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
-exports.addInterest = (listingData, callback) => {
-  let id = listingData.itemId;
-  Listing.findById(id, function (err, listing) {
-    if (err) {
-      console.log(err, 'line 89');
+exports.updateInterest = ({id, userId, claimed})=>{
+  return new Promise((resolve, reject)=>{
+    if(JSON.parse(claimed) === true){
+      Listing.findByIdAndUpdate(id, {$pull:{interested_users:{$in: userId}}})
+      .exec().then(updated=>{
+        resolve(updated);
+      })
+      .catch(error=>{
+        error;
+      })
+    } else {
+      Listing.findByIdAndUpdate(id, {$push:{interested_users: userId}})
+      .exec().then(updated=>{
+        resolve(updated);
+      })
+      .catch(error=>{
+        error;
+      })
     }
-    listing.interested_users.push(listingData.interestedId);
-    listing.save();
   })
-  .then(success => {callback(true);})
-  .catch(err => callback(false));
-};
+}
 
-exports.removeInterest = (listingData, callback) => {
-  let id = listingData.itemId;
-  Listing.findById(id, function (err, listing) {
-    if (err) {
-      console.log(err, 'line 102');
-    }
-    listing.interested_users.splice(listingData.interestedId, 1);
-    listing.save();
-  })
-  .then(success => {callback(true);})
-  .catch(err => callback(false));
-};
+// exports.addInterest = (listingData, callback) => {
+//   let id = listingData.itemId;
+//   Listing.findById(id, function (err, listing) {
+//     if (err) {
+//       console.log(err, 'line 89');
+//     }
+//     listing.interested_users.push(listingData.interestedId);
+//     listing.save();
+//   })
+//   .then(success => {callback(true);})
+//   .catch(err => callback(false));
+// };
+
+// exports.removeInterest = (listingData, callback) => {
+//   let id = listingData.itemId;
+//   Listing.findById(id, function (err, listing) {
+//     if (err) {
+//       console.log(err, 'line 102');
+//     }
+//     listing.interested_users.splice(listingData.interestedId, 1);
+//     listing.save();
+//   })
+//   .then(success => {callback(true);})
+//   .catch(err => callback(false));
+// };
 
 exports.updateListing = () => {
 };

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom';
 import {Container, Grid, Image, Header, Icon, Segment} from 'semantic-ui-react';
+import moment from 'moment';
 
 class ListingDetails extends React.Component{
   constructor(props){
@@ -10,25 +11,23 @@ class ListingDetails extends React.Component{
   
   render(){
     return(
-    <Segment>
-    <Grid>
-      <Grid.Column width={7}>
-        <Image src={this.props.listing.photo} />
-      </Grid.Column>
-      <Grid.Column width={5}>
-        <Segment textAlign='center'>
-          <Header>Description</Header>
-          {this.props.listing.description}
-        </Segment>
-      </Grid.Column>
-      <Grid.Column width={4}>
-        <Segment>
-        <Header>Title: {this.props.listing.title}</Header>
-        <Header.Content>Listed on: {this.props.listing.createdAt}</Header.Content>
-        </Segment>
-      </Grid.Column>
-    </Grid>
-    </Segment>
+      <Grid columns={3}>
+        <Grid.Column width={2}></Grid.Column>
+        <Grid.Column width={12}>
+          <Segment>
+            <Grid columns={2}>
+              <Grid.Column width={9}>
+                <Image src={this.props.listing.photo} rounded/>
+              </Grid.Column>
+              <Grid.Column width={7}>
+                <Header>Title: {this.props.listing.title}</Header>
+                <Header.Content>Listed on: {moment(this.props.listing.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</Header.Content>
+              </Grid.Column>
+            </Grid>
+          </Segment>
+        </Grid.Column>
+        <Grid.Column width={2}></Grid.Column>        
+      </Grid>
     )
   }
 }
