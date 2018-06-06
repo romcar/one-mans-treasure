@@ -25,14 +25,20 @@ module.exports = {
     },
 
     interested: function(req, res) {
-      console.log(req.body);
-      db.addInterest(req.body)
-      .then(markedInterest => {
-        res.status(201).send(markedInterest);
+      //console.log(req.body);
+      db.addInterest(req.body, function(boores) {
+        if(boores) {
+          res.status(201).send("hello")
+        } else {
+          res.status(401).send("goodbye")
+        }
       })
-      .catch(error => {
-        res.status(401).send(error);
-      })
+      // .then(markedInterest => {
+      //   res.status(201).send(markedInterest);
+      // })
+      // .catch(error => {
+      //   res.status(401).send(error);
+      // })
     }
 
   }

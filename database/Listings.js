@@ -82,14 +82,17 @@ exports.give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
-exports.addInterest = (data, callback) => {
-  console.log(data.itemId)
-  let id = data.itemId
+exports.addInterest = (listingData, callback) => {
+  let id = listingData.itemId;
   Listing.findById(id, function (err, listing) {
-    listing.interested_users.push(data.interestedId);
+    if (err) {
+      console.log(err, 'line 89');
+    }
+    listing.interested_users.push(listingData.interestedId);
+    listing.save();
   })
-  .then(response => {callback(response);})
-  .catch(error => {callback(error);})
+  .then(success => {callback(true);})
+  .catch(err => callback(false));
 };
 
 exports.updateListing = () => {

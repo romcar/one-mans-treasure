@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Button, Header, Icon, Modal, Input, Form} from 'semantic-ui-react'
@@ -40,14 +41,19 @@ class Login extends React.Component{
 
   render(){
     return (
+<<<<<<< HEAD
       <Modal className="login-modal" open={this.state.isOpen} 
       trigger={<Button color='orange' onClick={this.open.bind(this)}>Log In</Button>} basic size='tiny'>
+=======
+      <Modal className="login-modal" open={this.state.isOpen}
+      trigger={<Button onClick={this.open.bind(this)}>Log In</Button>} basic size='tiny'>
+>>>>>>> increment interest functionality progress
         <Header icon='user' content='Login' />
         <Modal.Content>
           <Form>
             <Form.Group unstackable widths={1}>
-              <Form.Input onChange={this.handleChange.bind(this, 'username')} 
-              value={this.state.account.username} placeholder='Username' required/>            
+              <Form.Input onChange={this.handleChange.bind(this, 'username')}
+              value={this.state.account.username} placeholder='Username' required/>
             </Form.Group>
             <Form.Group widths={1}>
               <Form.Input type='password' onChange={this.handleChange.bind(this, 'password')}

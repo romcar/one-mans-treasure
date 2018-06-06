@@ -30,7 +30,7 @@ class Listings extends React.Component{
     return(
       <Grid doubling columns={4}>
         {this.props.listings.map(listing=>
-          <ListingEntry listing={listing} key={listing._id} 
+          <ListingEntry listing={listing} key={listing._id}
           handleClaim={this.markInterest.bind(this)}
           selectHandler={this.props.selectHandler.bind(this)}
           />
