@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "engines": {
-    "node" : "8.11.1",
-    "npm" : "6.0.0"
+    "node": "8.11.1",
+    "npm": "6.0.0"
   },
   "scripts": {
     "start": "nodemon server/app.js",
@@ -37,6 +37,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "request": "^2.87.0",
-    "semantic-ui-react": "^0.80.2"
+    "semantic-ui-react": "^0.80.2",
+    "moment": "^2.22.2"
   }
 }

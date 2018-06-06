@@ -36,7 +36,7 @@ class App extends React.Component {
   createAccount(user){
     signupService(user, (response)=>{
       this.setState({
-        loginAs: response.username
+        loginAs: response
       })
     })
   }
@@ -47,6 +47,12 @@ class App extends React.Component {
       this.setState({
         loginAs: response
       })
+    })
+  }
+
+  userLogout(){
+    this.setState({
+      loginAs: null,
     })
   }
 
@@ -71,6 +77,8 @@ class App extends React.Component {
     return (
       <div>
         <NavBar
+        listings={this.state.listings}
+        logout={this.userLogout.bind(this)}
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}

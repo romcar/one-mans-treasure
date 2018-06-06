@@ -4,7 +4,7 @@ const db = require('./index.js');
 let listingsSchema = mongoose.Schema({
   title: String,
   location: String,
-  createdBy: String,
+  listedBy: String,
   isAvailable: Boolean,
   interested_users: Array,
   description: String,
@@ -20,9 +20,11 @@ let Listing = mongoose.model('Listing', listingsSchema);
 module.exports.Listing = Listing;
 
 exports.saveListing = (listing) => {
+  console.log(listing)
   let newlisting = {};
   newlisting.title = listing.title;
   newlisting.location = listing.loc;
+  newlisting.listedBy = listing.userId;
   newlisting.isAvailable = true;
   newlisting.interested_users = [];
   newlisting.description = listing.desc;

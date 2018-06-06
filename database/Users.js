@@ -35,10 +35,16 @@ exports.saveUser = (userData) => {
   newUser.tokenCount = 0;
   newUser.isAdmin = false;
   let user = new User(newUser);
-  user.save((err) => {
-    if (err) console.log(err)
-    console.log('saved user', user)
-  });
+  return new Promise((resolve, reject)=>{
+    user.save()
+    .then((savedUser) => {
+      resolve(savedUser);
+    })
+    .catch(error=>{
+      reject(error);
+    })
+  })
+
 };
 
 exports.loginUser = (userData, callback) => {
