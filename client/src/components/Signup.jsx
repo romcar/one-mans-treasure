@@ -52,7 +52,7 @@ class Signup extends React.Component{
   render(){
     return (
       <Modal className="signup-modal" open={this.state.isOpen} 
-      trigger={<Button onClick={this.open.bind(this)}>Signup</Button>} basic size='tiny'>
+      trigger={<Button color='orange' onClick={this.open.bind(this)}>Signup</Button>} basic size='tiny'>
         <Header icon='archive' content='Create An Account' />
         <Modal.Content>
           <Form>

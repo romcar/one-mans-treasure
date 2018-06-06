@@ -41,7 +41,7 @@ class Login extends React.Component{
   render(){
     return (
       <Modal className="login-modal" open={this.state.isOpen} 
-      trigger={<Button onClick={this.open.bind(this)}>Log In</Button>} basic size='tiny'>
+      trigger={<Button color='orange' onClick={this.open.bind(this)}>Log In</Button>} basic size='tiny'>
         <Header icon='user' content='Login' />
         <Modal.Content>
           <Form>

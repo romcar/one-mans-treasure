@@ -16,11 +16,11 @@ const ListingEntry = (props) =>{
         <Divider/>
         <Container textAlign="center">
         <Button as='div' labelPosition='right' >
-          <Button color='red' onClick={props.handleClaim}>
+          <Button color='orange' onClick={props.handleClaim}>
             <Icon name='heart' />
             Claim
           </Button>
-          <Label as='a' basic color='red' pointing='left'>
+          <Label as='a' basic color='orange' pointing='left'>
             {props.listing.interested_users.length}
           </Label>
         </Button>

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { Z_DEFAULT_STRATEGY } from 'zlib';
 
-export function createListingService(data, callback){
+export function createListingService(data, userId, callback){
   console.log(data)
   let formData = new FormData();
   formData.append("image", data.image)
@@ -19,12 +19,14 @@ export function createListingService(data, callback){
     mimeType: 'multipart/form-data',
   })
   .then(response=>{
+    console.log(userId)
     response = JSON.parse(response)
     console.log(response)
     $.post('/listing', {
       title: data.title,
       desc: data.desc,
       loc: data.loc,
+      userId: userId,
       image: response.data.link
     })
     .then(serverRes=>{

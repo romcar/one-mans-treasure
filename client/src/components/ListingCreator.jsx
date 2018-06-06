@@ -60,7 +60,9 @@ class ListingCreator extends React.Component{
 
   render(){
     return(
-    <Modal open={this.state.isOpen} trigger={<Button onClick={this.open.bind(this)}>New Listing</Button>} closeOnDimmerClick={false}>
+    <Modal open={this.state.isOpen} trigger={<div className="ui item" onClick={this.open.bind(this)}>
+        <Icon name='clipboard outline'/>
+        Create A New Listing</div>} basic closeOnDimmerClick={false}>
       <Modal.Header>New Listing</Modal.Header>
       <div>
         <Container textAlign="center">
