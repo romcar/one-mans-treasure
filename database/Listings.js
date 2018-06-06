@@ -53,33 +53,17 @@ exports.fetchListings = ()=>{
   })
 }
 
-// let claim = () => {
-//   // will be a big method with following functionality:
-//   // - Marks giver's User.my_listings[listing].isAvailable as False
-//   // - Adds listing to taker's User.claimed array
-// };
-
-exports.give = (giver, claimant, listing) => {
-  // different from claim, will be for the listings with interest/trade requirement
-  // will be a big method with following functionality:
-  // - Marks giver's User.my_listings[listing].isAvailable as False
-  // - Adds listing to taker's User.claimed array
-  User.findOne({username: giver.username}, (err, user) => {
-    // NOTE: I'm not sure vvvv if listing.id is the right way to identify our correct listing.
-    // This will take some console logging to lock down, also depends on how server side bros
-    // are passing in info here.
-
-    //HELPDESK ABOUT OR RESEARCH HOW FOREIGN KEYS WORK AND HOW TO UPDATE.
-    user.my_listings[listing.name].isAvailable = false;
-    user.save();
+exports.markClaimed = (listing) => {
+  return new Promise((resolve, reject)=>{
+    Listing.findByIdAndUpdate(listing, {$set: {isAvailable: false}})
+    .exec().then(updated => {
+      console.log("in DB line 60")
+      resolve(updated);
+    })
+    .catch(error => {
+      error;
+    })
   })
-  User.findOne({username: claimant.username}, (err, user) => {
-    user.claimed.push(listing);
-    user.save();
-  })
-
-  // FUTURE FUNCTIONALITY:
-  // increment token or karma here?
 }
 
 exports.deleteListing = (id)=>{
@@ -116,6 +100,7 @@ exports.updateInterest = ({id, userId, claimed})=>{
   })
 }
 
+
 // exports.addInterest = (listingData, callback) => {
 //   let id = listingData.itemId;
 //   Listing.findById(id, function (err, listing) {
@@ -150,7 +135,11 @@ exports.updateListing = (id, {title, description, photo, location}) => {
     }).catch(err=>{
       reject(err);
     })
+
   })
+  .then(response => {callback(response);})
+  .catch(error => {callback(error);})
 };
+
 
 

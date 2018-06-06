@@ -1,4 +1,5 @@
 const db = require('../../database/Listings');
+const util = require('../services/utility.js');
 
 module.exports = {
   listings: {
@@ -44,6 +45,7 @@ module.exports = {
       })
     },
 
+
     update: function(req, res) {
       console.log('Request body: \n', req.body);
       console.log('Request params: \n',req.params);
@@ -54,6 +56,15 @@ module.exports = {
       .catch(error=>{
         res.status(401).send(error);
       })
-    }
+    },
+
+    give: function(req, res) {
+      util.giveListing(req.body)
+      .then(given=>{
+        res.status(201).send(given);
+      .catch(error=>{
+        res.status(401).send(error);
+
+      })
   }
 }

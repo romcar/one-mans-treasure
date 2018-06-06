@@ -15,7 +15,7 @@ router.put('/listing/interest', listingCtrl.listings.setInterest);
 router.delete('/listing/:listingId', listingCtrl.listings.delete);
 router.put('/listing/:listingId', listingCtrl.listings.update);
 
-router.post('/claim', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
+router.post('/listing/give', listingCtrl.listings.give);
 router.post('/resolve', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 
 // router.post('/upvote', )
