@@ -95,5 +95,18 @@ exports.addInterest = (listingData, callback) => {
   .catch(err => callback(false));
 };
 
+exports.removeInterest = (listingData, callback) => {
+  let id = listingData.itemId;
+  Listing.findById(id, function (err, listing) {
+    if (err) {
+      console.log(err, 'line 102');
+    }
+    listing.interested_users.splice(listingData.interestedId, 1);
+    listing.save();
+  })
+  .then(success => {callback(true);})
+  .catch(err => callback(false));
+};
+
 exports.updateListing = () => {
 };
