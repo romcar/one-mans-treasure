@@ -35,7 +35,13 @@ module.exports = {
     },
 
     delete: function(req, res){
-      console.log(req.params.listingId);
+      db.deleteListing(req.params.listingId)
+      .then(deleted=>{
+        res.status(201).send(deleted);
+      })
+      .catch(error=>{
+        res.status(401).send(error);
+      })
     }
 
   }

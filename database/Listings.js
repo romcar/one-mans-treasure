@@ -82,6 +82,18 @@ exports.give = (giver, claimant, listing) => {
   // increment token or karma here?
 }
 
+exports.deleteListing = (id)=>{
+  return new Promise((resolve, reject)=>{
+    Listing.findByIdAndRemove(id)
+      .then(deleted=>{
+        resolve(deleted);
+      })
+      .catch(error=>{
+        reject(error);
+      })
+  })
+}
+
 exports.updateInterest = ({id, userId, claimed})=>{
   return new Promise((resolve, reject)=>{
     if(JSON.parse(claimed) === true){

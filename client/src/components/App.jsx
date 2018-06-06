@@ -25,7 +25,9 @@ class App extends React.Component {
   }
 
   deleteListing(listing){
-    deleteListingService(listing._id);
+    deleteListingService(listing._id, (deleted)=>{
+      this.loadListing();
+    });
   }
 
   markInterest ({interested_users, _id}) {
