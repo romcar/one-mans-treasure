@@ -67,6 +67,7 @@ exports.claimItem = (user, listing) => {
   return new Promise((resolve, reject)=>{
     User.findByIdAndUpdate(user, {$push: {claimed: listing}})
     .exec().then(updated => {
+      console.log('in DB line 70')
       resolve(updated);
     })
     .catch(error => {

@@ -57,6 +57,7 @@ exports.markClaimed = (listing) => {
   return new Promise((resolve, reject)=>{
     Listing.findByIdAndUpdate(listing, {$set: {isAvailable: false}})
     .exec().then(updated => {
+      console.log("in DB line 60")
       resolve(updated);
     })
     .catch(error => {
