@@ -8,7 +8,7 @@ class Listings extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedListing : [];
+      selectedListing : []
     }
   }
 
