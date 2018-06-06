@@ -12,12 +12,6 @@ class Listings extends React.Component{
     }
   }
 
-  // setCurrentListing (listing) {
-  //   this.setState({
-  //     currentListing: listing
-  //   })
-  //   console.log(this.state)
-  // }
 
   render(){
     return(
