@@ -62,3 +62,15 @@ exports.loginUser = (userData, callback) => {
 exports.updateUser = () => {
 
 };
+
+exports.claimItem = (user, listing) => {
+  return new Promise((resolve, reject)=>{
+    User.findByIdAndUpdate(user, {$push: {claimed: listing}})
+    .exec().then(updated => {
+      resolve(updated);
+    })
+    .catch(error => {
+      error;
+    })
+  })
+}
