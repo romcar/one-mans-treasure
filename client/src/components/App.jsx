@@ -7,7 +7,7 @@ import ListingDetails from './ListingDetails.jsx';
 
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {loadListingService, listingInterestService} from '../services/listingService.js';
+import {loadListingService, listingInterestService, deleteListingService} from '../services/listingService.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,22 +24,23 @@ class App extends React.Component {
     this.loadListing();
   }
 
-  markInterest (listing) {
+  deleteListing(listing){
+    deleteListingService(listing._id);
+  }
+
+  markInterest ({interested_users, _id}) {
     if (this.state.loginAs === null) {
       console.log('Please login to claim items!')
       return;
     }
     let user = this.state.loginAs.user._id;
-    let index = listing.interested_users.indexOf(user);
-
+    let index = interested_users.indexOf(user);
     if (index >= 0) {
-      console.log('decremented');
-      listingInterestService(listing._id, user, true, (serverRes) => {
+      listingInterestService(_id, user, true, (serverRes) => {
         this.loadListing();
       })
     } else if (index < 0) {
-      console.log('incremented');      
-      listingInterestService(listing._id, user, false ,(serverRes) => {
+      listingInterestService(_id, user, false ,(serverRes) => {
         this.loadListing();        
       })
     }
@@ -103,6 +104,7 @@ class App extends React.Component {
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         login={this.userLogin.bind(this)}
+        delete={this.deleteListing.bind(this)}
         />
         <Container>
           {this.renderBody()}

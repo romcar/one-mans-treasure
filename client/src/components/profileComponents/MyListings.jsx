@@ -7,7 +7,8 @@ class MyListings extends React.Component {
   constructor(props){
     super(props);
     this.state = { 
-      isOpen: false 
+      isOpen: false,
+      listings: this.props.listings
     }
   }
 
@@ -33,9 +34,9 @@ class MyListings extends React.Component {
         <Header icon='browser' content='My Listings' />
         <Modal.Content>
           {
-            this.props.listings.map(entry =>
+            this.state.listings.map(entry =>
               <List divided verticalAlign='middle' key={entry._id}>
-                <MyListingEntry listing={entry} />
+                <MyListingEntry listing={entry} delete={this.props.delete.bind(this)}/>
               </List>
             )
           }

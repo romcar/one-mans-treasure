@@ -34,5 +34,9 @@ module.exports = {
         })
     },
 
+    delete: function(req, res){
+      console.log(req.params.listingId);
+    }
+
   }
 }

@@ -61,11 +61,23 @@ export function listingInterestService(id, user, claimed ,callback){
       userId: user,
     },
   })
-  .then(fromServer=>{
-    callback(fromServer);
+  .then(response=>{
+    callback(response);
   })
   .catch(error=>{
     callback(error);
   })
 }
 
+export function deleteListingService(id, callback){
+  $.ajax({
+    type:'DELETE',
+    url: `/listing/${id}`,
+  })
+  .then(response=>{
+    callback(response);
+  })
+  .catch(error=>{
+    callback(error);
+  })
+}

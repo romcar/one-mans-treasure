@@ -12,6 +12,7 @@ router.post('/listing', listingCtrl.listings.post);
 router.get('/listing', listingCtrl.listings.get);
 router.get('/listing/nearest', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 router.put('/listing/interest', listingCtrl.listings.setInterest);
+router.delete('/listing/:listingId', listingCtrl.listings.delete);
 
 router.post('/claim', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
 router.post('/resolve', /*REPLACE_ME_WITH_FUNCTION_FROM_LISTING_CONTROLLER*/);
