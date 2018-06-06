@@ -81,3 +81,19 @@ export function deleteListingService(id, callback){
     callback(error);
   })
 }
+
+export function updateListingService(id, change) {
+  $.ajax({
+    type:'PUT',
+    url: `/listing/${id}`,
+    data: {
+      changes: change // => this will be an object sent to server
+    }
+  })
+  .then(response=>{
+    callback(response);
+  })
+  .catch(error=>{
+    callback(error);
+  })
+}
