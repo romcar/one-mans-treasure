@@ -135,11 +135,5 @@ exports.updateListing = (id, {title, description, photo, location}) => {
     }).catch(err=>{
       reject(err);
     })
-
   })
-  .then(response => {callback(response);})
-  .catch(error => {callback(error);})
 };
-
-
-
