@@ -57,8 +57,29 @@ exports.loginUser = (userData, callback) => {
   }).then(user => {
     callback(bcrypt.compareSync(password, user.password), user);
   }).catch(err => callback(false));
-}
-
-exports.updateUser = () => {
-
 };
+
+exports.updateUser = (id, password) => {
+  let plainTextPw = password;
+  let hash = bcrypt.hashSync(plainTextPw, 10);
+  return new Promise((resolve, reject)=> {
+    User.findByIdAndUpdate(id, { $set: { 'password': hash } }, { new: true })
+    .exec().then(updatedPw=> {
+      console.log('Updated PW: ', updatedPw);
+      resolve(updatedPw);
+    }).catch(err=> {
+      reject(err);
+    })
+  })
+};
+exports.claimItem = (user, listing) => {
+  return new Promise((resolve, reject)=>{
+    User.findByIdAndUpdate(user, {$push: {claimed: listing}})
+    .exec().then(updated => {
+      resolve(updated);
+    })
+    .catch(error => {
+      error;
+    })
+  })
+}

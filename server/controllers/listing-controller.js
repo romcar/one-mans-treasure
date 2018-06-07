@@ -1,4 +1,5 @@
 const db = require('../../database/Listings');
+const util = require('../services/utility.js');
 
 module.exports = {
   listings: {
@@ -44,10 +45,21 @@ module.exports = {
       })
     },
 
+
     update: function(req, res) {
       db.updateListing(req.params.listingId, req.body)
       .then(updated=>{
         res.status(201).send(updated);
+      })
+      .catch(error=>{
+        res.status(401).send(error);
+      })
+    },
+
+    give: function(req, res) {
+      util.giveListing(req.body.data)
+      .then(given=>{
+        res.status(201).send(given);
       })
       .catch(error=>{
         res.status(401).send(error);

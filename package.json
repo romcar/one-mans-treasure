@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "nodemon server/app.js",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "build": "webpack --config ./webpack.config.js",
+    "postinstall": "npm run build"
   },
   "author": "AnotherMansTreasure",
   "license": "ISC",
