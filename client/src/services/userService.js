@@ -23,3 +23,20 @@ export function loginService({username, password}, callback){
     callback(error);
   })
 }
+
+export function updatePasswordService({id, password}) {
+  $.ajax({
+    type:'PUT',
+    url: `/account/${id}`,
+    data: {
+      pw: password
+    }
+  })
+  .then(response=>{
+    callback(response);
+  })
+  .catch(error=>{
+    callback(error);
+  })
+}
+
