@@ -6,7 +6,7 @@ import MyListingEntry from './MyListingEntry.jsx';
 class MyListings extends React.Component {
   constructor(props){
     super(props);
-    this.state = { 
+    this.state = {
       isOpen: false,
     }
   }
@@ -23,20 +23,20 @@ class MyListings extends React.Component {
     })
   }
 
-  
+
 
   render() {
-    console.log('my lisitng')
+    console.log('my listings');
     return (
       <Modal
-        open={this.state.isOpen} 
+        open={this.state.isOpen}
         trigger={<div className="ui item" onClick={this.open.bind(this)}>
         <Icon name='list alternate outline'/>
         My Listings</div>} basic size='small'>
         <Header icon='browser' content='My Listings' />
         <Modal.Content>
           {
-            this.props.listings.map(entry => 
+            this.props.listings.map(entry =>
               entry.listedBy === this.props.user._id ?
               <List divided verticalAlign='middle' key={entry._id}>
                 <MyListingEntry listing={entry} delete={this.props.delete.bind(this)}
