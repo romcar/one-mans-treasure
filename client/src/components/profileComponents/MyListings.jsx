@@ -33,10 +33,12 @@ class MyListings extends React.Component {
         <Header icon='browser' content='My Listings' />
         <Modal.Content>
           {
-            this.props.listings.map(entry =>
+            this.props.listings.map(entry => 
+              entry.listedBy === this.props.user._id ?
               <List divided verticalAlign='middle' key={entry._id}>
-                <MyListingEntry listing={entry} delete={this.props.delete.bind(this)}/>
-              </List>
+                <MyListingEntry listing={entry} delete={this.props.delete.bind(this)}
+                listingSelectHandler={this.props.listingSelectHandler.bind(this)} close={this.close.bind(this)}/>
+              </List> : false
             )
           }
         </Modal.Content>

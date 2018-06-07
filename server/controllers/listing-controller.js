@@ -45,9 +45,7 @@ module.exports = {
     },
 
     update: function(req, res) {
-      console.log('Request body: \n', req.body);
-      console.log('Request params: \n',req.params);
-      db.updateListing(req.params.listingId, req.body.changes)
+      db.updateListing(req.params.listingId, req.body)
       .then(updated=>{
         res.status(201).send(updated);
       })

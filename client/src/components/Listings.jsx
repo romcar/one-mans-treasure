@@ -12,7 +12,6 @@ class Listings extends React.Component{
     }
   }
 
-
   render(){
     return(
       <Grid doubling columns={4}>

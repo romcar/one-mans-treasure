@@ -116,35 +116,9 @@ exports.updateInterest = ({id, userId, claimed})=>{
   })
 }
 
-// exports.addInterest = (listingData, callback) => {
-//   let id = listingData.itemId;
-//   Listing.findById(id, function (err, listing) {
-//     if (err) {
-//       console.log(err, 'line 89');
-//     }
-//     listing.interested_users.push(listingData.interestedId);
-//     listing.save();
-//   })
-//   .then(success => {callback(true);})
-//   .catch(err => callback(false));
-// };
-
-// exports.removeInterest = (listingData, callback) => {
-//   let id = listingData.itemId;
-//   Listing.findById(id, function (err, listing) {
-//     if (err) {
-//       console.log(err, 'line 102');
-//     }
-//     listing.interested_users.splice(listingData.interestedId, 1);
-//     listing.save();
-//   })
-//   .then(success => {callback(true);})
-//   .catch(err => callback(false));
-// };
-
-exports.updateListing = (id, {title, description, photo, location}) => {
+exports.updateListing = (id, {title, desc, image, loc}) => {
   return new Promise((resolve, reject) => {
-    Listing.findByIdAndUpdate(id, { $set: { 'title': title, 'description': description, 'photo': photo, 'location': location } }, { new: true })
+    Listing.findByIdAndUpdate(id, { $set: { 'title': title, 'description': desc, 'photo': image, 'location': loc } }, { new: true })
     .then(updated=>{
       resolve(updated);
     }).catch(err=>{

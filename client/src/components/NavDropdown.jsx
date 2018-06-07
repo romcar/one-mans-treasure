@@ -15,12 +15,6 @@ class NavDropdown extends Component {
     this.setState({ activeItem: name })
   } 
 
-  handleListingCreate(post){
-    createListingService(post, this.props.session.user._id, (dataFromServer)=>{
-      console.log(dataFromServer);
-    })
-  }
-
   logoutHandler(){
     this.props.logout();
   }
@@ -29,11 +23,14 @@ class NavDropdown extends Component {
       return (
         <Dropdown.Menu>
           {this.props.session ? <Dropdown.Item>
-            <ListingCreator handleCreate={this.handleListingCreate.bind(this)}/>
+            <ListingCreator user={this.props.session.user}
+              createListing={this.props.createListing.bind(this)}/>
           </Dropdown.Item> : false}
 
           {this.props.session ? <Dropdown.Item>
-            <MyListings listings={this.props.listings} 
+            <MyListings listings={this.props.listings}
+            user={this.props.session.user} 
+            listingSelectHandler={this.props.listingSelectHandler.bind(this)}
             delete={this.props.delete.bind(this)}>
             </MyListings>
           </Dropdown.Item> : false}
@@ -53,7 +50,7 @@ class NavDropdown extends Component {
 
   render() {
     return (
-    <Dropdown item icon='bars' className="ui dropdown">
+    <Dropdown text='MENU' item icon='bars' className="ui dropdown">
         {this.renderUserDropdown()}
     </Dropdown>
     )

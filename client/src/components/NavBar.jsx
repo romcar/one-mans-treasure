@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import NavDropdown from './NavDropdown.jsx';
-import {Button, Dropdown, Menu, Container, Header} from 'semantic-ui-react';
+import {Button, Dropdown, Menu, Container, Header, Icon} from 'semantic-ui-react';
 
 class NavBar extends React.Component{
   constructor(props){
@@ -14,7 +14,6 @@ class NavBar extends React.Component{
     if(this.props.session === null){
       return(
       <div className="item ui">
-        
       <Button.Group>
         <Login login={this.props.login.bind(this)}/>
       <Button.Or/>
@@ -34,6 +33,9 @@ class NavBar extends React.Component{
   render(){
     return(
       <div className="ui menu aligned">
+        <div className='item'>
+            <Icon onClick={this.props.homeHandler.bind(this)} name='home' size='large'></Icon>
+        </div>
         <div className="item">
           <div className="ui action left icon input">
             <i className="search icon"></i>
@@ -45,9 +47,11 @@ class NavBar extends React.Component{
             {this.renderCredential()}
           <NavDropdown 
           listings={this.props.listings} 
-          logout={this.props.logout.bind(this)} 
           session={this.props.session}
-          delete={this.props.delete.bind(this)}>
+          createListing={this.props.createListing.bind(this)}
+          delete={this.props.delete.bind(this)}
+          listingSelectHandler={this.props.listingSelectHandler.bind(this)}
+          logout={this.props.logout.bind(this)}>           
           </NavDropdown>
             
         </Menu.Menu>
