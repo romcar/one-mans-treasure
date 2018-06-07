@@ -108,7 +108,7 @@ class App extends React.Component {
 
   userLogin(user){
     loginService(user, (response)=>{
-      console.log(response);
+      console.log(response, 'back in app');
       this.setState({
         loginAs: response
       })

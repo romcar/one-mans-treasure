@@ -3,22 +3,15 @@ import ReactDom from 'react-dom';
 import { Button, Header, Icon, Divider,
    Container, Modal, Input, Form, TextArea } from 'semantic-ui-react'
 
-
-
-
-             // Welcome back {this.props.session.user.username}!
-
-
 class Profile extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       userInfo : {
-        Username: '',
-        First_Name: '',
-        Last_Name: '',
-        Password: '',
+        Username: this.props.user,
+        Password: ''
       },
+      usernameEdit: false,
       isOpen: false
     }
     const inputStyle={
@@ -47,13 +40,37 @@ class Profile extends React.Component{
   }
 
   handleChange(key, event){
-    const listing = this.state.listing;
-    listing[key] = event.target.value;
-    this.setState({listing: listing});
+    const user = this.state.userInfo
+    user[key] = event.target.value;
+    this.setState({user});
+  }
+
+  makeUsernameEditabel(){
+    this.setState({
+      usernameEdit: !this.state.usernameEdit
+    })
+  }
+
+  renderUsernameForm(){
+    if (this.state.usernameEdit === true) {
+      return (
+      <span>
+        <Input onChange={this.handleChange.bind(this, 'Username')} placeholder="Username"/>
+        <Button primary type="button" onClick={this.makeUsernameEditabel.bind(this)}><Icon name='right chevron'/>Done</Button>
+      </span>
+      )
+    } else {
+      return (
+      <span>
+        <span>&nbsp;{this.state.userInfo.Username}</span>
+        <Button secondary type="button" onClick={this.makeUsernameEditabel.bind(this)}><Icon name='edit'/>Edit</Button>
+      </span>
+      )
+    }
   }
 
   submit(){
-    console.log('submit!');
+    console.log(this.props.user, 'submit!');
   }
 
   render(){
@@ -63,22 +80,9 @@ class Profile extends React.Component{
         Welcome back {this.props.user}!</div>} basic closeOnDimmerClick={false}>
       <Modal.Header>Your Profile</Modal.Header>
       <Divider/>
-      <Container textAlign="center">
-      <Input onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title} placeholder="Username"/><Button secondary type="button">
-          <Icon name='edit'/>Edit
-        </Button>
+      <Container textAlign="center"> Username {this.renderUsernameForm()}
       <Divider/>
-      <Input onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc} placeholder="First Name"/><Button secondary type="button">
-          <Icon name='edit'/>Edit
-        </Button>
-      <Divider/>
-      <Input onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc} placeholder="Last Name"/><Button secondary type="button">
-          <Icon name='edit'/>Edit
-        </Button>
-      <Divider/>
-      <Input onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc} placeholder="Password"/><Button secondary type="button">
-          <Icon name='edit'/>Edit
-        </Button>
+      <Button secondary type="button"><Icon name='edit'/>Edit</Button>
       </Container>
       <Divider/>
       <Modal.Actions>
