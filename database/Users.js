@@ -60,7 +60,6 @@ exports.loginUser = (userData, callback) => {
 };
 
 exports.updateUser = (id, password) => {
-  console.log('ID: ', id, 'PW: ', password);
   let plainTextPw = password;
   let hash = bcrypt.hashSync(plainTextPw, 10);
   return new Promise((resolve, reject)=> {
