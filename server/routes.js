@@ -7,6 +7,7 @@ router.post('/login', userCtrl.comparePassword);
 router.get('/login', (req, res) => {
   res.status(200).send(req.session);
 });
+router.put('/account/:userId', userCtrl.updatePassword);
 
 router.post('/listing', listingCtrl.listings.post);
 router.get('/listing', listingCtrl.listings.get);
