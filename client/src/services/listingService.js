@@ -2,7 +2,6 @@ import $ from 'jquery';
 import { Z_DEFAULT_STRATEGY } from 'zlib';
 
 export function createListingService(data, userId, callback){
-  console.log(data)
   let formData = new FormData();
   formData.append("image", data.image)
   $.ajax({
@@ -82,12 +81,48 @@ export function deleteListingService(id, callback){
   })
 }
 
-export function updateListingService(id, change) {
+export function updateListingService(listing, oldListing, callback){
+  console.log(listing)
+  console.log(oldListing)
+  if(listing.image === oldListing.image){
+    updateListing(listing, oldListing, callback)
+  } else {
+  let formData = new FormData();
+  formData.append("image", listing.image)
+  console.log(formData);
+  $.ajax({
+    type:'POST',
+    url: 'https://api.imgur.com/3/image',
+    data: formData,
+    crossDomain: true,
+    processData: false,
+    contentType: false,
+    headers: {
+      Authorization: 'Client-ID ' + "276a9fab62145b0",
+      Accept: 'application/json'
+    },
+    mimeType: 'multipart/form-data',
+  })
+  .then(response=>{
+    response = JSON.parse(response);
+    listing.image = response.data.link;
+    updateListing(listing, oldListing, callback)
+  })
+  .catch(error=>{
+    callback(error);
+  })
+  }
+}
+
+function updateListing(listing, oldListing, callback) {
   $.ajax({
     type:'PUT',
-    url: `/listing/${id}`,
+    url: `/listing/${oldListing._id}`,
     data: {
-      changes: change // => this will be an object sent to server
+      title: listing.title, 
+      desc: listing.desc,
+      loc: listing.loc,
+      image: listing.image
     }
   })
   .then(response=>{

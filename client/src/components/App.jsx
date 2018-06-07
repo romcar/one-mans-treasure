@@ -7,7 +7,8 @@ import ListingDetails from './ListingDetails.jsx';
 
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {loadListingService, listingInterestService, deleteListingService} from '../services/listingService.js';
+import {updateListingService, loadListingService, createListingService,
+  listingInterestService, deleteListingService} from '../services/listingService.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,8 +21,48 @@ class App extends React.Component {
     }
   }
 
+  renderBody(){
+    if(this.state.view === 'listings'){
+      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)} 
+      listings={this.state.listings}/>)
+    } else if(this.state.view === 'single') {
+      return <ListingDetails 
+      user={this.state.loginAs === null ? this : this.state.loginAs.user._id} 
+      listing={this.state.selectedListing}
+      updateChanges={this.updateChanges.bind(this)}
+      />
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <NavBar
+        listings={this.state.listings}
+        session={this.state.loginAs}
+        create={this.createAccount.bind(this)}
+        createListing={this.createListing.bind(this)}
+        delete={this.deleteListing.bind(this)}
+        homeHandler={this.homeHandler.bind(this)}        
+        login={this.userLogin.bind(this)}        
+        logout={this.userLogout.bind(this)}
+        listingSelectHandler={this.listingSelectHandler.bind(this)}
+        />
+        <Container>
+          {this.renderBody()}
+        </Container>
+      </div>
+    )
+  }
+
   componentDidMount(){
     this.loadListing();
+  }
+
+  createListing(listing, userId){
+    createListingService(listing, userId, (response)=>{
+      this.loadListing();
+    })
   }
 
   deleteListing(listing){
@@ -87,32 +128,17 @@ class App extends React.Component {
     })
   }
 
-  renderBody(){
-    if(this.state.view === 'listings'){
-      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)} 
-      user={this.state.loginAs} 
-      listings={this.state.listings}/>)
-    } else if(this.state.view === 'single') {
-      return <ListingDetails user={this.state.loginAs} listing={this.state.selectedListing}/>
-    }
+  homeHandler(){
+    this.setState({
+      view: 'listings',
+      selectedListing: ''
+    })
   }
 
-  render() {
-    return (
-      <div>
-        <NavBar
-        listings={this.state.listings}
-        logout={this.userLogout.bind(this)}
-        session={this.state.loginAs}
-        create={this.createAccount.bind(this)}
-        login={this.userLogin.bind(this)}
-        delete={this.deleteListing.bind(this)}
-        />
-        <Container>
-          {this.renderBody()}
-        </Container>
-      </div>
-    )
+  updateChanges(changes, oldListing){
+    updateListingService(changes, oldListing, (response)=>{
+      this.loadListing();
+    })
   }
 }
 

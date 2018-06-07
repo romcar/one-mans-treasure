@@ -54,7 +54,7 @@ class ListingCreator extends React.Component{
   }
 
   submit(){
-    this.props.handleCreate(this.state.listing);
+    this.props.createListing(this.state.listing, this.props.user._id);
     this.close();
   }
 
