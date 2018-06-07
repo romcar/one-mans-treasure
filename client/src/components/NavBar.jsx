@@ -3,12 +3,11 @@ import ReactDom from 'react-dom';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import NavDropdown from './NavDropdown.jsx';
-<<<<<<< HEAD
+
 import {Button, Dropdown, Menu, Container, Header, Icon} from 'semantic-ui-react';
-=======
+
 import Profile from './Profile.jsx';
-import {Button, Dropdown, Menu, Container, Header} from 'semantic-ui-react';
->>>>>>> trying to fix db issues by rebasing
+
 
 class NavBar extends React.Component{
   constructor(props){
@@ -19,10 +18,6 @@ class NavBar extends React.Component{
     if(this.props.session === null){
       return(
       <div className="item ui">
-<<<<<<< HEAD
-=======
-
->>>>>>> trying to fix db issues by rebasing
       <Button.Group>
         <Login login={this.props.login.bind(this)}/>
       <Button.Or/>
@@ -40,8 +35,6 @@ class NavBar extends React.Component{
     }
   }
 
-// Welcome back <span>&nbsp;{this.props.session.user.username}</span>
-
   render(){
     return(
       <div className="ui menu aligned">
@@ -57,21 +50,15 @@ class NavBar extends React.Component{
         </div>
         <Menu.Menu position="right">
             {this.renderCredential()}
-<<<<<<< HEAD
-          <NavDropdown 
-          listings={this.props.listings} 
-=======
           <NavDropdown
           listings={this.props.listings}
           logout={this.props.logout.bind(this)}
->>>>>>> trying to fix db issues by rebasing
           session={this.props.session}
           createListing={this.props.createListing.bind(this)}
           delete={this.props.delete.bind(this)}
           listingSelectHandler={this.props.listingSelectHandler.bind(this)}
-          logout={this.props.logout.bind(this)}>           
+          logout={this.props.logout.bind(this)}>
           </NavDropdown>
-
         </Menu.Menu>
       </div>
     )

@@ -26,8 +26,8 @@ module.exports = {
     });
   },
 
-  updatePassword: function(req, res) {
-    db.updateUser(req.params.userId, req.body.pw)
+  updateUserInfo: function(req, res) {
+    db.updateUser(req.params.userId, req.body.user, req.body.pw)
     .then(updatedPw=> {
       res.status(200).send(updatedPw);
     })
