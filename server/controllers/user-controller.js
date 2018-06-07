@@ -14,7 +14,6 @@ module.exports = {
       })
   },
   comparePassword: function(req, res) {
-
     db.loginUser(req, function(isMatch, newUser) {
       if(isMatch) {
         let newSession = util.createSession(req, res, newUser);
@@ -25,6 +24,15 @@ module.exports = {
         res.status(200).send(false);
       }
     });
+  },
 
+  updatePassword: function(req, res) {
+    db.updateUser(req.params.userId, req.body.pw)
+    .then(updatedPw=> {
+      res.status(200).send(updatedPw);
+    })
+    .catch(err=> {
+      res.status(404).send(err);
+    })
   }
 }
