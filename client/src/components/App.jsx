@@ -84,7 +84,7 @@ class App extends React.Component {
       })
     } else if (index < 0) {
       listingInterestService(_id, user, false ,(serverRes) => {
-        this.loadListing();        
+        this.loadListing();
       })
     }
   }
@@ -128,11 +128,22 @@ class App extends React.Component {
     })
   }
 
+<<<<<<< HEAD
   homeHandler(){
     this.setState({
       view: 'listings',
       selectedListing: ''
     })
+=======
+  renderBody(){
+    if(this.state.view === 'listings'){
+      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
+      user={this.state.loginAs}
+      listings={this.state.listings}/>)
+    } else if(this.state.view === 'single') {
+      return <ListingDetails user={this.state.loginAs} listing={this.state.selectedListing}/>
+    }
+>>>>>>> trying to fix db issues by rebasing
   }
 
   updateChanges(changes, oldListing){
