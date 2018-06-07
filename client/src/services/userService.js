@@ -26,12 +26,13 @@ export function loginService({username, password}, callback){
   })
 }
 
-export function updatePasswordService({id, password}) {
+export function updateUserService({UserId, Username, Password}) {
   $.ajax({
     type:'PUT',
-    url: `/account/${id}`,
+    url: `/account/${UserId}`,
     data: {
-      pw: password
+      user: Username,
+      pw: Password
     }
   })
   .then(response=>{

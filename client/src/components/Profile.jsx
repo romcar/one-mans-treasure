@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Button, Header, Icon, Divider,
    Container, Modal, Input, Form, TextArea } from 'semantic-ui-react'
+import {updateUserService} from '../services/userService.js'
 
 class Profile extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       userInfo : {
+        UserId: '',
         Username: this.props.user,
         Password: ''
       },
@@ -71,6 +73,7 @@ class Profile extends React.Component{
 
   submit(){
     console.log(this.props.user, 'submit!');
+    updateUserService(this.state.userInfo)
   }
 
   render(){
