@@ -28,8 +28,8 @@ class NavBar extends React.Component{
     } else {
       return(
       <div className="item ui">
-          <Profile user={this.props.session.user.username}>
-          </Profile>
+        <Icon name='user' />
+        Welcome back {this.props.session.user.username}!
       </div>
       )
     }
