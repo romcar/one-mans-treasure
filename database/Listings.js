@@ -43,7 +43,7 @@ exports.saveListing = (listing) => {
 
 exports.fetchListings = ()=>{
   return new Promise((resolve, reject)=>{
-    Listing.find()
+    Listing.find({isAvailable: true})
     .then(listings=>{
       resolve(listings);
     })
