@@ -7,7 +7,7 @@ import ListingDetails from './ListingDetails.jsx';
 
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {updateListingService, loadListingService, 
+import {updateListingService, loadListingService,
   createListingService, givawayListingService,
   listingInterestService, deleteListingService} from '../services/listingService.js';
 
@@ -111,9 +111,14 @@ class App extends React.Component {
   userLogin(user){
     loginService(user, (response)=>{
       console.log(response, 'back in app');
-      this.setState({
-        loginAs: response
-      })
+      if(response === false) {
+        alert('you messed up dawg');
+      } else {
+        this.setState({
+          loginAs: response
+        });
+      }
+
     })
   }
 
