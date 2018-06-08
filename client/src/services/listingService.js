@@ -119,7 +119,7 @@ function updateListing(listing, oldListing, callback) {
     type:'PUT',
     url: `/listing/${oldListing._id}`,
     data: {
-      title: listing.title, 
+      title: listing.title,
       desc: listing.desc,
       loc: listing.loc,
       image: listing.image
@@ -133,14 +133,25 @@ function updateListing(listing, oldListing, callback) {
   })
 }
 
-export function givawayListingService(callback){
-  $.post('/listing/give', {
-    
+export function givawayListingService(input, callback){
+  console.log(input.receiver)
+  $.post('/give', {
+    receiver: input.receiver,
+    listing: input.listing
   })
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '/give',
+  //   data: {
+  //     receiver: input.receiver,
+  //     listing: input.listing
+  //   }
+  // })
   .then(response=>{
     callback(response);
   })
   .catch(error=>{
+    console.log(error)
     callback(error);
   })
 }

@@ -57,7 +57,8 @@ module.exports = {
     },
 
     give: function(req, res) {
-      util.giveListing(req.body.data)
+      console.log(req.body, 'controller')
+      util.giveListing(req.body)
       .then(given=>{
         res.status(201).send(given);
       })

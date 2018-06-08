@@ -32,8 +32,15 @@ class NavDropdown extends Component {
             <MyListings listings={this.props.listings}
             user={this.props.session.user}
             listingSelectHandler={this.props.listingSelectHandler.bind(this)}
-            delete={this.props.delete.bind(this)}>
+            delete={this.props.delete.bind(this)} giveHandler={this.props.giveHandler.bind(this)}>
             </MyListings>
+          </Dropdown.Item> : false}
+
+          {this.props.session ? <Dropdown.Item>
+            <ClaimListings listings={this.props.listings} claimed={this.props.session.user.claimed}
+            user={this.props.session.user}
+            listingSelectHandler={this.props.listingSelectHandler.bind(this)}>
+            </ClaimListings>
           </Dropdown.Item> : false}
 
           {this.props.session ? <Dropdown.Item>

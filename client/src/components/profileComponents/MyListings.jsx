@@ -39,7 +39,7 @@ class MyListings extends React.Component {
               entry.listedBy === this.props.user._id ?
               <List divided verticalAlign='middle' key={entry._id}>
                 <MyListingEntry listing={entry} delete={this.props.delete.bind(this)}
-                listingSelectHandler={this.props.listingSelectHandler.bind(this)} close={this.close.bind(this)}/>
+                listingSelectHandler={this.props.listingSelectHandler.bind(this)} close={this.close.bind(this)} giveHandler={this.props.giveHandler.bind(this)}/>
               </List> : false
             )
           }
