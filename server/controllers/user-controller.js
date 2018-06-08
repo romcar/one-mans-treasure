@@ -27,9 +27,9 @@ module.exports = {
   },
 
   updateUserInfo: function(req, res) {
-    db.updateUser(req.params.userId, req.body.user, req.body.pw)
-    .then(updatedPw=> {
-      res.status(200).send(updatedPw);
+    db.updateUser(req.params.userId, req.body.user, req.body.pw, req.body.originalPw)
+    .then(updatedInfo=> {
+      res.status(200).send(updatedInfo);
     })
     .catch(err=> {
       res.status(404).send(err);

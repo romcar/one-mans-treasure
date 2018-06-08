@@ -17,22 +17,21 @@ export function loginService({username, password}, callback){
     user: username, pw: password
   })
   .then(response=>{
-    console.log("there")
     callback(response);
   })
   .catch(error=>{
-    console.log('here')
     callback(error);
   })
 }
 
-export function updateUserService({UserId, Username, Password}) {
+export function updateUserService({UserId, Username, Password, OriginalPw}, callback) {
   $.ajax({
     type:'PUT',
     url: `/account/${UserId}`,
     data: {
       user: Username,
-      pw: Password
+      pw: Password,
+      originalPw: OriginalPw
     }
   })
   .then(response=>{

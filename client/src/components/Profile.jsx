@@ -11,7 +11,8 @@ class Profile extends React.Component{
       userInfo : {
         UserId: this.props.userId,
         Username: this.props.user,
-        Password: this.props.password
+        Password: this.props.password,
+        OriginalPw: this.props.password
       },
       usernameEdit: false,
       passwordEdit: false,
@@ -96,8 +97,8 @@ class Profile extends React.Component{
   }
 
   submit(){
-    console.log(this.props.user, 'submit!');
-    updateUserService(this.state.userInfo)
+    updateUserService(this.state.userInfo);
+    this.close();
   }
 
   render(){
