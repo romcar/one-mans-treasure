@@ -72,10 +72,10 @@ class ListingCreator extends React.Component{
         <Divider hidden/>
         <div style={this.labelStyle}>
           <label htmlFor="embedpollfileinput" className="ui huge green button">
-            <i className="ui upload icon"></i> 
+            <i className="ui upload icon"></i>
             Upload image
           </label>
-          <input onChange={this.fileSelectedHandler.bind(this)} 
+          <input onChange={this.fileSelectedHandler.bind(this)}
           type="file"
           className="inputfile" id="embedpollfileinput" style={this.inputStyle}/>
         </div>
@@ -83,20 +83,20 @@ class ListingCreator extends React.Component{
         <Divider hidden/>
         <Divider hidden/>
         <Divider/>
-        <Divider/>    
+        <Divider/>
         </Container>
       </div>
-      
+
       <Container textAlign="center">
       <Input onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title}
-        placeholder="Title"/>   
+        placeholder="Title"/>
         <Input onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc}
         placeholder="Location"/>
-        <Divider/>         
+        <Divider/>
         <TextArea onChange={this.handleChange.bind(this, 'desc')} value={this.state.listing.desc}
         autoHeight cols="60" placeholder='Short Description' />
       </Container>
-      <Divider/> 
+      <Divider/>
       <Modal.Actions>
         <Button type="button" onClick={this.close.bind(this)} basic color='red'>
           <Icon name='remove'/>Cancel

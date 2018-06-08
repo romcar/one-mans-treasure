@@ -26,7 +26,6 @@ class MyListings extends React.Component {
 
 
   render() {
-    console.log('my listings');
     return (
       <Modal
         open={this.state.isOpen}
