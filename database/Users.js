@@ -59,19 +59,32 @@ exports.loginUser = (userData, callback) => {
   }).catch(err => callback(false));
 };
 
-exports.updateUser = (id, username, password) => {
-  let plainTextPw = password;
-  let hash = bcrypt.hashSync(plainTextPw, 10);
-  return new Promise((resolve, reject)=> {
-    User.findByIdAndUpdate(id, { $set: { 'password': hash, 'username': username } }, { new: true })
-    .exec().then(updatedInfo=> {
-      console.log('Updated Info: ', updatedInfo);
-      resolve(updatedInfo);
-    }).catch(err=> {
-      reject(err);
+exports.updateUser = (id, username, password, originalPw) => {
+  if (password === originalPw) {
+    return new Promise((resolve, reject)=> {
+      User.findByIdAndUpdate(id, { $set: { 'username': username } }, { new: true })
+      .exec().then(updatedInfo=> {
+        console.log('Updated Info: ', updatedInfo);
+        resolve(updatedInfo);
+      }).catch(err=> {
+        reject(err);
+      })
     })
-  })
+  } else {
+    let plainTextPw = password;
+    let hash = bcrypt.hashSync(plainTextPw, 10);
+    return new Promise((resolve, reject)=> {
+      User.findByIdAndUpdate(id, { $set: { 'password': hash, 'username': username } }, { new: true })
+      .exec().then(updatedInfo=> {
+        console.log('Updated Info: ', updatedInfo);
+        resolve(updatedInfo);
+      }).catch(err=> {
+        reject(err);
+      })
+    })
+  }
 };
+
 exports.claimItem = (user, listing) => {
   return new Promise((resolve, reject)=>{
     User.findByIdAndUpdate(user, {$push: {claimed: listing}})
