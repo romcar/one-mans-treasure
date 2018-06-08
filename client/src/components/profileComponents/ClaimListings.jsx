@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Button, Header, Icon, Modal, List } from 'semantic-ui-react'
-import MyListingEntry from './MyListingEntry.jsx';
+import ClaimListingEntry from './ClaimListingEntry.jsx';
 
-class MyListings extends React.Component {
+class ClaimListings extends React.Component {
   constructor(props){
     super(props);
     this.state = { 
@@ -26,20 +26,20 @@ class MyListings extends React.Component {
   
 
   render() {
-    console.log('my lisitng')
+    console.log('claim listing')
     return (
       <Modal
         open={this.state.isOpen} 
         trigger={<div className="ui item" onClick={this.open.bind(this)}>
         <Icon name='list alternate outline'/>
-        My Listings</div>} basic size='small'>
-        <Header icon='browser' content='My Listings' />
+        Claim Listings</div>} basic size='small'>
+        <Header icon='browser' content='Claim Listings' />
         <Modal.Content>
           {
             this.props.listings.map(entry => 
               entry.listedBy === this.props.user._id ?
               <List divided verticalAlign='middle' key={entry._id}>
-                <MyListingEntry listing={entry} delete={this.props.delete.bind(this)}
+                <ClaimListingEntry listing={entry} delete={this.props.delete.bind(this)}
                 listingSelectHandler={this.props.listingSelectHandler.bind(this)} close={this.close.bind(this)}/>
               </List> : false
             )
@@ -55,4 +55,4 @@ class MyListings extends React.Component {
   }
 }
 
-export default MyListings;
+export default ClaimListings;

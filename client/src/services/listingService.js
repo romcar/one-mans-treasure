@@ -132,3 +132,15 @@ function updateListing(listing, oldListing, callback) {
     callback(error);
   })
 }
+
+export function givawayListingService(callback){
+  $.post('/listing/give', {
+    
+  })
+  .then(response=>{
+    callback(response);
+  })
+  .catch(error=>{
+    callback(error);
+  })
+}

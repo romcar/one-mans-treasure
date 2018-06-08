@@ -4,6 +4,7 @@ import { Button, Dropdown, Menu, Divider, Segment, Icon, DropdownDivider } from 
 import ListingCreator from './ListingCreator.jsx';
 import MyListings from './profileComponents/MyListings.jsx';
 import {createListingService} from '../services/listingService.js';
+import ClaimListings from './profileComponents/ClaimListings.jsx';
 
 
 class NavDropdown extends Component {
@@ -33,6 +34,14 @@ class NavDropdown extends Component {
             listingSelectHandler={this.props.listingSelectHandler.bind(this)}
             delete={this.props.delete.bind(this)}>
             </MyListings>
+          </Dropdown.Item> : false}
+
+          {this.props.session ? 
+          <Dropdown.Item>
+            <ClaimListings listings={this.props.listings}
+            user={this.props.session.user}
+            listingSelectHandler={this.props.listingSelectHandler.bind(this)}
+            delete={this.props.delete.bind(this)}>></ClaimListings>
           </Dropdown.Item> : false}
 
           <DropdownDivider/>
