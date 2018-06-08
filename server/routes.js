@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 router.post('/signup', userCtrl.signUp);
 router.post('/login', userCtrl.comparePassword);
-router.put('/account/:userId', userCtrl.updatePassword);
+router.put('/account/:userId', userCtrl.updateUserInfo);
 
 router.post('/listing', listingCtrl.listings.post);
 router.get('/listing', listingCtrl.listings.get);

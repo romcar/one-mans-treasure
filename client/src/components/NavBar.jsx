@@ -6,6 +6,7 @@ import NavDropdown from './NavDropdown.jsx';
 import Profile from './Profile.jsx';
 import {Button, Dropdown, Menu, Container, Header, Icon} from 'semantic-ui-react';
 
+
 class NavBar extends React.Component{
   constructor(props){
     super(props);
@@ -25,14 +26,12 @@ class NavBar extends React.Component{
     } else {
       return(
       <div className="item ui">
-          <Profile user={this.props.session.user.username}>
-          </Profile>
+        <Icon name='user' />
+        Welcome back {this.props.session.user.username}!
       </div>
       )
     }
   }
-
-// Welcome back <span>&nbsp;{this.props.session.user.username}</span>
 
   render(){
     return(
@@ -56,9 +55,8 @@ class NavBar extends React.Component{
           createListing={this.props.createListing.bind(this)}
           delete={this.props.delete.bind(this)}
           listingSelectHandler={this.props.listingSelectHandler.bind(this)}
-          logout={this.props.logout.bind(this)}>           
+          logout={this.props.logout.bind(this)}>
           </NavDropdown>
-
         </Menu.Menu>
       </div>
     )

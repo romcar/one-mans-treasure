@@ -24,11 +24,11 @@ class App extends React.Component {
 
   renderBody(){
     if(this.state.view === 'listings'){
-      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)} 
+      return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
       listings={this.state.listings}/>)
     } else if(this.state.view === 'single') {
-      return <ListingDetails 
-      user={this.state.loginAs === null ? this : this.state.loginAs.user._id} 
+      return <ListingDetails
+      user={this.state.loginAs === null ? this : this.state.loginAs.user._id}
       listing={this.state.selectedListing}
       updateChanges={this.updateChanges.bind(this)}
       />
@@ -44,8 +44,8 @@ class App extends React.Component {
         create={this.createAccount.bind(this)}
         createListing={this.createListing.bind(this)}
         delete={this.deleteListing.bind(this)}
-        homeHandler={this.homeHandler.bind(this)}        
-        login={this.userLogin.bind(this)}        
+        homeHandler={this.homeHandler.bind(this)}
+        login={this.userLogin.bind(this)}
         logout={this.userLogout.bind(this)}
         listingSelectHandler={this.listingSelectHandler.bind(this)}
         giveHandler={this.giveHandler.bind(this)}
@@ -136,6 +136,16 @@ class App extends React.Component {
       selectedListing: ''
     })
   }
+
+  // renderBody(){
+  //   if(this.state.view === 'listings'){
+  //     return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
+  //     user={this.state.loginAs}
+  //     listings={this.state.listings}/>)
+  //   } else if(this.state.view === 'single') {
+  //     return <ListingDetails user={this.state.loginAs} listing={this.state.selectedListing}/>
+  //   }
+  // }
 
   updateChanges(changes, oldListing){
     updateListingService(changes, oldListing, (response)=>{

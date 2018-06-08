@@ -2,16 +2,19 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Button, Header, Icon, Divider,
    Container, Modal, Input, Form, TextArea } from 'semantic-ui-react'
+import { updateUserService } from '../services/userService.js'
 
 class Profile extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       userInfo : {
+        UserId: this.props.userId,
         Username: this.props.user,
-        Password: ''
+        Password: this.props.password
       },
       usernameEdit: false,
+      passwordEdit: false,
       isOpen: false
     }
     const inputStyle={
@@ -45,9 +48,15 @@ class Profile extends React.Component{
     this.setState({user});
   }
 
-  makeUsernameEditabel(){
+  makeUsernameEditable(){
     this.setState({
       usernameEdit: !this.state.usernameEdit
+    })
+  }
+
+  makePasswordEditable(){
+    this.setState({
+      passwordEdit: !this.state.passwordEdit
     })
   }
 
@@ -56,33 +65,50 @@ class Profile extends React.Component{
       return (
       <span>
         <Input onChange={this.handleChange.bind(this, 'Username')} placeholder="Username"/>
-        <Button primary type="button" onClick={this.makeUsernameEditabel.bind(this)}><Icon name='right chevron'/>Done</Button>
+        <Button primary type="button" onClick={this.makeUsernameEditable.bind(this)}><Icon name='right chevron'/>Done</Button>
       </span>
       )
     } else {
       return (
+        <span>
+          <span>&nbsp;{this.state.userInfo.Username}</span>
+          <Button secondary type="button" onClick={this.makeUsernameEditable.bind(this)}><Icon name='edit'/>Edit</Button>
+        </span>
+      )
+    }
+  }
+
+  renderPasswordForm() {
+    if (this.state.passwordEdit === true) {
+      return (
       <span>
-        <span>&nbsp;{this.state.userInfo.Username}</span>
-        <Button secondary type="button" onClick={this.makeUsernameEditabel.bind(this)}><Icon name='edit'/>Edit</Button>
+        <Input onChange={this.handleChange.bind(this, 'Password')} placeholder="Password"/>
+        <Button primary type="button" onClick={this.makePasswordEditable.bind(this)}><Icon name='right chevron'/> Done</Button>
       </span>
+      )
+    } else {
+      return (
+        <span>
+          <Button secondary type="button" onClick={this.makePasswordEditable.bind(this)}><Icon name='edit'/> Edit</Button>
+        </span>
       )
     }
   }
 
   submit(){
     console.log(this.props.user, 'submit!');
+    updateUserService(this.state.userInfo)
   }
 
   render(){
     return(
-    <Modal open={this.state.isOpen} trigger={<div className="ui item" onClick={this.open.bind(this)}>
-        <Icon name='user' />
-        Welcome back {this.props.user}!</div>} basic closeOnDimmerClick={false}>
+    <Modal open={this.state.isOpen} trigger={<div className="ui item" onClick={this.open.bind(this)}><Icon name='edit outline' />
+        Edit Profile</div>} basic closeOnDimmerClick={false}>
       <Modal.Header>Your Profile</Modal.Header>
       <Divider/>
       <Container textAlign="center"> Username {this.renderUsernameForm()}
       <Divider/>
-      <Button secondary type="button"><Icon name='edit'/>Edit</Button>
+      <div textAlign="center"> Password {this.renderPasswordForm()}</div>
       </Container>
       <Divider/>
       <Modal.Actions>

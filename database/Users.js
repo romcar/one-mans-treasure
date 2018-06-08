@@ -59,14 +59,14 @@ exports.loginUser = (userData, callback) => {
   }).catch(err => callback(false));
 };
 
-exports.updateUser = (id, password) => {
+exports.updateUser = (id, username, password) => {
   let plainTextPw = password;
   let hash = bcrypt.hashSync(plainTextPw, 10);
   return new Promise((resolve, reject)=> {
-    User.findByIdAndUpdate(id, { $set: { 'password': hash } }, { new: true })
-    .exec().then(updatedPw=> {
-      console.log('Updated PW: ', updatedPw);
-      resolve(updatedPw);
+    User.findByIdAndUpdate(id, { $set: { 'password': hash, 'username': username } }, { new: true })
+    .exec().then(updatedInfo=> {
+      console.log('Updated Info: ', updatedInfo);
+      resolve(updatedInfo);
     }).catch(err=> {
       reject(err);
     })

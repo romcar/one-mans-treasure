@@ -10,7 +10,7 @@ module.exports = {
   },
 
   giveListing: function(data) {
-    let giverId = data.giver;
+    //let giverId = data.giver;
     let receiverId =  data.receiver;
     let listingId = data.listing;
     return new Promise((resolve, reject) => {
