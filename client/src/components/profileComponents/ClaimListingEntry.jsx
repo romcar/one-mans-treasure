@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import {Icon, List, Image, Button, Dropdown} from 'semantic-ui-react';
 import moment from 'moment';
 
-class MyListingEntry extends React.Component{
+class ClaimListingEntry extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -82,7 +82,7 @@ class MyListingEntry extends React.Component{
 
 }
 
-export default MyListingEntry;
+export default ClaimListingEntry;
 
 // <Dropdown inline
 // onChange={this.handleSelect.bind(this)}

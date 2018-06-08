@@ -4,6 +4,7 @@ import { Button, Dropdown, Menu, Divider, Segment, Icon, DropdownDivider } from 
 import ListingCreator from './ListingCreator.jsx';
 import MyListings from './profileComponents/MyListings.jsx';
 import {createListingService} from '../services/listingService.js';
+import ClaimListings from './profileComponents/ClaimListings.jsx';
 import Profile from './Profile.jsx';
 
 class NavDropdown extends Component {

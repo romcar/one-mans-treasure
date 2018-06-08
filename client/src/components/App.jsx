@@ -7,7 +7,8 @@ import ListingDetails from './ListingDetails.jsx';
 
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {updateListingService, loadListingService, createListingService,
+import {updateListingService, loadListingService, 
+  createListingService, givawayListingService,
   listingInterestService, deleteListingService} from '../services/listingService.js';
 
 class App extends React.Component {
@@ -47,6 +48,7 @@ class App extends React.Component {
         login={this.userLogin.bind(this)}
         logout={this.userLogout.bind(this)}
         listingSelectHandler={this.listingSelectHandler.bind(this)}
+        giveHandler={this.giveHandler.bind(this)}
         />
         <Container>
           {this.renderBody()}
@@ -147,6 +149,12 @@ class App extends React.Component {
 
   updateChanges(changes, oldListing){
     updateListingService(changes, oldListing, (response)=>{
+      this.loadListing();
+    })
+  }
+
+  giveHandler(){
+    givawayListingService((response)=>{
       this.loadListing();
     })
   }
