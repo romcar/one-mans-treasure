@@ -10,6 +10,10 @@ class MyListingEntry extends React.Component{
       view: 'listings',
       users: this.props.listing.interested_users,
       user: '',
+      data: {
+        receiver: '',
+        listing: this.props.listing._id
+      }
     }
   }
 
@@ -18,8 +22,8 @@ class MyListingEntry extends React.Component{
     this.props.close();
   }
 
-  handleGivaway(){
-    
+  handleGivaway(stuff){
+    this.props.giveHandler(this.state.data)
   }
 
   handleRenderGivaway(){
@@ -28,11 +32,10 @@ class MyListingEntry extends React.Component{
     })
   }
 
-  handleSelect(event){
-    console.log(event.target)
-    this.setState({
-      user: event.target.value,
-    })
+  handleSelect(key, event){
+    const id = this.state.data
+    id[key] = event.target.value
+    this.setState({id})
   }
 
   handleCloseGivaway(){
@@ -59,17 +62,15 @@ class MyListingEntry extends React.Component{
       </List.Item>
       )
     } else if(this.state.view === 'givaway'){
-      console.log(this.props.listing)
       return(
-
         <List.Item>
-          <select className='ui dropdown button' onChange={this.handleSelect.bind(this)}>
+          <select className='ui dropdown button' onChange={this.handleSelect.bind(this, 'receiver')}>
             {this.state.users.map(user=>
               <option value={user}>{user}</option>
             )}
           </select>
           <Button inverted> Cancel</Button>
-          <Button color='blue' inverted onClick={()=>{if(confirm(`Are you sure you want to give it to ${this.state.user}?`)){this.handleGivaway.bind(this)}}}>
+          <Button color='blue' inverted onClick={()=>{if(confirm(`Are you sure you want to give it to ${this.state.user}?`)){this.handleGivaway(this.state.data)}}}>
           <Icon name='gift'/> Givaway</Button>
         </List.Item>
       )
@@ -83,10 +84,3 @@ class MyListingEntry extends React.Component{
 }
 
 export default MyListingEntry;
-
-// <Dropdown inline
-// onChange={this.handleSelect.bind(this)}
-// {this.state.users.map()}
-// placeholder='Please choose an user to givaway your freebie.'
-// value={this.state.user}
-// />

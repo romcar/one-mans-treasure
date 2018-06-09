@@ -55,7 +55,8 @@ class NavBar extends React.Component{
           createListing={this.props.createListing.bind(this)}
           delete={this.props.delete.bind(this)}
           listingSelectHandler={this.props.listingSelectHandler.bind(this)}
-          logout={this.props.logout.bind(this)}>
+          logout={this.props.logout.bind(this)}
+          giveHandler={this.props.giveHandler.bind(this)}>
           </NavDropdown>
         </Menu.Menu>
       </div>

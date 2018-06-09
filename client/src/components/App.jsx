@@ -142,24 +142,15 @@ class App extends React.Component {
     })
   }
 
-  // renderBody(){
-  //   if(this.state.view === 'listings'){
-  //     return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
-  //     user={this.state.loginAs}
-  //     listings={this.state.listings}/>)
-  //   } else if(this.state.view === 'single') {
-  //     return <ListingDetails user={this.state.loginAs} listing={this.state.selectedListing}/>
-  //   }
-  // }
-
   updateChanges(changes, oldListing){
     updateListingService(changes, oldListing, (response)=>{
       this.loadListing();
     })
   }
 
-  giveHandler(){
-    givawayListingService((response)=>{
+  giveHandler(input){
+    console.log(input, 'HALLELUJIA')
+    givawayListingService(input, (response)=>{
       this.loadListing();
     })
   }
