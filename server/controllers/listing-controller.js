@@ -67,5 +67,16 @@ module.exports = {
       })
     },
 
+    getClaimedListings: (req, res)=>{
+      db.fetchClaimedListing(req.body.listingsId)
+        .then(claimed=>{
+          console.log(claimed)
+          res.status(201).send(given);
+        })
+        .catch(error=>{
+          res.status(401).send(error);
+        })
+    }
+
   }
 }

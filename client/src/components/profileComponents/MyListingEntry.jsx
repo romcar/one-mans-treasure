@@ -40,6 +40,7 @@ class MyListingEntry extends React.Component{
     const id = this.state.data
     id[key] = event.target.value
     this.setState({id})
+    console.log(this.state.data)
   }
 
   handleCloseGivaway(){
@@ -70,7 +71,7 @@ class MyListingEntry extends React.Component{
         <List.Item>
           <select className='ui dropdown button' onChange={this.handleSelect.bind(this, 'receiver')}>
             {this.props.interestedUsers.map(user=>
-              <option value={user.username}>{user.username}</option>
+              <option value={user._id}>{user.username}</option>
             )}
           </select>
           <Button inverted onClick={this.handleCloseGivaway.bind(this)}> Cancel</Button>

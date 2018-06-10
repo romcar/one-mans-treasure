@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, Header, Icon, Modal, List } from 'semantic-ui-react'
 import ClaimListingEntry from './ClaimListingEntry.jsx';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchClaimedListings} from '../../actions/ClaimedListingsActions';
 
 class ClaimListings extends React.Component {
   constructor(props){
@@ -8,6 +11,10 @@ class ClaimListings extends React.Component {
     this.state = {
       isOpen: false,
     }
+  }
+
+  componentDidMount(){
+    this.props.fetchClaimedListings(this.props.claimed);
   }
 
   open(){
@@ -22,11 +29,9 @@ class ClaimListings extends React.Component {
     })
   }
 
-
-
   render() {
-    console.log(this.props.listings, 'listings')
-    console.log(this.props.claimed, 'claimed')
+
+    console.log(this.props)
     return (
       <Modal
         open={this.state.isOpen}
@@ -36,12 +41,11 @@ class ClaimListings extends React.Component {
         <Header icon='browser' content='Claim Listings' />
         <Modal.Content>
           {
-            this.props.claimed.map(entry =>
-              entry.listedBy === this.props.user._id ?
+            this.props.claims.map(entry =>
               <List divided verticalAlign='middle' key={entry._id}>
                 <ClaimListingEntry listing={entry}
                 listingSelectHandler={this.props.listingSelectHandler.bind(this)} close={this.close.bind(this)} claimed={this.props.claimed}/>
-              </List> : false
+              </List> 
             )
           }
         </Modal.Content>
@@ -55,4 +59,13 @@ class ClaimListings extends React.Component {
   }
 }
 
-export default ClaimListings;
+const mapStateToProps = (data) =>{
+  console.log(data)
+  return {claims: data.claims, listings: data.listings};
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({fetchClaimedListings},dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClaimListings);

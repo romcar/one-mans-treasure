@@ -5,15 +5,9 @@ import moment from 'moment';
 class ClaimListingEntry extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      view: 'listings',
-      users: this.props.listing.interested_users,
-      user: ''
-    }
   }
 
   renderGivaway(){
-    if(this.state.view === 'listings'){
       return(
         <List.Item>
         <Image avatar src={this.props.listing.photo} />
@@ -23,7 +17,6 @@ class ClaimListingEntry extends React.Component{
         </List.Content>
       </List.Item>
       )
-    }
   }
 
   render(){

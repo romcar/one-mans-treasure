@@ -107,5 +107,4 @@ exports.fetchInterestedUsers = (users)=>{
       reject(error)
     })
   })
-
 }

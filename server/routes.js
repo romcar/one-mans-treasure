@@ -8,9 +8,11 @@ router.put('/account/:userId', userCtrl.updateUserInfo);
 router.put('/interestedUsers', userCtrl.getInterestedUsers);
 router.post('/listing', listingCtrl.listings.post);
 router.get('/listing', listingCtrl.listings.get);
-router.put('/listing/interest', listingCtrl.listings.setInterest);
 router.delete('/listing/:listingId', listingCtrl.listings.delete);
 router.put('/listing/:listingId', listingCtrl.listings.update);
 router.post('/listing/give', listingCtrl.listings.give);
+router.put('/listing/interest', listingCtrl.listings.setInterest);
+router.post('/listing/claimed', listingCtrl.listings.getClaimedListings);
+
 
 module.exports = router;

@@ -35,7 +35,7 @@ class NavDropdown extends Component {
           </Dropdown.Item> : false}
 
           {this.props.session ? <Dropdown.Item>
-            <ClaimListings listings={this.props.listings} claimed={this.props.session.user.claimed}
+            <ClaimListings claimed={this.props.session.user.claimed}
             user={this.props.session.user}
             listingSelectHandler={this.props.listingSelectHandler.bind(this)}>
             </ClaimListings>

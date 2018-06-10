@@ -110,3 +110,15 @@ exports.updateListing = (id, {title, desc, image, loc}) => {
     })
   })
 };
+
+exports.fetchClaimedListing = (listings)=>{
+  return new Promise((resolve, reject)=>{
+    Listing.find({_id: {$in: listings}})
+    .then(claimedListings=>{
+      resolve(claimedListings)
+    })
+    .catch(error=>{
+      reject(error)
+    })
+  })
+}
