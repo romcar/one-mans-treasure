@@ -40,7 +40,7 @@ export function createListingService(data, userId, callback){
 export function listingInterestService(id, user, claimed ,callback){
   $.ajax({
     type:'PUT',
-    url: '/listing/interest',
+    url: '/interest',
     data: {
       id: id,
       claimed: claimed,

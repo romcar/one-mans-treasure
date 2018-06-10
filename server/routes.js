@@ -11,7 +11,7 @@ router.get('/listing', listingCtrl.listings.get);
 router.delete('/listing/:listingId', listingCtrl.listings.delete);
 router.put('/listing/:listingId', listingCtrl.listings.update);
 router.post('/listing/give', listingCtrl.listings.give);
-router.put('/listing/interest', listingCtrl.listings.setInterest);
+router.put('/interest', listingCtrl.listings.setInterest);
 router.post('/listing/claimed', listingCtrl.listings.getClaimedListings);
 
 

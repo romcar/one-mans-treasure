@@ -79,6 +79,7 @@ exports.deleteListing = (id)=>{
 }
 
 exports.updateInterest = ({id, userId, claimed})=>{
+  console.log(id, userId, claimed)
   return new Promise((resolve, reject)=>{
     if(JSON.parse(claimed) === true){
       Listing.findByIdAndUpdate(id, {$pull:{interested_users:{$in: userId}}})

@@ -18,7 +18,6 @@ module.exports = {
       if(isMatch) {
         let newSession = util.createSession(req, res, newUser);
         newSession.user = newUser;
-        console.log(newSession);
         res.status(200).send(newSession);
       } else {
         res.status(200).send(false);
