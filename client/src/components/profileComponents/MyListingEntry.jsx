@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import {Icon, List, Image, Button, Dropdown} from 'semantic-ui-react';
 import moment from 'moment';
 

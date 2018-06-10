@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import { Z_DEFAULT_STRATEGY } from 'zlib';
 
 export function createListingService(data, userId, callback){
   let formData = new FormData();
@@ -135,7 +134,7 @@ function updateListing(listing, oldListing, callback) {
 
 export function givawayListingService(input, callback){
   console.log(input.receiver)
-  $.post('/give', {
+  $.post('/listing/give', {
     receiver: input.receiver,
     listing: input.listing
   })
@@ -151,7 +150,6 @@ export function givawayListingService(input, callback){
     callback(response);
   })
   .catch(error=>{
-    console.log(error)
     callback(error);
   })
 }

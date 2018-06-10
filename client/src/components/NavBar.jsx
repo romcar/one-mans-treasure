@@ -1,11 +1,8 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import NavDropdown from './NavDropdown.jsx';
-import Profile from './Profile.jsx';
 import {Button, Dropdown, Menu, Container, Header, Icon} from 'semantic-ui-react';
-
 
 class NavBar extends React.Component{
   constructor(props){
