@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import { Button, Header, Icon, Modal, Input, Form, Message } from 'semantic-ui-react'
-import $ from 'jquery';
 
 class Signup extends React.Component{
   constructor(props) {

@@ -1,8 +1,5 @@
-
 import React from 'react';
-import ReactDom from 'react-dom';
 import { Button, Header, Icon, Modal, Input, Form} from 'semantic-ui-react'
-import $ from 'jquery';
 
 class Login extends React.Component{
   constructor(props) {

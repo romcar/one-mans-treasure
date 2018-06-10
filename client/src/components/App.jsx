@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import NavBar from './NavBar.jsx';
 import Listings from './Listings.jsx';
 import ListingDetails from './ListingDetails.jsx';

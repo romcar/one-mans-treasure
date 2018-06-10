@@ -10,7 +10,7 @@ router.get('/listing', listingCtrl.listings.get);
 router.put('/listing/interest', listingCtrl.listings.setInterest);
 router.delete('/listing/:listingId', listingCtrl.listings.delete);
 router.put('/listing/:listingId', listingCtrl.listings.update);
-router.post('/give', listingCtrl.listings.give);
+router.post('/listing/give', listingCtrl.listings.give);
 
 
 module.exports = router;

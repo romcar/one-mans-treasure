@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import { Button, Header, Icon, Modal, List } from 'semantic-ui-react'
 import MyListingEntry from './MyListingEntry.jsx';
 

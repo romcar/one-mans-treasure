@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDom from 'react-dom';
 import {Container, Grid, Image, Button, TextArea,
    Input, Header, Icon, Segment, Divider} from 'semantic-ui-react';
 import moment from 'moment';

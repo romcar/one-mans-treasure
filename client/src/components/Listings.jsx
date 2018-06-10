@@ -1,8 +1,6 @@
 import React from 'react'
-import ReactDom from 'react-dom';
 import { Grid, Segment } from 'semantic-ui-react';
 import ListingEntry from '../components/ListingEntry.jsx';
-import {addInterest, removeInterest} from '../services/listingService.js';
 
 class Listings extends React.Component{
   constructor(props){
