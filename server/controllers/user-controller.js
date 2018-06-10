@@ -34,5 +34,15 @@ module.exports = {
     .catch(err=> {
       res.status(404).send(err);
     })
+  },
+
+  getInterestedUsers: (req, res) => {
+    db.fetchInterestedUsers(req.body.users)
+      .then(users=>{
+        res.status(201).send(users)
+      })
+      .catch(error=>{
+        res.status(401).send(error);
+      })
   }
 }

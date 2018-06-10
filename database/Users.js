@@ -96,3 +96,16 @@ exports.claimItem = (user, listing) => {
     })
   })
 }
+
+exports.fetchInterestedUsers = (users)=>{
+  return new Promise((resolve, reject)=>{
+    User.find({_id: {$in: users}})
+    .then(interestedUsers=>{
+      resolve(interestedUsers)
+    })
+    .catch(error=>{
+      reject(error)
+    })
+  })
+
+}

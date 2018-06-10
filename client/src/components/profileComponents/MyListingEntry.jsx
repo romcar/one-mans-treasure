@@ -1,20 +1,24 @@
 import React from 'react';
 import {Icon, List, Image, Button, Dropdown} from 'semantic-ui-react';
 import moment from 'moment';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchInterestedUsers} from '../../actions/UserActions';
+
 
 class MyListingEntry extends React.Component{
   constructor(props){
     super(props)
     this.state = {
       view: 'listings',
-      users: this.props.listing.interested_users,
-      user: '',
+      usersArr: this.props.listing.interested_users,
       data: {
         receiver: '',
         listing: this.props.listing._id
       }
     }
   }
+
 
   handleEdit(){
     this.props.listingSelectHandler(this.props.listing);
@@ -26,6 +30,7 @@ class MyListingEntry extends React.Component{
   }
 
   handleRenderGivaway(){
+    this.props.fetchInterestedUsers(this.state.usersArr);
     this.setState({
       view: 'givaway',
     })
@@ -64,11 +69,11 @@ class MyListingEntry extends React.Component{
       return(
         <List.Item>
           <select className='ui dropdown button' onChange={this.handleSelect.bind(this, 'receiver')}>
-            {this.state.users.map(user=>
-              <option value={user}>{user}</option>
+            {this.props.interestedUsers.map(user=>
+              <option value={user.username}>{user.username}</option>
             )}
           </select>
-          <Button inverted> Cancel</Button>
+          <Button inverted onClick={this.handleCloseGivaway.bind(this)}> Cancel</Button>
           <Button color='blue' inverted onClick={()=>{if(confirm(`Are you sure you want to give it to ${this.state.user}?`)){this.handleGivaway(this.state.data)}}}>
           <Icon name='gift'/> Givaway</Button>
         </List.Item>
@@ -82,4 +87,13 @@ class MyListingEntry extends React.Component{
 
 }
 
-export default MyListingEntry;
+
+const mapStateToProps = ({interestedUsers}) => {
+  return {interestedUsers};
+}
+
+const mapDispatchToProps = dispatch =>{
+  return bindActionCreators({fetchInterestedUsers}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyListingEntry);
