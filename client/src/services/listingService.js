@@ -17,9 +17,7 @@ export function createListingService(data, userId, callback){
     mimeType: 'multipart/form-data',
   })
   .then(response=>{
-    console.log(userId)
     response = JSON.parse(response)
-    console.log(response)
     $.post('/listing', {
       title: data.title,
       desc: data.desc,
@@ -37,16 +35,6 @@ export function createListingService(data, userId, callback){
   .catch(error=>{
     callback(error);
   })
-}
-
-export function loadListingService(callback){
-  $.get('/listing')
-    .then(response=>{
-      callback(response);
-    })
-    .catch(error=>{
-      callback(response);
-    })
 }
 
 export function listingInterestService(id, user, claimed ,callback){

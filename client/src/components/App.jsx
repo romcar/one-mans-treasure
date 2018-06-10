@@ -2,19 +2,20 @@ import React from 'react';
 import NavBar from './NavBar.jsx';
 import Listings from './Listings.jsx';
 import ListingDetails from './ListingDetails.jsx';
-
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
 import {updateListingService, loadListingService,
   createListingService, givawayListingService,
   listingInterestService, deleteListingService} from '../services/listingService.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchListings} from '../actions/ListingActions';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loginAs: null,
-      listings: [],
       view: 'listings',
       selectedListing: '',
     }
@@ -23,7 +24,7 @@ class App extends React.Component {
   renderBody(){
     if(this.state.view === 'listings'){
       return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
-      listings={this.state.listings}/>)
+      listings={this.props.listings}/>)
     } else if(this.state.view === 'single') {
       return <ListingDetails
       user={this.state.loginAs === null ? this : this.state.loginAs.user._id}
@@ -37,7 +38,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBar
-        listings={this.state.listings}
+        listings={this.props.listings}
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         createListing={this.createListing.bind(this)}
@@ -56,18 +57,19 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    this.loadListing();
+    this.props.fetchListings();
+    // console.log(this.props.state.listings)
   }
 
   createListing(listing, userId){
     createListingService(listing, userId, (response)=>{
-      this.loadListing();
+      this.props.fetchListings();
     })
   }
 
   deleteListing(listing){
     deleteListingService(listing._id, (deleted)=>{
-      this.loadListing();
+      this.props.fetchListings();
     });
   }
 
@@ -80,22 +82,13 @@ class App extends React.Component {
     let index = interested_users.indexOf(user);
     if (index >= 0) {
       listingInterestService(_id, user, true, (serverRes) => {
-        this.loadListing();
+        this.props.fetchListings();
       })
     } else if (index < 0) {
       listingInterestService(_id, user, false ,(serverRes) => {
-        this.loadListing();
+        this.props.fetchListings();
       })
     }
-  }
-
-  loadListing(){
-    loadListingService(listings=>{
-      console.log(listings);
-      this.setState({
-        listings: listings,
-      })
-    })
   }
 
   createAccount(user){
@@ -108,7 +101,6 @@ class App extends React.Component {
 
   userLogin(user){
     loginService(user, (response)=>{
-      console.log(response, 'back in app');
       if(response === false) {
         alert('you messed up dawg');
       } else {
@@ -116,7 +108,6 @@ class App extends React.Component {
           loginAs: response
         });
       }
-
     })
   }
 
@@ -142,16 +133,24 @@ class App extends React.Component {
 
   updateChanges(changes, oldListing){
     updateListingService(changes, oldListing, (response)=>{
-      this.loadListing();
+      this.props.fetchListings();
     })
   }
 
   giveHandler(input){
     console.log(input, 'HALLELUJIA')
     givawayListingService(input, (response)=>{
-      this.loadListing();
+      this.props.fetchListings();
     })
   }
 }
 
-export default App;
+const mapStateToProps = ({listings}) =>{
+  return {listings};
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({fetchListings}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
