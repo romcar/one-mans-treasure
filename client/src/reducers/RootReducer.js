@@ -6,7 +6,7 @@ import UsersReducer from './UsersReducer';
 const rootReducer = combineReducers({
   listings: ListingsReducer,
   interestedUsers: UsersReducer,
-  claims: ClaimedListings,
+  claimedListings: ClaimedListings,
 });
 
 export default rootReducer;

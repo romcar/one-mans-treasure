@@ -26,12 +26,13 @@ module.exports = {
     },
 
     setInterest: function(req, res) {
+      console.log(req.body)
       db.updateInterest(req.body)
         .then(updated=>{
           res.status(201).send(updated);
         })
         .catch(error=>{
-          res.status(401).send(error);
+          res.status(404).send(error);
         })
     },
 
@@ -57,7 +58,6 @@ module.exports = {
     },
 
     give: function(req, res) {
-      console.log(req.body, 'controller')
       util.giveListing(req.body)
       .then(given=>{
         res.status(201).send(given);
@@ -68,10 +68,11 @@ module.exports = {
     },
 
     getClaimedListings: (req, res)=>{
+      console.log(req.body.listingsId)
       db.fetchClaimedListing(req.body.listingsId)
         .then(claimed=>{
           console.log(claimed)
-          res.status(201).send(given);
+          res.status(201).send(claimed);
         })
         .catch(error=>{
           res.status(401).send(error);

@@ -25,7 +25,7 @@ class MyListingEntry extends React.Component{
     this.props.close();
   }
 
-  handleGivaway(stuff){
+  handleGivaway(){
     this.props.giveHandler(this.state.data)
   }
 
@@ -40,7 +40,6 @@ class MyListingEntry extends React.Component{
     const id = this.state.data
     id[key] = event.target.value
     this.setState({id})
-    console.log(this.state.data)
   }
 
   handleCloseGivaway(){

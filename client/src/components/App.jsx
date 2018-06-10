@@ -4,8 +4,7 @@ import Listings from './Listings.jsx';
 import ListingDetails from './ListingDetails.jsx';
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
-import {updateListingService, loadListingService,
-  createListingService, givawayListingService,
+import {updateListingService, createListingService, givawayListingService,
   listingInterestService, deleteListingService} from '../services/listingService.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
