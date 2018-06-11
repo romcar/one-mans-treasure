@@ -93,11 +93,13 @@ class ListingDetails extends React.Component{
                   <GoogleMap lon={this.state.lon} lat={this.state.lat}/>
                 </Container>
 
-                {this.state.address}, {this.props.user === this.props.listing.listedBy ? 
+                {this.props.user === this.props.listing.listedBy ? 
                 <Input transparent onChange={this.handleChange.bind(this, 'loc')}
                 value={this.state.listing.loc}/>  
                 : this.state.listing.loc}
 
+                <Divider hidden/>
+                <div>{this.state.address}</div>
                 </Header.Content>
                 <Divider/>
                 <h6>Listed on: {moment(this.props.listing.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>

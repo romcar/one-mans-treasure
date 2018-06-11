@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Header, Icon, Divider,
-   Container, Modal, Input, Form, TextArea } from 'semantic-ui-react'
+import { Button, Segment, Icon, Divider,
+   Container, Modal, Input, TextArea } from 'semantic-ui-react';
 
 class ListingCreator extends React.Component{
   constructor(props){
@@ -13,17 +13,6 @@ class ListingCreator extends React.Component{
         loc: '',
       },
       isOpen: false
-    }
-    const inputStyle={
-      width: `0.1px`,
-      height: `0.1px`,
-      opacity: 0,
-      overflow: "hidden",
-      position: "absolute",
-      "z-index": "-1"
-    }
-    const labelStyle={
-      "white-space": "nowrap"
     }
   }
 
@@ -61,41 +50,37 @@ class ListingCreator extends React.Component{
     return(
     <Modal open={this.state.isOpen} trigger={<div className="ui item" onClick={this.open.bind(this)}>
         <Icon name='clipboard outline'/>
-        Create A New Listing</div>} basic closeOnDimmerClick={false}>
+        Create A New Listing</div>} closeOnDimmerClick={false}>
       <Modal.Header>New Listing</Modal.Header>
       <div>
         <Container textAlign="center">
-        <Divider/>
         <Divider hidden/>
         <Divider hidden/>
         <Divider hidden/>
-        <div style={this.labelStyle}>
-          <label htmlFor="embedpollfileinput" className="ui huge green button">
-            <i className="ui upload icon"></i>
-            Upload image
-          </label>
-          <input onChange={this.fileSelectedHandler.bind(this)}
-          type="file"
-          className="inputfile" id="embedpollfileinput" style={this.inputStyle}/>
+        <Divider hidden/>
+        <div className="upload-btn-wrapper">
+          <button className="btn"><Icon name="upload"></Icon>UPLOAD A IMAGE</button>
+          <input onChange={this.fileSelectedHandler.bind(this)} type="file"
+          name="myfile"/>
         </div>
         <Divider hidden/>
         <Divider hidden/>
         <Divider hidden/>
-        <Divider/>
-        <Divider/>
+        <Divider hidden/>
+        <Divider hidden/>
         </Container>
       </div>
 
       <Container textAlign="center">
-      <Input onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title}
-        placeholder="Title"/>
-        <Input onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc}
-        placeholder="Location"/>
-        <Divider/>
+        <Segment>
+          <Input label="Title" onChange={this.handleChange.bind(this, 'title')} value={this.state.listing.title}
+          placeholder="Name" style={{'padding-right': '20px'}}/>
+          <Input label="Location" onChange={this.handleChange.bind(this, 'loc')} value={this.state.listing.loc}
+          placeholder="Zip-Code, City, or Full Address"/>
+        </Segment>
         <TextArea onChange={this.handleChange.bind(this, 'desc')} value={this.state.listing.desc}
         autoHeight cols="60" placeholder='Short Description' />
       </Container>
-      <Divider/>
       <Modal.Actions>
         <Button type="button" onClick={this.close.bind(this)} basic color='red'>
           <Icon name='remove'/>Cancel

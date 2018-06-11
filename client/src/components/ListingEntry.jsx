@@ -22,7 +22,7 @@ class ListingEntry extends React.Component{
       this.setState({
         lon: data.results[0].geometry.location.lng,
         lat: data.results[0].geometry.location.lat,
-        city: data.results[0].address_components[1].long_name,
+        city: data.results[0].formatted_address,
       },this.render.bind(this))
     })
   }
