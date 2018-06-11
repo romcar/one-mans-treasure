@@ -9,15 +9,18 @@ import {updateListingService, createListingService, givawayListingService,
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchListings} from '../actions/ListingActions';
+import GoogleMap from './GoogleMap.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      map: null,
       loginAs: null,
       view: 'listings',
       selectedListing: '',
     }
+    
   }
 
   renderBody(){
@@ -27,6 +30,7 @@ class App extends React.Component {
     } else if(this.state.view === 'single') {
       return <ListingDetails
       user={this.state.loginAs === null ? this : this.state.loginAs.user._id}
+      map={this.state.map}
       listing={this.state.selectedListing}
       updateChanges={this.updateChanges.bind(this)}
       />
@@ -48,6 +52,7 @@ class App extends React.Component {
         listingSelectHandler={this.listingSelectHandler.bind(this)}
         giveHandler={this.giveHandler.bind(this)}
         />
+
         <Container>
           {this.renderBody()}
         </Container>
@@ -57,7 +62,6 @@ class App extends React.Component {
 
   componentDidMount(){
     this.props.fetchListings();
-    // console.log(this.props.state.listings)
   }
 
   createListing(listing, userId){
@@ -116,9 +120,10 @@ class App extends React.Component {
     })
   }
 
-  listingSelectHandler(selected){
+  listingSelectHandler(selected, mapInfo){
     this.setState({
       view: 'single',
+      map: mapInfo,
       selectedListing: selected
     })
   }
