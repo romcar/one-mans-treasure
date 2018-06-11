@@ -1,23 +1,42 @@
 import React from 'react'
-import {Container, Grid, Image, Button, TextArea,
-   Input, Header, Icon, Segment, Divider} from 'semantic-ui-react';
+import {Container, Grid, Image, Button, TextArea, Input, Header, Icon, Segment, Divider} from 'semantic-ui-react';
 import moment from 'moment';
+import GoogleMap from './GoogleMap.jsx';
+import {googleMapService} from '../services/googleMapService';
 
 class ListingDetails extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      lon: this.props.map.lon,
+      lat: this.props.map.lat,
+      address: this.props.map.city,
       listing: {
         title: this.props.listing.title,
         image: this.props.listing.photo,
         desc: this.props.listing.description,
         loc: this.props.listing.location,
-      }
+      },
     }
     const borderlessTextArea={
       border: 'none',
     }
   }
+
+  // componentDidMount(){
+  //   console.log(this.props.map)
+  //   this.fetchMap();
+  // }
+
+  // fetchMap(){
+  //   googleMapService(this.props.listing.location, (data)=>{
+  //     this.setState({
+  //       lon: data.results[0].geometry.location.lng,
+  //       lat: data.results[0].geometry.location.lat,
+  //       address: data.results[0].address_components[1].long_name,
+  //     },this.render.bind(this))
+  //   })
+  // }
 
   handleEditSubmit(){
     this.props.updateChanges(this.state.listing, this.props.listing)
@@ -35,6 +54,7 @@ class ListingDetails extends React.Component{
     listing[key] = event.target.value;
     this.setState({listing: listing});
   }
+
 
   render(){
     return(
@@ -68,13 +88,18 @@ class ListingDetails extends React.Component{
                 value={this.state.listing.desc} style={{border: 'none',resize: 'none', outline: 'none'}}/>  
                 : this.state.listing.desc}
                 <Divider hidden/>
-                
-                Location:{this.props.user === this.props.listing.listedBy ? 
+
+                <Container >
+                  <GoogleMap lon={this.state.lon} lat={this.state.lat}/>
+                </Container>
+
+                {this.props.user === this.props.listing.listedBy ? 
                 <Input transparent onChange={this.handleChange.bind(this, 'loc')}
                 value={this.state.listing.loc}/>  
                 : this.state.listing.loc}
-                
 
+                <Divider hidden/>
+                <div>{this.state.address}</div>
                 </Header.Content>
                 <Divider/>
                 <h6>Listed on: {moment(this.props.listing.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
@@ -91,5 +116,6 @@ class ListingDetails extends React.Component{
     )
   }
 }
+
 
 export default ListingDetails;
