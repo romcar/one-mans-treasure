@@ -23,7 +23,7 @@ export const fetchClaimedListings = (listingsId) =>{
 }
 
 export const fetchGoogleMap = (zipcode)=>{
-  const url = `http://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&sensor=false`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&sensor=false`;
   const response = axios.get(url);
   return {
     type: FETCH_GOOGLE_MAP,
