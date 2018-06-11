@@ -34,7 +34,7 @@ npm run start
 Currently there is no test for this application.
 
 ## Authors
-Donny Rojas
-Feng Chen
-Samnuel Shih
+Donny Rojas / 
+Feng Chen / 
+Samnuel Shih / 
 Zack Carlson
