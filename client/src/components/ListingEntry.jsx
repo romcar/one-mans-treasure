@@ -47,7 +47,7 @@ class ListingEntry extends React.Component{
           <Divider/>
           <Container textAlign="center">
           <Button as='div' labelPosition='right' >
-            <Button color='orange' onClick={() => claimHandler()}>
+            <Button color='orange' onClick={this.claimHandler.bind(this)}>
               <Icon name='heart' />
               Claim
             </Button>

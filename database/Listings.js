@@ -44,7 +44,11 @@ exports.saveListing = (listing) => {
 exports.fetchListings = ()=>{
   return new Promise((resolve, reject)=>{
     Listing.find({isAvailable: true})
+    .sort({createdAt: -1})
+    .limit(12)
+    .exec()
     .then(listings=>{
+      console.log(listings)
       resolve(listings);
     })
     .catch(error=>{

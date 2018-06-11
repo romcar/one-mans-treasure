@@ -150,7 +150,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({listings}) =>{
-  return {listings};
+  return {listings}; 
 }
 
 const mapDispatchToProps = dispatch => {

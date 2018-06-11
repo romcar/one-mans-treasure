@@ -54,10 +54,6 @@ class NavDropdown extends Component {
             <div className="ui item" onClick={this.logoutHandler.bind(this)}>
             <Icon name="log out"/>Logout</div>
           </Dropdown.Item> : false}
-
-          <Dropdown.Item>
-            About Us
-          </Dropdown.Item>
         </Dropdown.Menu>
         )
   }
