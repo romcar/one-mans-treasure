@@ -23,21 +23,6 @@ class ListingDetails extends React.Component{
     }
   }
 
-  // componentDidMount(){
-  //   console.log(this.props.map)
-  //   this.fetchMap();
-  // }
-
-  // fetchMap(){
-  //   googleMapService(this.props.listing.location, (data)=>{
-  //     this.setState({
-  //       lon: data.results[0].geometry.location.lng,
-  //       lat: data.results[0].geometry.location.lat,
-  //       address: data.results[0].address_components[1].long_name,
-  //     },this.render.bind(this))
-  //   })
-  // }
-
   handleEditSubmit(){
     this.props.updateChanges(this.state.listing, this.props.listing)
   }
@@ -54,7 +39,6 @@ class ListingDetails extends React.Component{
     listing[key] = event.target.value;
     this.setState({listing: listing});
   }
-
 
   render(){
     return(

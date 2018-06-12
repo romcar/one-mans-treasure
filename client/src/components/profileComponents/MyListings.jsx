@@ -22,8 +22,6 @@ class MyListings extends React.Component {
     })
   }
 
-
-
   render() {
     return (
       <Modal

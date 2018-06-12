@@ -26,4 +26,3 @@ class Listings extends React.Component{
 
 export default Listings;
 
-// onMouseEnter={this.setCurrentListing(listing._id)}

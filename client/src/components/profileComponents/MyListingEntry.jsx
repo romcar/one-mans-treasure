@@ -19,7 +19,6 @@ class MyListingEntry extends React.Component{
     }
   }
 
-
   handleEdit(){
     this.props.listingSelectHandler(this.props.listing);
     this.props.close();

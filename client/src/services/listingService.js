@@ -11,7 +11,7 @@ export function createListingService(data, userId, callback){
     processData: false,
     contentType: false,
     headers: {
-      Authorization: 'Client-ID ' + "276a9fab62145b0",
+      Authorization: 'Client-ID ' + IMGUR_API_KEY,
       Accept: 'application/json'
     },
     mimeType: 'multipart/form-data',
@@ -85,7 +85,7 @@ export function updateListingService(listing, oldListing, callback){
     processData: false,
     contentType: false,
     headers: {
-      Authorization: 'Client-ID ' + "276a9fab62145b0",
+      Authorization: 'Client-ID ' + IMGUR_API_KEY,
       Accept: 'application/json'
     },
     mimeType: 'multipart/form-data',
@@ -126,14 +126,6 @@ export function givawayListingService(input, callback){
     receiver: input.receiver,
     listing: input.listing
   })
-  // $.ajax({
-  //   type: 'POST',
-  //   url: '/give',
-  //   data: {
-  //     receiver: input.receiver,
-  //     listing: input.listing
-  //   }
-  // })
   .then(response=>{
     callback(response);
   })
