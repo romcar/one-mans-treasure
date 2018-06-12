@@ -3,7 +3,6 @@ const util = require('../services/utility.js');
 
 module.exports = {
   listings: {
-    // get listing by most recent
     get: function(req, res) {
       db.fetchListings()
         .then(listings=>{
@@ -13,9 +12,7 @@ module.exports = {
           res.status(401).send(error);
         })
     },
-    // create and add listing to db
     post: function(req, res) {
-      //if FC then db.saveFC
       db.saveListing(req.body)
         .then(savedListing=>{
           res.status(201).send(savedListing);

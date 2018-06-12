@@ -10,7 +10,6 @@ module.exports = {
   },
 
   giveListing: function(data) {
-    //let giverId = data.giver;
     console.log(data);
     let receiverId =  data.receiver;
     let listingId = data.listing;

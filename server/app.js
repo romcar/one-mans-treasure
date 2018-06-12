@@ -7,12 +7,11 @@ const session = require('express-session');
 
 let app = express();
 exports.app = app;
-//app.set('port', process.env.PORT || 1128)
 var port = process.env.PORT || 1128;
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended: true}));
-app.use(morgan("dev"));
+app.use(morgan("common"));
 
 app.use(session({
   secret: '499xcq3de300op',
@@ -25,5 +24,5 @@ app.use('/', routes);
 
 
 app.listen(port, ()=>{
-  console.log(`listening port: ${app.get('port')}`);
+  console.log(`listening port: ${port}`);
 })

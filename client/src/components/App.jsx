@@ -9,7 +9,6 @@ import {updateListingService, createListingService, givawayListingService,
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchListings} from '../actions/ListingActions';
-import GoogleMap from './GoogleMap.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +19,6 @@ class App extends React.Component {
       view: 'listings',
       selectedListing: '',
     }
-    
   }
 
   renderBody(){

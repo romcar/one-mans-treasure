@@ -63,5 +63,3 @@ class ListingEntry extends React.Component{
 }
 
 export default ListingEntry;
-
-// ajax call to server sending data: {listing: , user_id: }
