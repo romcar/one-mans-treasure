@@ -38,9 +38,12 @@ class NavBar extends React.Component{
         </div>
         <div className="item">
           <div className="ui action left icon input">
-            <i className="search icon"></i>
-            <input type="type" placeholder="Search"/>
-            <Button color='orange' className="ui button">Submit</Button>
+          {/*search bar here*/}
+            <form onSubmit={(e) => {e.preventDefault(); console.log(document.getElementsByClassName('search-query')[0].value)}}>
+              <i className="search icon"></i>
+              <input className="search-query"type="type" placeholder="Search"/>
+              <Button color='orange' className="ui button">Submit</Button>
+            </form>
           </div>
         </div>
         <Menu.Menu position="right">
