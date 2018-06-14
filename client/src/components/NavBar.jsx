@@ -39,7 +39,7 @@ class NavBar extends React.Component{
         <div className="item">
           <div className="ui action left icon input">
           {/*search bar here*/}
-            <form onSubmit={(e) => {e.preventDefault(); console.log(document.getElementsByClassName('search-query')[0].value)}}>
+            <form onSubmit={this.handleSearch.bind(this)}>
               <i className="search icon"></i>
               <input className="search-query"type="type" placeholder="Search"/>
               <Button color='orange' className="ui button">Submit</Button>
@@ -62,6 +62,14 @@ class NavBar extends React.Component{
       </div>
     )
   }
+
+  handleSearch(e) {
+    e.preventDefault();
+    const query = document.getElementsByClassName('search-query')[0].value;
+
+    console.log(query)
+  }
 }
+
 
 export default NavBar;
