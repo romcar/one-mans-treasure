@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar.jsx';
 import Listings from './Listings.jsx';
+import Comments from './Comments.jsx';
 import ListingDetails from './ListingDetails.jsx';
 import {Container} from 'semantic-ui-react'
 import {signupService, loginService} from '../services/userService.js';
