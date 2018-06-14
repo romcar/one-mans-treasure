@@ -4,13 +4,23 @@ const util = require('../services/utility.js');
 module.exports = {
   listings: {
     get: function(req, res) {
-      db.fetchListings()
+      if(!req.query) {
+        db.fetchListings()
         .then(listings=>{
           res.status(200).send(listings);
         })
         .catch(error=>{
           res.status(401).send(error);
         })
+      } else {
+        db.fetchListings(req.query)
+        .then(listings=>{
+          res.status(200).send(listings);
+        })
+        .catch(error=>{
+          res.status(401).send(error);
+        })
+      }
     },
     post: function(req, res) {
       db.saveListing(req.body)

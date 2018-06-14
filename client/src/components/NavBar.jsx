@@ -67,6 +67,7 @@ class NavBar extends React.Component{
     e.preventDefault();
     const query = document.getElementsByClassName('search-query')[0].value;
 
+    this.props.searchListings(query);
     console.log(query)
   }
 }

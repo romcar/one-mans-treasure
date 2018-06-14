@@ -40,6 +40,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBar
+        searchListings={this.props.fetchListings}
         listings={this.props.listings}
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
@@ -149,7 +150,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({listings}) =>{
-  return {listings}; 
+  return {listings};
 }
 
 const mapDispatchToProps = dispatch => {
