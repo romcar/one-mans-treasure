@@ -1,0 +1,40 @@
+{
+  "name": "semantic-ui-comment",
+  "description": "Comment - Semantic UI",
+  "homepage": "http://www.semantic-ui.com",
+  "author": {
+    "name": "Jack Lukic",
+    "web": "http://www.jacklukic.com"
+  },
+  "ignore": [
+    "docs",
+    "node",
+    "server",
+    "spec",
+    "src",
+    "test"
+  ],
+  "keywords": [
+    "semantic",
+    "ui",
+    "css3",
+    "framework"
+  ],
+  "license": [
+    "http://semantic-ui.mit-license.org/"
+  ],
+  "main": [
+    "comment.css"
+  ],
+  "version": "2.3.1",
+  "_release": "2.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.3.1",
+    "commit": "a22aa2c94e0bfa6c192dc0e2db1577509f74ae54"
+  },
+  "_source": "https://github.com/Semantic-Org/UI-Comment.git",
+  "_target": "^2.3.1",
+  "_originalSource": "semantic-ui-comment",
+  "_direct": true
+}
