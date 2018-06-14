@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('./index.js');
+const Comments = require('./Comments.js');
 
 let listingsSchema = mongoose.Schema({
   title: String,
@@ -8,7 +9,8 @@ let listingsSchema = mongoose.Schema({
   isAvailable: Boolean,
   interested_users: Array,
   description: String,
-  photo: String
+  photo: String,
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }]
 },
   {
     timestamps: true
