@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const db = require('./index.js');
 const User = require('./Users.js');
 
-let commentSchema = mongoose.Schema({
+let commentSchema = Schema({
   _id: Schema.Types.ObjectId,
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   username: String,

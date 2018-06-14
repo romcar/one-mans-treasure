@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const db = require('./index.js');
 const Comments = require('./Comments.js');
 
