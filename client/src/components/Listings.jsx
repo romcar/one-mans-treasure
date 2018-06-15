@@ -11,9 +11,10 @@ class Listings extends React.Component{
   }
 
   render(){
-    if(this.props.listings === undefined) {
+    console.log(this.props)
+    if(this.props.listings === undefined || !this.props.listings.length) {
       // if there is nothing to render, apologize
-      return(<div>No results returned, sorry</div>);
+      return(<div className="no-search-results">No results returned, sorry</div>);
     } else {
       // render the hell out of it
       return(
