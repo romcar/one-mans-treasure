@@ -1,4 +1,4 @@
-import { FETCH_LISTINGS, SET_QUERY } from "../actions/ListingActions";
+import { FETCH_LISTINGS, SET_QUERY, SET_LISTINGS } from "../actions/ListingActions";
 
 export default (state = {}, action) =>{
   switch(action.type){
@@ -10,6 +10,10 @@ export default (state = {}, action) =>{
       query: action.payload,
       listings: state.listings
     };
+    case SET_LISTINGS: return {
+      listings: action.payload,
+      query: state.query
+    }
   }
   return state;
 }
