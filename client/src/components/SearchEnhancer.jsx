@@ -23,10 +23,10 @@ class SearchEnhancer extends React.Component{
           <div>Searching for: {this.props.query}</div>
 
           <Menu.Item
-            name='relavance'
-            active={sortType === 'relavance'}
+            name='relevance'
+            active={sortType === 'relevance'}
             onClick={this.handleSortChange.bind(this)}>
-            Relavance
+            Relevance
           </Menu.Item>
 
           <Menu.Item
