@@ -70,7 +70,7 @@ class ListingDetails extends React.Component{
                 </Header><Divider/>
                 <Header.Content>
 
-                {this.props.user === this.props.listing.listedBy ?
+                {this.props.user === this.props.listing.listings.listedBy ?
                 <TextArea autoHeight rows={5} cols={25} onChange={this.handleChange.bind(this, 'desc')}
                 value={this.state.listing.desc} style={{border: 'none',resize: 'none', outline: 'none'}}/>
                 : this.state.listing.desc}
@@ -80,7 +80,7 @@ class ListingDetails extends React.Component{
                   <GoogleMap lon={this.state.lon} lat={this.state.lat}/>
                 </Container>
 
-                {this.props.user === this.props.listing.listedBy ?
+                {this.props.user === this.props.listing.listings.listedBy ?
                 <Input transparent onChange={this.handleChange.bind(this, 'loc')}
                 value={this.state.listing.loc}/>
                 : this.state.listing.loc}
@@ -89,9 +89,9 @@ class ListingDetails extends React.Component{
                 <div>{this.state.address}</div>
                 </Header.Content>
                 <Divider/>
-                <h6>Listed on: {moment(this.props.listing.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
+                <h6>Listed on: {moment(this.props.listing.listings.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
 
-                {this.props.user === this.props.listing.listedBy ?
+                {this.props.user === this.props.listing.listings.listedBy ?
                 <Button onClick={this.handleEditSubmit.bind(this)}>Submit Changes</Button> : false}
                 </Segment>
               </Grid.Column>
