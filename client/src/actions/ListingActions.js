@@ -6,9 +6,7 @@ export const SET_QUERY = 'SET_QUERY';
 export const SET_LISTINGS = 'SET_LISTINGS';
 
 export const fetchListings = (query) =>{
-  console.log('I am gettin called')
   if(query) {
-    console.log('with query');
     const url = `/listing?query=${query}`;
     const response = axios.get(url);
     return {
