@@ -3,9 +3,9 @@ import axios from 'axios';
 export const FETCH_LISTINGS = 'FETCH_LISTINGS';
 export const FETCH_CLAIMED_LISTINGS = 'FETCH_CLAIMED_LISTINGS';
 export const SET_QUERY = 'SET_QUERY';
+export const SET_LISTINGS = 'SET_LISTINGS';
 
 export const fetchListings = (query) =>{
-  console.log(arguments)
   console.log('I am gettin called')
   if(query) {
     console.log('with query');
@@ -29,6 +29,13 @@ export const setQuery = (query) => {
   return {
     type: SET_QUERY,
     payload: query
+  }
+}
+
+export const setListings = (updatedListings) => {
+  return {
+    type: SET_LISTINGS,
+    payload: updatedListings
   }
 }
 
