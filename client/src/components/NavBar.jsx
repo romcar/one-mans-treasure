@@ -22,7 +22,7 @@ class NavBar extends React.Component{
     console.log(this.props.session);
     if(this.props.session === null){
       return(
-      <Menu.Menu position="right">
+      <React-fragment>
         <div className="item ui">
           <Button.Group>
             <Login login={this.props.login.bind(this)}/>
@@ -30,7 +30,7 @@ class NavBar extends React.Component{
             <Signup create={this.props.create.bind(this)}/>
           </Button.Group>
         </div>
-      </Menu.Menu>
+      </React-fragment>
       )
     } else {
       return(
@@ -76,16 +76,6 @@ class NavBar extends React.Component{
           </div>
           <Menu.Menu position="right">
               {this.renderCredential()}
-            <NavDropdown
-              listings={this.props.listings}
-              logout={this.props.logout.bind(this)}
-              session={this.props.session}
-              createListing={this.props.createListing.bind(this)}
-              delete={this.props.delete.bind(this)}
-              listingSelectHandler={this.props.listingSelectHandler.bind(this)}
-              logout={this.props.logout.bind(this)}
-              giveHandler={this.props.giveHandler.bind(this)}>
-            </NavDropdown>
           </Menu.Menu>
         </div>
         {this.state.displayEnhancer ? this.renderSearchEnhancer() : undefined}
