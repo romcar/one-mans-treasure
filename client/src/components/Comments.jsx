@@ -1,48 +1,69 @@
 import React from 'react';
+import axios from 'axios';
 
 class Comments extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      comments: []
+      comments: [],
+      text: ''
     }
+  }
+
+  changeText(e) {
+    this.setState({
+      text: e.target.value
+    });
   }
 
   handleCommentSubmit() {
     // send message to server
+    console.log('This is the text: ', this.state.text);
+    axios.post('/api/comments', {
+      text: this.state.text
+    }).then(results => {
+      this.setState({
+        text: results.data
+      })
+    }).catch(err => {
+      console.error(err);
+    })
+    console.log('You have just attempted to submit a comment')
+
   }
 
   render() {
     return (
-      <div class="ui comments">
-        <h3 class="ui dividing header">Comments</h3>
+      <div className="ui comments">
+        <h3 className="ui dividing header">Comments</h3>
 
-        <div class="comment">
-          <a class="avatar">
-            <img src="/images/avatar/small/matt.jpg" />
+        <div className="comment">
+          <a className="avatar">
+            <img src="" />
           </a>
-          <div class="content">
-            <a class="author">Matt</a>
-            <div class="metadata">
-              <span class="date">Today at 5:42PM</span>
+          <div className="content">
+            <a className="author">Matt</a>
+            <div className="metadata">
+              <span className="date">Today at 5:42PM</span>
             </div>
-            <div class="text">
+            <div className="text">
               How artistic!
             </div>
-            <div class="actions">
-              <a class="reply">Reply</a>
+            <div className="actions">
+              <a className="reply">Reply</a>
             </div>
           </div>
         </div>
 
-        <form class="ui reply form">
-          <div class="field">
-            <textarea></textarea>
+        <form className="ui reply form">
+          <div className="field">
+            <textarea onChange={this.changeText.bind(this)}></textarea>
           </div>
           <div 
-            class="ui blue labeled submit icon button" 
-            onClick={this.handleCommentSubmit}>
-            <i class="icon edit"></i> Add Reply
+            className="ui blue labeled submit icon button" 
+            onClick={this.handleCommentSubmit.bind(this)}>
+            <i className="icon edit"></i> 
+            Add Reply
           </div>
         </form>
       </div>

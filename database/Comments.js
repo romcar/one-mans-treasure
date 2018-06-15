@@ -13,3 +13,15 @@ let commentSchema = Schema({
 
 let Comment = mongoose.model('Comment', commentSchema);
 module.exports.Comment = Comment;
+
+exports.saveComment = (comment) => {
+  console.log('This is your comment: ', comment);
+  return new Promise((resolve, reject) => {
+    Comment.save({message: comment})
+    .then(result => {
+      resolve(result);
+    }).catch(err => {
+      reject(err);
+    })
+  })
+}
