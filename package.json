@@ -7,8 +7,8 @@
     "node": "8.11.1",
     "npm": "6.0.0"
   },
-  "scripts": {
-    "start": "nodemon server/app.js",
+   "scripts": {
+    "start": "nodemon --inspect server/app.js",
     "react-dev": "webpack -d --watch",
     "build": "webpack --config ./webpack.config.js",
     "postinstall": "npm run build"
