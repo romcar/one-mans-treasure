@@ -8,7 +8,11 @@ import reducers from './reducers/RootReducer';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
-ReactDOM.render(  
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
+var store = createStoreWithMiddleware(reducers);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App store={store}/>
   </Provider>, document.getElementById('app'));
+
+export default store;
