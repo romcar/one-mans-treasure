@@ -11,16 +11,22 @@ class Listings extends React.Component{
   }
 
   render(){
-    return(
-      <Grid doubling columns={4}>
-        {this.props.listings.map(listing=>
-          <ListingEntry listing={listing} key={listing._id}
-          interestHandler={this.props.interestHandler.bind(this)}
-          selectHandler={this.props.selectHandler.bind(this)}
-          />
-        )}
-      </Grid>
-    )
+    if(!this.props.listings.length) {
+      // if there is nothing to render, apologize
+      return(<div>No results returned, sorry</div>);
+    } else {
+      // render the hell out of it
+      return(
+        <Grid doubling columns={4}>
+          {this.props.listings.map(listing=>
+            <ListingEntry listing={listing} key={listing._id}
+            interestHandler={this.props.interestHandler.bind(this)}
+            selectHandler={this.props.selectHandler.bind(this)}
+            />
+          )}
+        </Grid>
+      )
+    }
   }
 }
 
