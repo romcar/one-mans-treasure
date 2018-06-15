@@ -43,7 +43,7 @@ exports.saveListing = (listing) => {
     })
   })
 };
-
+// used to prevent Ddos attacks
 function escapeRegExp(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
@@ -53,7 +53,7 @@ exports.fetchListings = (query)=>{
   if(query.query) {
     const regex = new RegExp(escapeRegExp(query.query), 'gi');
     return new Promise((resolve, reject) => {
-      Listing.find({location: regex})
+      Listing.find().or([{location: regex}, {title: regex}, {description: regex}])
       .limit(12)
       .exec()
       .then(listings => {
