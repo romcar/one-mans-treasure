@@ -9,7 +9,8 @@ import {updateListingService, createListingService, givawayListingService,
   listingInterestService, deleteListingService} from '../services/listingService.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchListings} from '../actions/ListingActions';
+import {fetchListings, setQuery} from '../actions/ListingActions';
+import store from '../index.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class App extends React.Component {
   renderBody(){
     if(this.state.view === 'listings'){
       return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
-      listings={this.props.listings}/>)
+      listings={this.props.listings.listings}/>)
     } else if(this.state.view === 'single') {
       return <ListingDetails
       user={this.state.loginAs === null ? this : this.state.loginAs.user._id}
@@ -40,7 +41,8 @@ class App extends React.Component {
     return (
       <div>
         <NavBar
-        listings={this.props.listings}
+        searchListings={this.props.fetchListings}
+        listings={this.props.listings.listings}
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         createListing={this.createListing.bind(this)}
@@ -76,6 +78,10 @@ class App extends React.Component {
   }
 
   markInterest ({interested_users, _id}) {
+    console.log(store.getState())
+    var query = store.getState().listings.query;
+    console.log('in markInterest the query is ', query);
+
     if (this.state.loginAs === null) {
       console.log('Please login to claim items!')
       return;
@@ -84,11 +90,11 @@ class App extends React.Component {
     let index = interested_users.indexOf(user);
     if (index >= 0) {
       listingInterestService(_id, user, true, (serverRes) => {
-        this.props.fetchListings();
+        this.props.fetchListings(query);
       })
     } else if (index < 0) {
       listingInterestService(_id, user, false ,(serverRes) => {
-        this.props.fetchListings();
+        this.props.fetchListings(query);
       })
     }
   }
@@ -119,7 +125,7 @@ class App extends React.Component {
     })
   }
 
-  listingSelectHandler(selected, mapInfo){
+   listingSelectHandler(selected, mapInfo){
     this.setState({
       view: 'single',
       map: mapInfo,
@@ -132,6 +138,7 @@ class App extends React.Component {
       view: 'listings',
       selectedListing: ''
     })
+    this.props.fetchListings();
   }
 
   updateChanges(changes, oldListing){
@@ -149,11 +156,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({listings}) =>{
-  return {listings}; 
+  return {listings};
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchListings}, dispatch);
+  return bindActionCreators({fetchListings, setQuery}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

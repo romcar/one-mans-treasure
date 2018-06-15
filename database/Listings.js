@@ -43,21 +43,41 @@ exports.saveListing = (listing) => {
     })
   })
 };
+// used to prevent Ddos attacks
+function escapeRegExp(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
 
-exports.fetchListings = ()=>{
-  return new Promise((resolve, reject)=>{
-    Listing.find({isAvailable: true})
-    .sort({createdAt: -1})
-    .limit(12)
-    .exec()
-    .then(listings=>{
-      console.log(listings)
-      resolve(listings);
+exports.fetchListings = (query)=>{
+  if(query.query) {
+    const regex = new RegExp(escapeRegExp(query.query), 'gi');
+    return new Promise((resolve, reject) => {
+      Listing.find().or([{location: regex}, {title: regex}, {description: regex}])
+      .limit(12)
+      .exec()
+      .then(listings => {
+        console.log('located by zip', listings);
+        resolve(listings);
+      })
+      .catch(error => {
+        reject(error);
+      })
+    }) // end Promise
+  } else {
+    return new Promise((resolve, reject)=>{
+      Listing.find({isAvailable: true})
+      .sort({createdAt: -1})
+      .limit(12)
+      .exec()
+      .then(listings=>{
+        console.log(listings)
+        resolve(listings);
+      })
+      .catch(error=>{
+        reject(error);
+      })
     })
-    .catch(error=>{
-      reject(error);
-    })
-  })
+  }
 }
 
 exports.markClaimed = (listing) => {
