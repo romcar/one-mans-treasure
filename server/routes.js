@@ -1,5 +1,6 @@
 const listingCtrl = require('./controllers/listing-controller');
 const userCtrl = require('./controllers/user-controller');
+const commentCtrl = require('./controllers/comment-controller');
 const router = require('express').Router();
 
 router.post('/signup', userCtrl.signUp);
@@ -13,5 +14,8 @@ router.put('/listing/:listingId', listingCtrl.listings.update);
 router.post('/listing/give', listingCtrl.listings.give);
 router.put('/interest', listingCtrl.listings.setInterest);
 router.post('/listing/claimed', listingCtrl.listings.getClaimedListings);
+
+// post for sending new comment data to db
+router.post('')
 
 module.exports = router;
