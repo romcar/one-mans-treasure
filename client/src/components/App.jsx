@@ -138,6 +138,7 @@ class App extends React.Component {
       view: 'listings',
       selectedListing: ''
     })
+    this.props.fetchListings();
   }
 
   updateChanges(changes, oldListing){
