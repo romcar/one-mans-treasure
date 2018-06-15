@@ -47,7 +47,7 @@ class NavBar extends React.Component{
               <Icon onClick={() => {
                 this.setState({displayEnhancer: false});
                 this.props.homeHandler();
-              }} name='home' size='large'></Icon>
+              }} link name='home' size='large'></Icon>
 
           </div>
           <div className="item">
