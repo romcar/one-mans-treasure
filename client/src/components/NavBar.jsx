@@ -4,17 +4,20 @@ import Login from './Login.jsx';
 import NavDropdown from './NavDropdown.jsx';
 import {Button, Dropdown, Menu, Container, Header, Icon} from 'semantic-ui-react';
 import SearchEnhancer from './SearchEnhancer.jsx';
+import store from '../index.jsx';
 
 class NavBar extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      search: ''
+      displayEnhancer: false
     }
   }
+
   renderSearchEnhancer() {
     return(<SearchEnhancer query={this.state.search}>{this.state.search}</SearchEnhancer>)
   }
+
   renderCredential(){
     if(this.props.session === null){
       return(
@@ -56,18 +59,18 @@ class NavBar extends React.Component{
           <Menu.Menu position="right">
               {this.renderCredential()}
             <NavDropdown
-            listings={this.props.listings}
-            logout={this.props.logout.bind(this)}
-            session={this.props.session}
-            createListing={this.props.createListing.bind(this)}
-            delete={this.props.delete.bind(this)}
-            listingSelectHandler={this.props.listingSelectHandler.bind(this)}
-            logout={this.props.logout.bind(this)}
-            giveHandler={this.props.giveHandler.bind(this)}>
+              listings={this.props.listings}
+              logout={this.props.logout.bind(this)}
+              session={this.props.session}
+              createListing={this.props.createListing.bind(this)}
+              delete={this.props.delete.bind(this)}
+              listingSelectHandler={this.props.listingSelectHandler.bind(this)}
+              logout={this.props.logout.bind(this)}
+              giveHandler={this.props.giveHandler.bind(this)}>
             </NavDropdown>
           </Menu.Menu>
         </div>
-        {this.state.search ? this.renderSearchEnhancer() : undefined}
+        {this.state.displayEnhancer ? this.renderSearchEnhancer() : undefined}
       </div>
     )
   }
@@ -75,7 +78,13 @@ class NavBar extends React.Component{
   handleSearch(e) {
     e.preventDefault();
     const query = document.getElementsByClassName('search-query')[0].value;
-    this.setState({search: query});
+    this.setState({displayEnhancer: !!query});
+
+    store.dispatch({
+      type: 'SET_QUERY',
+      payload: query
+    })
+
     document.getElementsByClassName('search-query')[0].value = '';
     this.props.searchListings(query);
 

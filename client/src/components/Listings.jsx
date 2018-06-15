@@ -11,7 +11,7 @@ class Listings extends React.Component{
   }
 
   render(){
-    if(!this.props.listings.length) {
+    if(this.props.listings === undefined) {
       // if there is nothing to render, apologize
       return(<div>No results returned, sorry</div>);
     } else {
