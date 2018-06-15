@@ -49,7 +49,6 @@ function escapeRegExp(text) {
 }
 
 exports.fetchListings = (query)=>{
-  console.log(query.query, '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~database');
   if(query.query) {
     const regex = new RegExp(escapeRegExp(query.query), 'gi');
     return new Promise((resolve, reject) => {
