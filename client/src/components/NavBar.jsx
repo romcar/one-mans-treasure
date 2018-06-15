@@ -36,7 +36,7 @@ class NavBar extends React.Component{
       return(
         <Menu.Menu position="right">
           <div className="item ui">
-            <Icon link bordered inverted color='orange'name='user' /> {this.props.session.user.username} <Icon linkname='user' size='large' /> <Icon link color='orange' className='gem outline' size='large' /> {this.props.session.user.karma}
+            <Icon link bordered inverted color='orange'name='user' /> {this.props.session.user.username} <Icon linkname='user' size='large' /> <Icon link color='orange' className='gem outline' size='large' /> {this.props.karma}
           </div>
           <NavDropdown
             listings={this.props.listings}
