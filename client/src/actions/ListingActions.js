@@ -2,10 +2,13 @@ import axios from 'axios';
 
 export const FETCH_LISTINGS = 'FETCH_LISTINGS';
 export const FETCH_CLAIMED_LISTINGS = 'FETCH_CLAIMED_LISTINGS';
+export const SET_QUERY = 'SET_QUERY';
 
 export const fetchListings = (query) =>{
-  console.log(query, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  console.log(arguments)
+  console.log('I am gettin called')
   if(query) {
+    console.log('with query');
     const url = `/listing?query=${query}`;
     const response = axios.get(url);
     return {
@@ -19,6 +22,13 @@ export const fetchListings = (query) =>{
       type: FETCH_LISTINGS,
       payload: response
     }
+  }
+}
+
+export const setQuery = (query) => {
+  return {
+    type: SET_QUERY,
+    payload: query
   }
 }
 
