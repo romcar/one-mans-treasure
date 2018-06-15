@@ -3,6 +3,7 @@ import {Container, Grid, Image, Button, TextArea, Input, Header, Icon, Segment, 
 import moment from 'moment';
 import GoogleMap from './GoogleMap.jsx';
 import {googleMapService} from '../services/googleMapService';
+import Comments from '../components/Comments.jsx';
 
 class ListingDetails extends React.Component{
   constructor(props){
@@ -54,6 +55,8 @@ class ListingDetails extends React.Component{
                 : false}
                 <Image src={this.props.listing.photo} rounded/>
 
+                <Comments/> 
+
               </Grid.Column>
               <Grid.Column width={7}>
                 <Segment>
@@ -93,9 +96,9 @@ class ListingDetails extends React.Component{
                 </Segment>
               </Grid.Column>
             </Grid>
-          </Segment>
+          </Segment> 
         </Grid.Column>
-        <Grid.Column width={2}></Grid.Column>        
+        <Grid.Column width={2}></Grid.Column>      
       </Grid>
     )
   }
