@@ -19,6 +19,7 @@ class NavBar extends React.Component{
   }
 
   renderCredential(){
+    console.log(this.props.session);
     if(this.props.session === null){
       return(
       <div className="item ui">
@@ -32,8 +33,7 @@ class NavBar extends React.Component{
     } else {
       return(
       <div className="item ui">
-        <Icon name='user' />
-        Welcome back {this.props.session.user.username}!
+        <Icon link bordered inverted color='orange'name='user' /> {this.props.session.user.username} <Icon linkname='user' size='large' /> <Icon link color='orange' name='gem outline' size='large' /> {this.props.session.user.karma}
       </div>
       )
     }
