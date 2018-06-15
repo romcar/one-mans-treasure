@@ -125,7 +125,7 @@ class App extends React.Component {
     })
   }
 
-  listingSelectHandler(selected, mapInfo){
+   listingSelectHandler(selected, mapInfo){
     this.setState({
       view: 'single',
       map: mapInfo,
