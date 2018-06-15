@@ -15,7 +15,7 @@ class NavBar extends React.Component{
   }
 
   renderSearchEnhancer() {
-    return(<SearchEnhancer query={this.state.search}>{this.state.search}</SearchEnhancer>)
+    return(<SearchEnhancer query={store.getState().listings.query}>{this.state.search}</SearchEnhancer>)
   }
 
   renderCredential(){
@@ -44,7 +44,11 @@ class NavBar extends React.Component{
       <div>
         <div className="ui menu aligned">
           <div className='item'>
-              <Icon onClick={this.props.homeHandler.bind(this)} name='home' size='large'></Icon>
+              <Icon onClick={() => {
+                this.setState({displayEnhancer: false});
+                this.props.homeHandler();
+              }} name='home' size='large'></Icon>
+
           </div>
           <div className="item">
             <div className="ui action left icon input">
