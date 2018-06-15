@@ -22,19 +22,33 @@ class NavBar extends React.Component{
     console.log(this.props.session);
     if(this.props.session === null){
       return(
-      <div className="item ui">
-      <Button.Group>
-        <Login login={this.props.login.bind(this)}/>
-      <Button.Or/>
-        <Signup create={this.props.create.bind(this)}/>
-      </Button.Group>
-      </div>
+      <Menu.Menu position="right">
+        <div className="item ui">
+          <Button.Group>
+            <Login login={this.props.login.bind(this)}/>
+            <Button.Or/>
+            <Signup create={this.props.create.bind(this)}/>
+          </Button.Group>
+        </div>
+      </Menu.Menu>
       )
     } else {
       return(
-      <div className="item ui">
-        <Icon link bordered inverted color='orange'name='user' /> {this.props.session.user.username} <Icon linkname='user' size='large' /> <Icon link color='orange' name='gem outline' size='large' /> {this.props.session.user.karma}
-      </div>
+        <Menu.Menu position="right">
+          <div className="item ui">
+            <Icon link bordered inverted color='orange'name='user' /> {this.props.session.user.username} <Icon linkname='user' size='large' /> <Icon link color='orange' className='gem outline' size='large' /> {this.props.session.user.karma}
+          </div>
+          <NavDropdown
+            listings={this.props.listings}
+            logout={this.props.logout.bind(this)}
+            session={this.props.session}
+            createListing={this.props.createListing.bind(this)}
+            delete={this.props.delete.bind(this)}
+            listingSelectHandler={this.props.listingSelectHandler.bind(this)}
+            logout={this.props.logout.bind(this)}
+            giveHandler={this.props.giveHandler.bind(this)}>
+          </NavDropdown>
+        </Menu.Menu>
       )
     }
   }
