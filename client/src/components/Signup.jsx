@@ -49,6 +49,8 @@ class Signup extends React.Component{
     }
 
     if(this.state.account.password === this.state.account.confirmedPw
+      && this.state.account.password !== ''
+      && this.state.account.username !== ''
       && this.state.account.username.length < 4
       && this.state.account.password.length < 8) {
       this.props.create(this.state.account);
@@ -69,10 +71,10 @@ class Signup extends React.Component{
               <div className="register-username-error" hidden>
                 <div className="ui left pointing red basic label"> Username must be 4 characters long</div>
               </div>
-              {/*<Form.Input onChange={this.handleChange.bind(this, 'firstname')}
+              <Form.Input onChange={this.handleChange.bind(this, 'firstname')}
               value={this.state.account.firstname} placeholder='First name'/>
               <Form.Input onChange={this.handleChange.bind(this, 'lastname')}
-              value={this.state.account.lastname} placeholder='Last name'/>*/}
+              value={this.state.account.lastname} placeholder='Last name'/>
             </Form.Group>
             <Form.Group widths={2}>
               <Form.Input type='password' onChange={this.handleChange.bind(this, 'password')}
