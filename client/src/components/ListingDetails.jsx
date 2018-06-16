@@ -42,9 +42,7 @@ class ListingDetails extends React.Component{
   }
 
   render(){
-    console.log(this.props)
-    console.log('user: ', this.props.user.user.username)
-    console.log('date: ', this.props.user.user.created_at)
+    console.log('!!!!!!!!!!!!!!!!!!!!!!',this.props.user)
     return(
       <Grid columns={3}>
         <Grid.Column width={2}></Grid.Column>
@@ -57,11 +55,11 @@ class ListingDetails extends React.Component{
                 type='file' className='inputfile'/>
                 : false}
                 <Image src={this.props.listing.photo} rounded/>
-                
-                <Comments 
-                  user={this.props.user.user.username} 
-                  userId={this.props.user.user._id} 
-                /> 
+
+                <Comments
+                  user={this.props.user.user.username}
+                  userId={this.props.user.user._id}
+                />
 
               </Grid.Column>
               <Grid.Column width={7}>

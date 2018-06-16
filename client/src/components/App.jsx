@@ -33,7 +33,7 @@ class App extends React.Component {
       listings={this.props.listings.listings}/>)
     } else if(this.state.view === 'single') {
       return <ListingDetails
-      user={this.state.loginAs === null ? this : this.state.loginAs}
+      user={this.state.loginAs === null ? {user: {username: 'Anonymous', _id: 'none'}} : this.state.loginAs}
       map={this.state.map}
       listing={this.state.selectedListing}
       comments={this.state.comments}
