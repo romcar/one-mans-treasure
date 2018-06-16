@@ -45,6 +45,11 @@ body{
   opacity: 0;
 }
 
+.listing-image {
+  height: 15vmin;
+  width: auto;
+}
+
 /*--------------
     Comments
 ---------------*/

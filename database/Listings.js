@@ -40,13 +40,18 @@ exports.saveListing = (listing) => {
   let listingToStore = new Listing(newlisting);
   return new Promise((resolve,reject)=>{
     listingToStore.save()
-    .then(savedListing=>{
+    .then(savedListing => {
+      User.saveListingToUser(savedListing.listedBy, savedListing);
+
+      return savedListing;
+    })
+    .then(savedListing => {
       resolve(savedListing);
     })
-    .catch(error=>{
-      reject(error)
-    })
-  })
+    .catch(error => {
+      reject(error);
+    });
+  });
 };
 // used to prevent Ddos attacks
 function escapeRegExp(text) {
