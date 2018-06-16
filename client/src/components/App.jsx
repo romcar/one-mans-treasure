@@ -114,7 +114,8 @@ class App extends React.Component {
   createAccount(user){
     signupService(user, (response)=>{
       this.setState({
-        loginAs: response
+        loginAs: response,
+        karma: response.user.karma
       })
     })
   }
@@ -139,6 +140,7 @@ class App extends React.Component {
   userLogout(){
     this.setState({
       loginAs: null,
+      karma: null
     })
   }
 
