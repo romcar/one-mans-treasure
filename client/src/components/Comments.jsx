@@ -18,15 +18,11 @@ class Comments extends React.Component{
       text: e.target.value,
     });
     this.state.comments.push(this.state.text);
-    console.log('Comments in state: ', this.state.comments)
   }
 
   handleCommentSubmit() {
-    console.log('These are props handed down to Comments', this.props)
-    console.log('These are in the state: ', this.state)
     // send message to server
-    console.log('This is the text: ', this.state.text);
-    axios.post('/api/comments', 
+    axios.post('/api/comments',
     {
       text: this.state.text,
       userId: this.state.userId,
@@ -68,10 +64,10 @@ class Comments extends React.Component{
           <div className="field">
             <textarea onChange={this.changeText.bind(this)}></textarea>
           </div>
-          <div 
-            className="ui blue labeled submit icon button" 
+          <div
+            className="ui blue labeled submit icon button"
             onClick={this.handleCommentSubmit.bind(this)}>
-            <i className="icon edit"></i> 
+            <i className="icon edit"></i>
             Add Reply
           </div>
         </form>

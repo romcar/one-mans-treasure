@@ -42,7 +42,6 @@ class ListingDetails extends React.Component{
   }
 
   render(){
-    console.log('!!!!!!!!!!!!!!!!!!!!!!',this.props.user)
     return(
       <Grid columns={3}>
         <Grid.Column width={2}></Grid.Column>

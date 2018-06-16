@@ -84,12 +84,10 @@ class App extends React.Component {
   }
 
   markInterest ({interested_users, _id}) {
-    console.log(store.getState())
     var query = store.getState().listings.query;
-    console.log('in markInterest the query is ', query);
 
     if (this.state.loginAs === null) {
-      console.log('Please login to claim items!')
+      alert('Please login to claim items!')
       return;
     }
     let user = this.state.loginAs.user._id;
@@ -171,7 +169,6 @@ class App extends React.Component {
   }
 
   giveHandler(input){
-    console.log(input, 'HALLELUJIA')
     givawayListingService(input, (response)=>{
       this.props.fetchListings();
     })
