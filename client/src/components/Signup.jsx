@@ -66,11 +66,11 @@ class Signup extends React.Component{
         <Modal.Content>
           <Form>
             <Form.Group unstackable widths={3}>
+              <div className="register-username-error" hidden>
+                <div className="ui right pointing red basic label"> Username must be 4 characters long</div>
+              </div>
               <Form.Input onChange={this.handleChange.bind(this, 'username')}
               value={this.state.account.username} placeholder='Username' required/>
-              <div className="register-username-error" hidden>
-                <div className="ui left pointing red basic label"> Username must be 4 characters long</div>
-              </div>
               <Form.Input onChange={this.handleChange.bind(this, 'firstname')}
               value={this.state.account.firstname} placeholder='First name'/>
               <Form.Input onChange={this.handleChange.bind(this, 'lastname')}
