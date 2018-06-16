@@ -35,7 +35,7 @@ class ListingEntry extends React.Component{
     return(
       <Grid.Column>
         <Segment>
-        <Image src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} rounded/>
+        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} rounded/>
           <Header as="h3" textAlign="center">
             <Header.Content onClick={()=>{this.props.selectHandler(this.props.listing)}}>{this.props.listing.title}</Header.Content>
           </Header>
