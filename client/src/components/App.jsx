@@ -150,6 +150,10 @@ class App extends React.Component {
       view: 'listings',
       selectedListing: ''
     })
+    store.dispatch({
+      type: 'SET_QUERY',
+      payload: ''
+    });
     this.props.fetchListings();
   }
 
