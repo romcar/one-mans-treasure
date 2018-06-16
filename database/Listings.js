@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const db = require('./index.js');
 const Comments = require('./Comments.js');
-const Users = require('./Users.js');
+const User = require('./Users.js');
+
 
 let listingsSchema = mongoose.Schema({
   title: String,
@@ -12,7 +13,7 @@ let listingsSchema = mongoose.Schema({
   interested_users: Array,
   description: String,
   photo: String,
-  username: { type: String, ref: 'Users' },
+  username: { type: String, ref: 'User' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }]
 },
   {
@@ -47,21 +48,41 @@ exports.saveListing = (listing) => {
     })
   })
 };
+// used to prevent Ddos attacks
+function escapeRegExp(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
 
-exports.fetchListings = ()=>{
-  return new Promise((resolve, reject)=>{
-    Listing.find({isAvailable: true})
-    .sort({createdAt: -1})
-    .limit(12)
-    .exec()
-    .then(listings=>{
-      console.log(listings)
-      resolve(listings);
+exports.fetchListings = (query)=>{
+  if(query.query) {
+    const regex = new RegExp(escapeRegExp(query.query), 'gi');
+    return new Promise((resolve, reject) => {
+      Listing.find().or([{location: regex}, {title: regex}, {description: regex}])
+      .limit(12)
+      .exec()
+      .then(listings => {
+        console.log('located by zip', listings);
+        resolve(listings);
+      })
+      .catch(error => {
+        reject(error);
+      })
+    }) // end Promise
+  } else {
+    return new Promise((resolve, reject)=>{
+      Listing.find({isAvailable: true})
+      .sort({createdAt: -1})
+      .limit(12)
+      .exec()
+      .then(listings=>{
+        console.log(listings)
+        resolve(listings);
+      })
+      .catch(error=>{
+        reject(error);
+      })
     })
-    .catch(error=>{
-      reject(error);
-    })
-  })
+  }
 }
 
 exports.markClaimed = (listing) => {
@@ -90,26 +111,31 @@ exports.deleteListing = (id)=>{
 }
 
 exports.updateInterest = ({id, userId, claimed})=>{
-  console.log(id, userId, claimed)
-  return new Promise((resolve, reject)=>{
+  console.log('🙀 updating interests at: ', Date(), 'id:', id, 'userid:', userId, 'claimed:', claimed)
+  // return new Promise((resolve, reject)=>{
     if(JSON.parse(claimed) === true){
-      Listing.findByIdAndUpdate(id, {$pull:{interested_users:{$in: userId}}})
-      .exec().then(updated=>{
-        resolve(updated);
-      })
-      .catch(error=>{
-        error;
-      })
-    } else {
-      Listing.findByIdAndUpdate(id, {$push:{interested_users: userId}})
-      .exec().then(updated=>{
-        resolve(updated);
-      })
-      .catch(error=>{
-        error;
-      })
-    }
-  })
+      //promise.all - 2 async calls
+        return Listing.findByIdAndUpdate(id, {$pull:{interested_users:{$in: userId}}})
+        .exec()
+        // .then(User.updateUserKarma({id, userId, claimed}))//.then(updated=>{
+        //   resolve(updated);
+        // })
+        // .catch(error=>{
+        //   error;
+        // })
+
+        // User.findByIdAndUpdate(userId, { $inc: { 'karma': -1 }}).exec()
+      } else {
+        return Listing.findByIdAndUpdate(id, {$push:{interested_users: userId}})
+        .exec()
+        // .then(User.updateUserKarma({id, userId, claimed}))//.then(updated=>{
+        //   resolve(updated);
+        // })
+        // .catch(error=>{
+        //   error;
+        // })
+      }
+  // })
 }
 
 exports.updateListing = (id, {title, desc, image, loc}) => {

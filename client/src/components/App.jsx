@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import NavBar from './NavBar.jsx';
 import Listings from './Listings.jsx';
 import Comments from './Comments.jsx';
@@ -9,7 +10,8 @@ import {updateListingService, createListingService, givawayListingService,
   listingInterestService, deleteListingService} from '../services/listingService.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchListings} from '../actions/ListingActions';
+import {fetchListings, setQuery} from '../actions/ListingActions';
+import store from '../index.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class App extends React.Component {
       loginAs: null,
       view: 'listings',
       selectedListing: '',
+      karma: null,
       comments: []
     }
   }
@@ -26,7 +29,7 @@ class App extends React.Component {
   renderBody(){
     if(this.state.view === 'listings'){
       return (<Listings interestHandler={this.markInterest.bind(this)} selectHandler={this.listingSelectHandler.bind(this)}
-      listings={this.props.listings}/>)
+      listings={this.props.listings.listings}/>)
     } else if(this.state.view === 'single') {
       return <ListingDetails
       user={this.state.loginAs === null ? this : this.state.loginAs}
@@ -42,7 +45,8 @@ class App extends React.Component {
     return (
       <div>
         <NavBar
-        listings={this.props.listings}
+        searchListings={this.props.fetchListings}
+        listings={this.props.listings.listings}
         session={this.state.loginAs}
         create={this.createAccount.bind(this)}
         createListing={this.createListing.bind(this)}
@@ -52,6 +56,7 @@ class App extends React.Component {
         logout={this.userLogout.bind(this)}
         listingSelectHandler={this.listingSelectHandler.bind(this)}
         giveHandler={this.giveHandler.bind(this)}
+        karma={this.state.karma}
         />
 
         <Container>
@@ -78,6 +83,10 @@ class App extends React.Component {
   }
 
   markInterest ({interested_users, _id}) {
+    console.log(store.getState())
+    var query = store.getState().listings.query;
+    console.log('in markInterest the query is ', query);
+
     if (this.state.loginAs === null) {
       console.log('Please login to claim items!')
       return;
@@ -86,11 +95,19 @@ class App extends React.Component {
     let index = interested_users.indexOf(user);
     if (index >= 0) {
       listingInterestService(_id, user, true, (serverRes) => {
-        this.props.fetchListings();
+        this.props.fetchListings(query);
+        this.setState({ karma: this.state.karma -1 })
+        // axios.post('/user', { user, claimed}).then(response=>{
+        // })
+        // console.log('this.state.loginAs = ', this.state.loginAs)
       })
     } else if (index < 0) {
       listingInterestService(_id, user, false ,(serverRes) => {
-        this.props.fetchListings();
+        this.props.fetchListings(query);
+        this.setState({ karma: this.state.karma +1 })
+        // axios.post('/user', user).then(karma => {
+        //   this.setState({karma})
+        // })
       })
     }
   }
@@ -109,7 +126,8 @@ class App extends React.Component {
         alert('you messed up dawg');
       } else {
         this.setState({
-          loginAs: response
+          loginAs: response,
+          karma: response.user.karma
         });
       }
     })
@@ -121,7 +139,7 @@ class App extends React.Component {
     })
   }
 
-  listingSelectHandler(selected, mapInfo){
+   listingSelectHandler(selected, mapInfo){
     this.setState({
       view: 'single',
       map: mapInfo,
@@ -134,6 +152,11 @@ class App extends React.Component {
       view: 'listings',
       selectedListing: ''
     })
+    store.dispatch({
+      type: 'SET_QUERY',
+      payload: ''
+    });
+    this.props.fetchListings();
   }
 
   updateChanges(changes, oldListing){
@@ -151,11 +174,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({listings}) =>{
-  return {listings}; 
+  return {listings};
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchListings}, dispatch);
+  return bindActionCreators({fetchListings, setQuery}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

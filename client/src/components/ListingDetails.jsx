@@ -57,7 +57,7 @@ class ListingDetails extends React.Component{
                 type='file' className='inputfile'/>
                 : false}
                 <Image src={this.props.listing.photo} rounded/>
-
+                
                 <Comments 
                   user={this.props.user.user.username} 
                   userId={this.props.user.user._id} 
@@ -67,18 +67,18 @@ class ListingDetails extends React.Component{
               <Grid.Column width={7}>
                 <Segment>
                 <Header>
-                
-                {this.props.user === this.props.listing.listedBy ? 
+
+                {this.props.user === this.props.listing.listedBy ?
                 <Input transparent onChange={this.handleChange.bind(this, 'title')}
-                value={this.state.listing.title}/>  
+                value={this.state.listing.title}/>
                 : this.state.listing.title}
-                
+
                 </Header><Divider/>
                 <Header.Content>
 
-                {this.props.user === this.props.listing.listedBy ? 
+                {this.props.user === this.props.listing.listedBy ?
                 <TextArea autoHeight rows={5} cols={25} onChange={this.handleChange.bind(this, 'desc')}
-                value={this.state.listing.desc} style={{border: 'none',resize: 'none', outline: 'none'}}/>  
+                value={this.state.listing.desc} style={{border: 'none',resize: 'none', outline: 'none'}}/>
                 : this.state.listing.desc}
                 <Divider hidden/>
 
@@ -86,9 +86,9 @@ class ListingDetails extends React.Component{
                   <GoogleMap lon={this.state.lon} lat={this.state.lat}/>
                 </Container>
 
-                {this.props.user === this.props.listing.listedBy ? 
+                {this.props.user === this.props.listing.listedBy ?
                 <Input transparent onChange={this.handleChange.bind(this, 'loc')}
-                value={this.state.listing.loc}/>  
+                value={this.state.listing.loc}/>
                 : this.state.listing.loc}
 
                 <Divider hidden/>
@@ -96,15 +96,15 @@ class ListingDetails extends React.Component{
                 </Header.Content>
                 <Divider/>
                 <h6>Listed on: {moment(this.props.listing.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
-                
-                {this.props.user === this.props.listing.listedBy ? 
+
+                {this.props.user === this.props.listing.listedBy ?
                 <Button onClick={this.handleEditSubmit.bind(this)}>Submit Changes</Button> : false}
                 </Segment>
               </Grid.Column>
             </Grid>
-          </Segment> 
+          </Segment>
         </Grid.Column>
-        <Grid.Column width={2}></Grid.Column>      
+        <Grid.Column width={2}></Grid.Column>
       </Grid>
     )
   }

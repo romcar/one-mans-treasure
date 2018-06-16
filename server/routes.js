@@ -14,8 +14,7 @@ router.put('/listing/:listingId', listingCtrl.listings.update);
 router.post('/listing/give', listingCtrl.listings.give);
 router.put('/interest', listingCtrl.listings.setInterest);
 router.post('/listing/claimed', listingCtrl.listings.getClaimedListings);
-
-// post for sending new comment data to db
 router.post('/api/comments', commentCtrl.comments.post);
+router.post('/user', userCtrl.updateKarma);
 
 module.exports = router;
