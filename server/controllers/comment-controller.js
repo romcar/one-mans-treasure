@@ -5,13 +5,13 @@ module.exports = {
   comments: {
     post: function(req, res) {
       console.log('This is the request body: ', req.body)
-      db.saveComment(req.body)
-      .then(savedComment => {
+      db.saveComment(req.body).then(savedComment => {
+        console.log('Saved comment: ', savedComment)
         res.status(201).send(savedComment);
       }).catch(error => {
-        res.status(401).send(error);
-      })
+        console.log('error: ', error)
+        res.status(404).send(error);
+      });
     } 
   }
-
 };
