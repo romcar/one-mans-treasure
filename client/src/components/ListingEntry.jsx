@@ -25,7 +25,6 @@ class ListingEntry extends React.Component{
 
   fetchMap(){
     googleMapService(this.props.listing.location, (data)=>{
-      console.log('googleMapService data = ', data)
       this.setState({
         lon: data.results[0].geometry.location.lng,
         lat: data.results[0].geometry.location.lat,
