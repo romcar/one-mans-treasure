@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import db from '../../../database/Comments';
 
 class Comments extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      comments: [],
       text: '',
       userId: this.props.userId,
       username: this.props.user || 'Anonymous',
@@ -17,8 +17,6 @@ class Comments extends React.Component{
     this.setState({
       text: e.target.value,
     });
-    this.state.comments.push(this.state.text);
-    console.log('Comments in state: ', this.state.comments)
   }
 
   handleCommentSubmit() {
@@ -42,6 +40,7 @@ class Comments extends React.Component{
   }
 
   render() {
+
     return (
       <div className="ui comments">
         <h3 className="ui dividing header">Comments</h3>
