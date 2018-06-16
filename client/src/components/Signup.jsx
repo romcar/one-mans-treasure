@@ -38,21 +38,11 @@ class Signup extends React.Component{
   submit(){
     if(this.state.account.password !== this.state.account.confirmedPw){
       $('.register-password-error-match').show();
-    }
-
-    if(this.state.account.username.length < 4){
+    } else if(this.state.account.username.length < 4){
       $('.register-username-error').show();
-    }
-
-    if(this.state.account.password.length <8){
+    } else if(this.state.account.password.length <8){
        $('.register-password-error-length').show();
-    }
-
-    if(this.state.account.password === this.state.account.confirmedPw
-      && this.state.account.password !== ''
-      && this.state.account.username !== ''
-      && this.state.account.username.length < 4
-      && this.state.account.password.length < 8) {
+    } else {
       this.props.create(this.state.account);
       this.close();
     }
