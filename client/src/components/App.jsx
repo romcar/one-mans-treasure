@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchListings, setQuery} from '../actions/ListingActions';
 import store from '../index.jsx';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class App extends React.Component {
       listings={this.props.listings.listings}/>)
     } else if(this.state.view === 'single') {
       return <ListingDetails
-      user={this.state.loginAs === null ? this : this.state.loginAs}
+      user={this.state.loginAs === null ? {user: {username: 'Anonymous', _id: 'none'}} : this.state.loginAs}
       map={this.state.map}
       listing={this.state.selectedListing}
       comments={this.state.comments}
@@ -83,12 +84,10 @@ class App extends React.Component {
   }
 
   markInterest ({interested_users, _id}) {
-    console.log(store.getState())
     var query = store.getState().listings.query;
-    console.log('in markInterest the query is ', query);
 
     if (this.state.loginAs === null) {
-      console.log('Please login to claim items!')
+      alert('Please login to claim items!')
       return;
     }
     let user = this.state.loginAs.user._id;
@@ -120,15 +119,19 @@ class App extends React.Component {
     })
   }
 
-  userLogin(user){
+  userLogin(user, callback){
     loginService(user, (response)=>{
       if(response === false) {
-        alert('you messed up dawg');
+        $('.login-error').show();
       } else {
         this.setState({
           loginAs: response,
           karma: response.user.karma
         });
+
+        if(callback) {
+          callback();
+        }
       }
     })
   }
@@ -166,7 +169,6 @@ class App extends React.Component {
   }
 
   giveHandler(input){
-    console.log(input, 'HALLELUJIA')
     givawayListingService(input, (response)=>{
       this.props.fetchListings();
     })
