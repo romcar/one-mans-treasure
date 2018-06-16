@@ -6,7 +6,7 @@ let usersSchema = mongoose.Schema({
   username: {type: String, required: true, index: {unique: true} },
   password: {type: String, required: true},
   created_at: Date,
-  my_listings: Array, //{type: Schema.Types.ObjectId, ref: 'Listing'}
+  my_listings: [{type: mongoose.Schema.Types.ObjectId, ref: 'Listing'}],
   // my_listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}],
   // gifted: Number, for any information regarding 'gifted listings' we can just going into the my_listings array and filter there.
   claimed: Array,
@@ -49,13 +49,11 @@ exports.saveUser = (userData) => {
 exports.loginUser = (userData, callback) => {
   let user = userData.body.user;
   let password = userData.body.pw;
-  User.findOne({username: user}, function(err, user) {
-    if(err) {
-      console.error(err);
-    }
-  }).then(user => {
-    callback(bcrypt.compareSync(password, user.password), user);
-  }).catch(err => callback(false));
+  User.findOne({ username: user }).populate('my_listings')
+    .then(user => {
+      callback(bcrypt.compareSync(password, user.password), user);
+    })
+    .catch(err => callback(false));
 };
 
 exports.updateUser = (id, username, password, originalPw) => {
@@ -116,3 +114,15 @@ exports.fetchInterestedUsers = (users)=>{
     })
   })
 }
+
+exports.saveListingToUser = (userId, listing) => {
+  return new Promise((resolve, reject) => {
+    User.findByIdAndUpdate(userId, { $push: { my_listings: listing._id } }, { new: true })
+      .exec().then(updatedInfo=> {
+        console.log('Updated Info: ', updatedInfo);
+        resolve(updatedInfo);
+      }).catch(err=> {
+        reject(err);
+      });
+  });
+};
