@@ -9,7 +9,12 @@ class ListingEntry extends React.Component{
     this.state = {
       lon: null,
       lat: null,
-      city: null,
+      formattedAddress: null,
+      address: {
+          city: null,
+          state: null,
+          zipcode: null
+      }
     }
   }
 
@@ -20,10 +25,16 @@ class ListingEntry extends React.Component{
 
   fetchMap(){
     googleMapService(this.props.listing.location, (data)=>{
+      console.log('googleMapService data = ', data)
       this.setState({
         lon: data.results[0].geometry.location.lng,
         lat: data.results[0].geometry.location.lat,
-        city: data.results[0].formatted_address,
+        formattedAddress: data.results[0].formatted_address,
+        address: {
+          city: data.results[0].address_components[2].short_name,
+          state: data.results[0].address_components[4].short_name,
+          zipcode: data.results[0].address_components[0].short_name
+        }
       },this.render.bind(this))
     })
   }
@@ -36,13 +47,13 @@ class ListingEntry extends React.Component{
     return(
       <Grid.Column>
         <Segment>
-        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} rounded/>
+        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} rounded bordered/>
           <Header as="h3" textAlign="center">
             <Header.Content onClick={()=>{this.props.selectHandler(this.props.listing)}}>{this.props.listing.title}</Header.Content>
           </Header>
           <Container textAlign="center">
             <Label color='grey' horizontal>
-              {this.state.city}
+              {this.state.address.city}, {this.state.address.state} {this.state.address.zipcode}
             </Label>
           </Container>
           <Divider/>
