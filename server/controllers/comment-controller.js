@@ -12,6 +12,15 @@ module.exports = {
         console.log('error: ', error)
         res.status(404).send(error);
       });
-    } 
+    },
+    get: function(req, res) {
+      db.find({}, (err, comments) => {
+        var commentInfo = {};
+        comments.forEach(comment => {
+          commentInfo[comment._id] = comment;
+        });
+        res.send(commentInfo);
+      });
+    }
   }
 };
