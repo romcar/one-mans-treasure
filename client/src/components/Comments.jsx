@@ -6,30 +6,39 @@ class Comments extends React.Component{
     super(props);
     this.state = {
       comments: [],
-      text: ''
+      text: '',
+      userId: this.props.userId,
+      username: this.props.user || 'Anonymous',
+      postDate: Date.now
     }
   }
 
   changeText(e) {
     this.setState({
-      text: e.target.value
+      text: e.target.value,
     });
+    this.state.comments.push(this.state.text);
+    console.log('Comments in state: ', this.state.comments)
   }
 
   handleCommentSubmit() {
+    console.log('These are props handed down to Comments', this.props)
+    console.log('These are in the state: ', this.state)
     // send message to server
     console.log('This is the text: ', this.state.text);
-    axios.post('/api/comments', {
-      text: this.state.text
-    }).then(results => {
-      this.setState({
-        text: results.data
-      })
-    }).catch(err => {
-      console.error(err);
-    })
-    console.log('You have just attempted to submit a comment')
+    axios.post('/api/comments', 
+    {
+      text: this.state.text,
+      userId: this.state.userId,
+      username: this.state.username,
+      postDate: this.state.date
 
+    }).then(response => {
+      console.log('results: ', response)
+      console.log('Comment sent from client to server!')
+    }).catch(error => {
+      console.error(error.respnse)
+    })
   }
 
   render() {

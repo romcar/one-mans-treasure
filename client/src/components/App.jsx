@@ -19,6 +19,7 @@ class App extends React.Component {
       loginAs: null,
       view: 'listings',
       selectedListing: '',
+      comments: []
     }
   }
 
@@ -28,9 +29,10 @@ class App extends React.Component {
       listings={this.props.listings}/>)
     } else if(this.state.view === 'single') {
       return <ListingDetails
-      user={this.state.loginAs === null ? this : this.state.loginAs.user._id}
+      user={this.state.loginAs === null ? this : this.state.loginAs}
       map={this.state.map}
       listing={this.state.selectedListing}
+      comments={this.state.comments}
       updateChanges={this.updateChanges.bind(this)}
       />
     }

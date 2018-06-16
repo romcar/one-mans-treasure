@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const db = require('./index.js');
 const Comments = require('./Comments.js');
+const Users = require('./Users.js');
 
 let listingsSchema = mongoose.Schema({
   title: String,
@@ -11,6 +12,7 @@ let listingsSchema = mongoose.Schema({
   interested_users: Array,
   description: String,
   photo: String,
+  username: { type: String, ref: 'Users' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }]
 },
   {
@@ -32,6 +34,8 @@ exports.saveListing = (listing) => {
   newlisting.interested_users = [];
   newlisting.description = listing.desc;
   newlisting.photo = listing.image;
+  newlisting.username = listing.username;
+  newlisting.comments = listing.comments;
   let listingToStore = new Listing(newlisting);
   return new Promise((resolve,reject)=>{
     listingToStore.save()

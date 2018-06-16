@@ -4,7 +4,6 @@ const db = require('./index.js');
 const User = require('./Users.js');
 
 let commentSchema = Schema({
-  _id: Schema.Types.ObjectId,
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   username: String,
   message: String,
@@ -17,11 +16,18 @@ module.exports.Comment = Comment;
 exports.saveComment = (comment) => {
   console.log('This is your comment: ', comment);
   return new Promise((resolve, reject) => {
-    Comment.save({message: comment})
-    .then(result => {
-      resolve(result);
-    }).catch(err => {
-      reject(err);
-    })
-  })
-}
+    let newComment = {};
+    newComment.userId = comment.userId;
+    newComment.username = comment.username;
+    newComment.message = comment.text;
+    
+    let CommentToStore = new Comment(newComment);
+    console.log('This is comment to store: ', CommentToStore);
+
+    CommentToStore.save(function(err) {
+      if (err) { reject(err); }
+      console.log('comment saved in db', CommentToStore)
+      resolve(CommentToStore);
+    });
+  });
+};
