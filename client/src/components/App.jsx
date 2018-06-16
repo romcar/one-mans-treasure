@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchListings, setQuery} from '../actions/ListingActions';
 import store from '../index.jsx';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -120,15 +121,19 @@ class App extends React.Component {
     })
   }
 
-  userLogin(user){
+  userLogin(user, callback){
     loginService(user, (response)=>{
       if(response === false) {
-        alert('you messed up dawg');
+        $('.login-error').show();
       } else {
         this.setState({
           loginAs: response,
           karma: response.user.karma
         });
+
+        if(callback) {
+          callback();
+        }
       }
     })
   }
