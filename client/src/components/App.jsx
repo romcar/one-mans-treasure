@@ -96,7 +96,7 @@ class App extends React.Component {
     if (index >= 0) {
       listingInterestService(_id, user, true, (serverRes) => {
         this.props.fetchListings(query);
-        this.setState({ karma: this.state.karma -1 })
+        this.setState({ karma: this.state.karma +1 })
         // axios.post('/user', { user, claimed}).then(response=>{
         // })
         // console.log('this.state.loginAs = ', this.state.loginAs)
@@ -104,7 +104,7 @@ class App extends React.Component {
     } else if (index < 0) {
       listingInterestService(_id, user, false ,(serverRes) => {
         this.props.fetchListings(query);
-        this.setState({ karma: this.state.karma +1 })
+        this.setState({ karma: this.state.karma -1 })
         // axios.post('/user', user).then(karma => {
         //   this.setState({karma})
         // })
