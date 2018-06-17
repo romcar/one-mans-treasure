@@ -42,7 +42,6 @@ class ListingDetails extends React.Component{
   }
 
   render(){
-    console.log('PROPS HANDED DOWN TO LISTING DETAILS ', this.props)
     return(
       <Grid columns={3}>
         <Grid.Column width={2}></Grid.Column>
@@ -61,6 +60,7 @@ class ListingDetails extends React.Component{
                   userId={this.props.user.user._id} 
                   listingId={this.props.listing._id}
                   fetchOneListing={this.props.fetchOneListing}
+                  commentData={this.props.listing.comments}
                 /> 
 
               </Grid.Column>
