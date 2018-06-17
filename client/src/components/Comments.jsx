@@ -54,7 +54,6 @@ class Comments extends React.Component{
   render() {
     return (
       <div className="ui four column grid">
-
         <div className="two column row">
           <div className="column">
             <Segment style={{overflow: 'auto', width: '450px', height: '150px'}}>
@@ -103,7 +102,6 @@ class Comments extends React.Component{
             </div>
           </div>
         </div>
-
       </div>
     )
   }
