@@ -42,6 +42,7 @@ class ListingDetails extends React.Component{
   }
 
   render(){
+    console.log('PROPS HANDED DOWN TO LISTING DETAILS ', this.props)
     return(
       <Grid columns={3}>
         <Grid.Column width={2}></Grid.Column>

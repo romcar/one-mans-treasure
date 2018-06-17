@@ -90,6 +90,7 @@ module.exports = {
       db.findOneListing(req.params.listingId).then(listing => {
         res.status(200).send(listing);
       }).catch(error => {
+        console.log('GET ONE LISTING ERR', error)
         res.status(400).send(error);
       })
     }

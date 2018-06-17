@@ -12,7 +12,7 @@ let commentSchema = Schema({
 });
 
 let Comment = mongoose.model('Comment', commentSchema);
-module.exports.Comment = Comment;
+exports.Comment = Comment;
 
 exports.saveComment = (comment) => {
   console.log('This is your comment: ', comment);

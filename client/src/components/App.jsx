@@ -149,10 +149,10 @@ class App extends React.Component {
   }
 
   updateSelectedListing(listingId) {
-    let response = axios.get(`/fetch/${listingId}`);
-    console.log('One listing: ', response)
+    axios.get(`/fetch/${listingId}`).then(listing => {
+      this.setState({selectedListing: listing.data});
+    });
   }
-
 
   homeHandler(){
     this.setState({
