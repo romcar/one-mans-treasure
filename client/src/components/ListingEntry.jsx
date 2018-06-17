@@ -2,7 +2,6 @@ import React from 'react';
 import {Grid, Segment, Image, Divider,
   Container, Header, Label, Icon, Button} from 'semantic-ui-react';
 import {googleMapService} from '../services/googleMapService';
-import $ from 'jquery';
 
 class ListingEntry extends React.Component{
   constructor(props){
@@ -56,7 +55,7 @@ class ListingEntry extends React.Component{
     return(
       <Grid.Column>
         <Segment>
-        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} rounded bordered/>
+        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} centered rounded bordered/>
           <Header as="h3" textAlign="center">
             <Header.Content onClick={()=>{this.props.selectHandler(this.props.listing)}}>{this.props.listing.title}</Header.Content>
           </Header>
