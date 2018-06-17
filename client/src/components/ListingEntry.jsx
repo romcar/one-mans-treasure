@@ -14,7 +14,8 @@ class ListingEntry extends React.Component{
           city: null,
           state: null,
           zipcode: null
-      }
+      },
+      disabledClaim: false
     }
   }
 
@@ -38,7 +39,15 @@ class ListingEntry extends React.Component{
     })
   }
 
-  claimHandler(){
+  claimHandler(e){
+    this.setState({
+      disabledClaim: true
+    })
+    setTimeout(()=> {
+      this.setState({
+        disabledClaim: false
+      })
+    }, 800)
     this.props.interestHandler(this.props.listing)
   }
 
@@ -46,7 +55,7 @@ class ListingEntry extends React.Component{
     return(
       <Grid.Column>
         <Segment>
-        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} rounded bordered/>
+        <Image className="listing-image" src={this.props.listing.photo} onClick={()=>{this.props.selectHandler(this.props.listing, this.state)}} centered rounded bordered/>
           <Header as="h3" textAlign="center">
             <Header.Content onClick={()=>{this.props.selectHandler(this.props.listing)}}>{this.props.listing.title}</Header.Content>
           </Header>
@@ -58,7 +67,7 @@ class ListingEntry extends React.Component{
           <Divider/>
           <Container textAlign="center">
           <Button as='div' labelPosition='right' >
-            <Button color='orange' onClick={this.claimHandler.bind(this)}>
+            <Button color='orange' onClick={this.claimHandler.bind(this)} disabled={ this.state.disabledClaim }>
               <Icon className='ticket' />
               Claim
             </Button>
