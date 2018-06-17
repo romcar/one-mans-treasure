@@ -42,9 +42,6 @@ class ListingDetails extends React.Component{
   }
 
   render(){
-    console.log(this.props)
-    console.log('user: ', this.props.user.user.username)
-    console.log('date: ', this.props.user.user.created_at)
     return(
       <Grid columns={3}>
         <Grid.Column width={2}></Grid.Column>
@@ -61,6 +58,8 @@ class ListingDetails extends React.Component{
                 <Comments 
                   user={this.props.user.user.username} 
                   userId={this.props.user.user._id} 
+                  listingId={this.props.listing._id}
+                  fetchOneListing={this.props.fetchOneListing}
                 /> 
 
               </Grid.Column>

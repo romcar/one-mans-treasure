@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import db from '../../../database/Comments';
 
 class Comments extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      comments = [],
+      comments: [],
       text: '',
       userId: this.props.userId,
-      username: this.props.user || 'Anonymous',
-      postDate: Date.now
+      username: this.props.user,
+      postDate: Date.now()
     }
   }
 
@@ -30,18 +29,19 @@ class Comments extends React.Component{
       text: this.state.text,
       userId: this.state.userId,
       username: this.state.username,
-      postDate: this.state.date
+      postDate: this.state.date,
+      listingId: this.props.listingId
 
     }).then(response => {
       console.log('results: ', response)
       console.log('Comment sent from client to server!')
+      this.props.fetchOneListing(this.props.listingId)
     }).catch(error => {
-      console.error(error.respnse)
+      console.error(error.response)
     })
   }
 
   render() {
-
     return (
       <div className="ui comments">
         <h3 className="ui dividing header">Comments</h3>
@@ -66,7 +66,9 @@ class Comments extends React.Component{
 
         <form className="ui reply form">
           <div className="field">
-            <textarea onChange={this.changeText.bind(this)}></textarea>
+            <textarea 
+              onChange={this.changeText.bind(this)}>
+            </textarea>
           </div>
           <div 
             className="ui blue labeled submit icon button" 

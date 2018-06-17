@@ -14,12 +14,12 @@ module.exports = {
       });
     },
     get: function(req, res) {
-      db.find({}, (err, comments) => {
-        var commentInfo = {};
-        comments.forEach(comment => {
-          commentInfo[comment._id] = comment;
-        });
-        res.send(commentInfo);
+      db.findCommentsList().then(commentsList => {
+        console.log('This is my comments list: ', commentsList)
+        res.status(201).send(commentsList)
+      }).catch(error => {
+        console.log('error in getting comments list: ', error)
+        res.status(404).send(error)
       });
     }
   }

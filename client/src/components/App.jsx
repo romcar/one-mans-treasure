@@ -37,6 +37,7 @@ class App extends React.Component {
       listing={this.state.selectedListing}
       comments={this.state.comments}
       updateChanges={this.updateChanges.bind(this)}
+      fetchOneListing={this.updateSelectedListing.bind(this)}
       />
     }
   }
@@ -146,6 +147,12 @@ class App extends React.Component {
       selectedListing: selected
     })
   }
+
+  updateSelectedListing(listingId) {
+    let response = axios.get(`/fetch/${listingId}`);
+    console.log('One listing: ', response)
+  }
+
 
   homeHandler(){
     this.setState({

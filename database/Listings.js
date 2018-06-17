@@ -23,7 +23,7 @@ let listingsSchema = mongoose.Schema({
 
 let Listing = mongoose.model('Listing', listingsSchema);
 
-module.exports.Listing = Listing;
+exports.Listing = Listing;
 
 exports.saveListing = (listing) => {
   console.log(listing)
@@ -163,5 +163,17 @@ exports.fetchClaimedListing = (listings)=>{
     .catch(error=>{
       reject(error)
     })
+  })
+}
+
+exports.findOneListing = (listingId) => {
+  return new Promise((resolve, reject) => {
+    console.log('Find one listing ID:', listingId)
+     Listing.findOne({_id: listingId}).then(listing => {
+      console.log('Resolved listing:', listing)
+       resolve(listing);
+     }).catch(error => {
+       reject(error);
+     })
   })
 }

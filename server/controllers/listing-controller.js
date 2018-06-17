@@ -84,7 +84,16 @@ module.exports = {
         .catch(error=>{
           res.status(401).send(error);
         })
+    },
+    
+    getOneListing: (req, res) => {
+      db.findOneListing(req.params.listingId).then(listing => {
+        res.status(200).send(listing);
+      }).catch(error => {
+        res.status(400).send(error);
+      })
     }
+
 
   }
 }
