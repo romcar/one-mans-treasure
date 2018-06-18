@@ -49,9 +49,9 @@ class Comments extends React.Component{
   render() {
     return (
       <div className="ui four column grid">
-        <div className="two column row">
+        <div className="one column row">
           <div className="column">
-            <Segment style={{overflow: 'auto', width: '450px', height: '150px'}}>
+            <Segment style={{overflowX: 'hidden', width: '10 vmin', height: '15vmax'}}>
               <div className="ui comments">
                 <div className="ui main text container">
                   <h3 className="ui dividing header">Comments</h3>
@@ -71,24 +71,23 @@ class Comments extends React.Component{
                     )
                   }) }
                   </div>
-                  
+
               </div>
             </Segment>
           </div>
         </div>
-        <div className="two column row">
+        <div className="one column row">
           <div className="column">
             <div className="ui comments">
-              <form className="ui reply form">
-                <div className="field" style={{width: '450px', height: '150px'}}>
-                  <textarea 
+              <form>
+                  <TextArea rows={2} placeholder='Add a comment...' style={{ width: '100%' }}
                     onChange={this.changeText.bind(this)}>
-                  </textarea>
-                </div>
-                <div 
-                  className="ui blue labeled submit icon button" 
+                  </TextArea>
+                  <br />
+                <div
+                  className="ui blue labeled submit icon button"
                   onClick={this.handleCommentSubmit.bind(this)}>
-                  <i className="icon edit"></i> 
+                  <i className="icon edit"></i>
                   Add Reply
                 </div>
               </form>
