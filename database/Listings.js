@@ -25,7 +25,6 @@ let Listing = mongoose.model('Listing', listingsSchema);
 exports.Listing = Listing;
 
 exports.saveListing = (listing) => {
-  console.log(listing)
   let newlisting = {};
   newlisting.title = listing.title;
   newlisting.location = listing.loc;
@@ -65,7 +64,6 @@ exports.fetchListings = (query)=>{
       .limit(12)
       .exec()
       .then(listings => {
-        console.log('located by zip', listings);
         resolve(listings);
       })
       .catch(error => {
@@ -79,7 +77,6 @@ exports.fetchListings = (query)=>{
       .limit(12)
       .exec()
       .then(listings=>{
-        console.log(listings)
         resolve(listings);
       })
       .catch(error=>{
@@ -90,7 +87,6 @@ exports.fetchListings = (query)=>{
 }
 
 exports.markClaimed = (listing) => {
-  console.log(listing, 'db listing')
   return new Promise((resolve, reject)=>{
     Listing.findByIdAndUpdate(listing, {$set: {isAvailable: false}})
     .exec().then(updated => {
@@ -115,7 +111,6 @@ exports.deleteListing = (id)=>{
 }
 
 exports.updateInterest = ({id, userId, claimed})=>{
-  console.log('🙀 updating interests at: ', Date(), 'id:', id, 'userid:', userId, 'claimed:', claimed)
   // return new Promise((resolve, reject)=>{
     if(JSON.parse(claimed) === true){
       //promise.all - 2 async calls
@@ -167,9 +162,7 @@ exports.fetchClaimedListing = (listings)=>{
 
 exports.findOneListing = (listingId) => {
   return new Promise((resolve, reject) => {
-    console.log('Find one listing ID:', listingId)
      Listing.findById(listingId).populate('comments').exec().then(listing => {
-      console.log('Resolved listing:', listing)
        resolve(listing);
      }).catch(error => {
        reject(error);
