@@ -33,7 +33,7 @@ class Login extends React.Component{
 
   submit(){
     this.props.login(this.state.account, () => {
-      this.close();
+      // this.close();
     });
   }
 

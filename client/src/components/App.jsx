@@ -72,11 +72,14 @@ class App extends React.Component {
     this.props.fetchListings();
   }
 
-  createListing(listing, userId){
+  createListing(listing, userId, cb){
     createListingService(listing, userId, (response)=>{
       this.props.fetchListings();
     })
     this.setState({ karma: this.state.karma +1 })
+    if (cb) {
+      cb();
+    }
   }
 
   deleteListing(listing){
