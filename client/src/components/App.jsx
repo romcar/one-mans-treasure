@@ -76,6 +76,7 @@ class App extends React.Component {
     createListingService(listing, userId, (response)=>{
       this.props.fetchListings();
     })
+    this.setState({ karma: this.state.karma +1 })
   }
 
   deleteListing(listing){
