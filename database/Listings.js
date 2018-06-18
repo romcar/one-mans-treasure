@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const db = require('./index.js');
-const Comments = require('./Comments.js');
 const User = require('./Users.js');
 
 
@@ -14,7 +13,7 @@ let listingsSchema = mongoose.Schema({
   description: String,
   photo: String,
   username: { type: String, ref: 'User' },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }]
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 },
   {
     timestamps: true
@@ -23,10 +22,9 @@ let listingsSchema = mongoose.Schema({
 
 let Listing = mongoose.model('Listing', listingsSchema);
 
-module.exports.Listing = Listing;
+exports.Listing = Listing;
 
 exports.saveListing = (listing) => {
-  console.log(listing)
   let newlisting = {};
   newlisting.title = listing.title;
   newlisting.location = listing.loc;
@@ -66,7 +64,6 @@ exports.fetchListings = (query)=>{
       .limit(12)
       .exec()
       .then(listings => {
-        console.log('located by zip', listings);
         resolve(listings);
       })
       .catch(error => {
@@ -80,7 +77,6 @@ exports.fetchListings = (query)=>{
       .limit(12)
       .exec()
       .then(listings=>{
-        console.log(listings)
         resolve(listings);
       })
       .catch(error=>{
@@ -91,7 +87,6 @@ exports.fetchListings = (query)=>{
 }
 
 exports.markClaimed = (listing) => {
-  console.log(listing, 'db listing')
   return new Promise((resolve, reject)=>{
     Listing.findByIdAndUpdate(listing, {$set: {isAvailable: false}})
     .exec().then(updated => {
@@ -116,7 +111,6 @@ exports.deleteListing = (id)=>{
 }
 
 exports.updateInterest = ({id, userId, claimed})=>{
-  console.log('🙀 updating interests at: ', Date(), 'id:', id, 'userid:', userId, 'claimed:', claimed)
   // return new Promise((resolve, reject)=>{
     if(JSON.parse(claimed) === true){
       //promise.all - 2 async calls
@@ -163,5 +157,15 @@ exports.fetchClaimedListing = (listings)=>{
     .catch(error=>{
       reject(error)
     })
+  })
+}
+
+exports.findOneListing = (listingId) => {
+  return new Promise((resolve, reject) => {
+     Listing.findById(listingId).populate('comments').exec().then(listing => {
+       resolve(listing);
+     }).catch(error => {
+       reject(error);
+     })
   })
 }

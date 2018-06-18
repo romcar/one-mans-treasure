@@ -55,10 +55,13 @@ class ListingDetails extends React.Component{
                 : false}
                 <Image src={this.props.listing.photo} rounded/>
 
-                <Comments
-                  user={this.props.user.user.username}
-                  userId={this.props.user.user._id}
-                />
+                <Comments 
+                  user={this.props.user.user.username} 
+                  userId={this.props.user.user._id} 
+                  listingId={this.props.listing._id}
+                  fetchOneListing={this.props.fetchOneListing}
+                  commentData={this.props.listing.comments}
+                /> 
 
               </Grid.Column>
               <Grid.Column width={7}>
