@@ -33,7 +33,6 @@ module.exports = {
     },
 
     setInterest: function(req, res) {
-      console.log(req.body)
       db.updateInterest(req.body)
         .then(updated=>{
           res.status(201).send(updated);
@@ -75,10 +74,8 @@ module.exports = {
     },
 
     getClaimedListings: (req, res)=>{
-      console.log(req.body.listingsId)
       db.fetchClaimedListing(req.body.listingsId)
         .then(claimed=>{
-          console.log(claimed)
           res.status(201).send(claimed);
         })
         .catch(error=>{
@@ -90,7 +87,6 @@ module.exports = {
       db.findOneListing(req.params.listingId).then(listing => {
         res.status(200).send(listing);
       }).catch(error => {
-        console.log('GET ONE LISTING ERR', error)
         res.status(400).send(error);
       })
     }
