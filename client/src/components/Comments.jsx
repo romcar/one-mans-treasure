@@ -27,6 +27,7 @@ class Comments extends React.Component{
     this.setState({
       text: e.target.value,
     });
+  }
 
   handleCommentSubmit() {
     // send message to server
