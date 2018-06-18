@@ -128,7 +128,13 @@ exports.saveListingToUser = (userId, listing) => {
     User.findByIdAndUpdate(userId, { $push: { my_listings: listing._id } }, { new: true })
       .exec().then(updatedInfo=> {
         console.log('Updated Info: ', updatedInfo);
-        resolve(updatedInfo);
+        updatedInfo.karma ++;
+        updatedInfo.save(err => {
+          if (err) {
+            console.error(err);
+          }
+          resolve(updatedInfo);
+        })
       }).catch(err=> {
         reject(err);
       });
