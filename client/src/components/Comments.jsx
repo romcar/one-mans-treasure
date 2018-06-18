@@ -30,10 +30,6 @@ class Comments extends React.Component{
   }
 
   handleCommentSubmit() {
-    console.log('These are props handed down to Comments', this.props)
-    console.log('These are in the state: ', this.state)
-    // send message to server
-    console.log('This is the text: ', this.state.text);
     axios.post('/api/comments', 
     {
       text: this.state.text,
@@ -43,8 +39,6 @@ class Comments extends React.Component{
       listingId: this.props.listingId
 
     }).then(response => {
-      console.log('results: ', response)
-      console.log('Comment sent from client to server!')
       this.props.fetchOneListing(this.props.listingId)
     }).catch(error => {
       console.error(error.response)
@@ -61,7 +55,6 @@ class Comments extends React.Component{
                 <div className="ui main text container">
                   <h3 className="ui dividing header">Comments</h3>
                   { this.props.commentData.map((commentInfo, idx) => {
-                    console.log('this is comment data ', commentInfo)
                     return (
                       <div className="comment" key={idx}>
                         <div className="content">
