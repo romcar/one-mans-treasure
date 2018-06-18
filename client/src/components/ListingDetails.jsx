@@ -53,15 +53,18 @@ class ListingDetails extends React.Component{
                 <input onChange={this.handleImageUpload.bind(this)}
                 type='file' className='inputfile'/>
                 : false}
-                <Image src={this.props.listing.photo} rounded/>
 
-                <Comments 
-                  user={this.props.user.user.username} 
-                  userId={this.props.user.user._id} 
+                <Image src={this.props.listing.photo} bordered rounded/>
+                <div>
+                  <br />
+                </div>
+                <Comments
+                  user={this.props.user.user.username}
+                  userId={this.props.user.user._id}
                   listingId={this.props.listing._id}
                   fetchOneListing={this.props.fetchOneListing}
                   commentData={this.props.listing.comments}
-                /> 
+                />
 
               </Grid.Column>
               <Grid.Column width={7}>
