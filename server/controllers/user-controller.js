@@ -38,7 +38,6 @@ module.exports = {
   updateKarma: (req, res) => {
     db.updateUserKarma(req.body)
       .then(updated=> {
-        console.log('🍩 updateKarma res = ', updated);
         res.status(201).send(updated);
       })
       .catch(err=> {
