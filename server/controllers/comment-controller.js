@@ -12,9 +12,9 @@ module.exports = {
     },
     get: function(req, res) {
       db.findCommentsList().then(commentsList => {
-        res.status(201).send(commentsList)
+        res.status(201).send(commentsList);
       }).catch(error => {
-        res.status(404).send(error)
+        res.status(404).send(error);
       });
     }
   }
