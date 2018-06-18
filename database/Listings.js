@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const db = require('./index.js');
-// const User = require('./Users.js');
+const User = require('./Users.js');
 
 
 let listingsSchema = mongoose.Schema({
