@@ -54,7 +54,7 @@ class ListingDetails extends React.Component{
                 type='file' className='inputfile'/>
                 : false}
                 <Image src={this.props.listing.photo} rounded/>
-                
+
                 <Comments 
                   user={this.props.user.user.username} 
                   userId={this.props.user.user._id} 

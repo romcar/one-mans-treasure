@@ -27,10 +27,10 @@ class Comments extends React.Component{
     this.setState({
       text: e.target.value,
     });
-  }
 
   handleCommentSubmit() {
-    axios.post('/api/comments', 
+    // send message to server
+    axios.post('/api/comments',
     {
       text: this.state.text,
       userId: this.state.userId,
@@ -75,7 +75,6 @@ class Comments extends React.Component{
             </Segment>
           </div>
         </div>
-
         <div className="two column row">
           <div className="column">
             <div className="ui comments">
