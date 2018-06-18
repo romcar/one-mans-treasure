@@ -27,7 +27,7 @@ exports.saveComment = (comment) => {
       Listing.Listing.findById(comment.listingId).exec((err, data) => {
         data.comments.push(CommentToStore._id);
         data.save(err => err ? console.error(err) : undefined);
-      })
+      });
       if (err) { reject(err); }
       resolve(CommentToStore);
     });
