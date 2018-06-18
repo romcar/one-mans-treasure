@@ -27,7 +27,7 @@ and https://apidocs.imgur.com/ in order for them to work.
 
 
 
-#### ~~Bugs~~ Features:
+#### Bugs:
   1. Currently you can't givaway your item to the first user who claimed it.
   2. Longer comments do not word-wrap.
   3. Listings do not automatically populate the profile. (Must log out and log back in).
